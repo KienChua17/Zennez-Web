@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZennezMC — Máy chủ Minecraft Eco SMP Việt Nam</title>
+  <meta name="description" content="ZennezMC là máy chủ Minecraft Eco SMP Việt Nam: vũ khí huyền thoại, hầm ngục theo party, enchant tùy chỉnh, crates. IP Java: play.zennez.net, Bedrock cổng 19018.">
+  <meta name="theme-color" content="#0c1a12">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ZennezMC — Máy chủ Minecraft Eco SMP Việt Nam">
+  <meta property="og:description" content="Vũ khí huyền thoại, hầm ngục theo party, enchant tùy chỉnh, crates. Vào chơi: play.zennez.net">
+  <meta property="og:image" content="assets/og-image.jpg">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Điều hướng chính">
+    <a class="brand" href="index.html">
+      <img src="assets/logo-small.webp" alt="" width="40" height="40">
+      <span>ZennezMC</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#tinh-nang">Tính năng</a></li>
+      <li><a href="#tham-gia">Cách tham gia</a></li>
+      <li><a href="wiki.html">Wiki</a></li>
+    </ul>
+    <a class="btn btn-ghost" data-discord href="#" rel="noopener">Discord</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>Sinh tồn, buôn bán và săn boss cùng bạn bè.</h1>
+        <p class="lead">
+          ZennezMC là máy chủ Minecraft Eco SMP của người Việt. Lập party vào hầm ngục,
+          lấy nguyên liệu từ boss để chế vũ khí huyền thoại, rồi tự xây nền kinh tế riêng của bạn.
+        </p>
+
+        <div class="ip" id="ip-box">
+          <div class="ip-tabs" role="tablist" aria-label="Chọn phiên bản Minecraft">
+            <button class="tab" role="tab" aria-selected="true" data-edition="java">Java</button>
+            <button class="tab" role="tab" aria-selected="false" data-edition="bedrock">Bedrock</button>
+          </div>
+
+          <div class="ip-fields">
+            <button class="field" type="button" data-copy-target="host" title="Bấm để sao chép">
+              <span class="field-label">Địa chỉ</span>
+              <span class="field-value" data-ip-host>play.zennez.net</span>
+              <span class="field-hint">Sao chép</span>
+            </button>
+            <button class="field field-port" type="button" data-copy-target="port" title="Bấm để sao chép" hidden>
+              <span class="field-label">Cổng</span>
+              <span class="field-value" data-ip-port>19018</span>
+              <span class="field-hint">Sao chép</span>
+            </button>
+          </div>
+
+          <p class="status" data-status aria-live="polite">
+            <span class="dot" aria-hidden="true"></span>
+            <span data-status-text>Đang kiểm tra máy chủ…</span>
+          </p>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" data-discord href="#" rel="noopener">Vào Discord</a>
+          <a class="btn btn-ghost" href="wiki.html">Đọc wiki</a>
+        </div>
+      </div>
+
+      <figure class="hero-art">
+        <div class="frame">
+          <img src="assets/logo.webp" alt="Logo Zennez Network giữa khu rừng Minecraft" width="1200" height="1200" fetchpriority="high">
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= TÍNH NĂNG ================= -->
+  <section id="tinh-nang" class="section features">
+    <div class="wrap">
+      <h2>Trong Zennez có gì</h2>
+      <p class="section-lead">Sáu hệ thống chính. Chọn một mục để xem chi tiết.</p>
+
+      <ol class="loop" aria-label="Vòng chơi chính">
+        <li><span data-icon="dungeon" data-size="36"></span><span>Đánh boss trong hầm ngục</span></li>
+        <li class="loop-sep" aria-hidden="true">›</li>
+        <li><span data-icon="chest" data-size="36"></span><span>Nhặt nguyên liệu đặc biệt</span></li>
+        <li class="loop-sep" aria-hidden="true">›</li>
+        <li><span data-icon="sword" data-size="36"></span><span>Chế vũ khí huyền thoại</span></li>
+      </ol>
+
+      <div class="explorer" id="explorer">
+        <div class="explorer-tabs" role="tablist" aria-label="Danh sách tính năng" aria-orientation="vertical">
+          <button role="tab" class="ex-tab" id="tab-weapon" aria-controls="panel-weapon" aria-selected="true">
+            <span data-icon="sword" data-size="32"></span><span>Vũ khí huyền thoại</span>
+          </button>
+          <button role="tab" class="ex-tab" id="tab-dungeon" aria-controls="panel-dungeon" aria-selected="false" tabindex="-1">
+            <span data-icon="dungeon" data-size="32"></span><span>Hầm ngục</span>
+          </button>
+          <button role="tab" class="ex-tab" id="tab-animals" aria-controls="panel-animals" aria-selected="false" tabindex="-1">
+            <span data-icon="paw" data-size="32"></span><span>Động vật mới</span>
+          </button>
+          <button role="tab" class="ex-tab" id="tab-enchant" aria-controls="panel-enchant" aria-selected="false" tabindex="-1">
+            <span data-icon="book" data-size="32"></span><span>Custom Enchant</span>
+          </button>
+          <button role="tab" class="ex-tab" id="tab-link" aria-controls="panel-link" aria-selected="false" tabindex="-1">
+            <span data-icon="lock" data-size="32"></span><span>Liên kết Discord</span>
+          </button>
+          <button role="tab" class="ex-tab" id="tab-crates" aria-controls="panel-crates" aria-selected="false" tabindex="-1">
+            <span data-icon="chest" data-size="32"></span><span>Crates</span>
+          </button>
+        </div>
+
+        <div class="explorer-panels">
+
+          <article class="panel" role="tabpanel" id="panel-weapon" aria-labelledby="tab-weapon">
+            <div class="panel-head">
+              <span data-icon="sword" data-size="64"></span>
+              <div>
+                <h3>Vũ khí huyền thoại</h3>
+                <p>Tám vũ khí huyền thoại, mỗi món được trưng bày ngay tại spawn.</p>
+              </div>
+            </div>
+            <ul>
+              <li>Mỗi vũ khí có công thức riêng: nguyên liệu đặc biệt cộng với nguyên liệu cơ bản.</li>
+              <li>Sát thương cao hơn vũ khí thường.</li>
+              <li>Có skill riêng, hiệu ứng đẹp mắt.</li>
+            </ul>
+            <a class="more" href="wiki.html#vu-khi">Xem chi tiết trong wiki</a>
+          </article>
+
+          <article class="panel" role="tabpanel" id="panel-dungeon" aria-labelledby="tab-dungeon">
+            <div class="panel-head">
+              <span data-icon="dungeon" data-size="64"></span>
+              <div>
+                <h3>Hầm ngục</h3>
+                <p>Rủ party vào hầm ngục tối tăm và đối đầu những con boss bí ẩn.</p>
+              </div>
+            </div>
+            <ul>
+              <li>Chơi theo party cùng bạn bè.</li>
+              <li>Boss và rương loot rơi nguyên liệu đặc biệt.</li>
+              <li>Nguyên liệu này dùng để chế vũ khí huyền thoại.</li>
+            </ul>
+            <a class="more" href="wiki.html#ham-nguc">Xem chi tiết trong wiki</a>
+          </article>
+
+          <article class="panel" role="tabpanel" id="panel-animals" aria-labelledby="tab-animals">
+            <div class="panel-head">
+              <span data-icon="paw" data-size="64"></span>
+              <div>
+                <h3>Động vật mới</h3>
+                <p>Thú hoang ngoài tự nhiên và những sinh vật bí ẩn dưới biển.</p>
+              </div>
+            </div>
+            <ul>
+              <li>Động vật xuất hiện ngoài thiên nhiên, cả trên cạn lẫn dưới nước.</li>
+              <li>Có thể rơi nguyên liệu lạ, ví dụ da thú.</li>
+            </ul>
+            <a class="more" href="wiki.html#dong-vat">Xem chi tiết trong wiki</a>
+          </article>
+
+          <article class="panel" role="tabpanel" id="panel-enchant" aria-labelledby="tab-enchant">
+            <div class="panel-head">
+              <span data-icon="book" data-size="64"></span>
+              <div>
+                <h3>Custom Enchant</h3>
+                <p>Các loại enchant mới, thêm chỉ số hoặc kỹ năng đặc biệt cho trang bị.</p>
+              </div>
+            </div>
+            <ul>
+              <li>Tăng chỉ số hoặc mở khóa hiệu ứng riêng.</li>
+              <li>Bổ sung thêm lựa chọn xây dựng trang bị.</li>
+            </ul>
+            <a class="more" href="wiki.html#enchant">Xem chi tiết trong wiki</a>
+          </article>
+
+          <article class="panel" role="tabpanel" id="panel-link" aria-labelledby="tab-link">
+            <div class="panel-head">
+              <span data-icon="lock" data-size="64"></span>
+              <div>
+                <h3>Liên kết game và Discord</h3>
+                <p>Nối tài khoản Minecraft với Discord để bảo mật và lấy lại mật khẩu dễ hơn.</p>
+              </div>
+            </div>
+            <ul>
+              <li>Liên kết bằng tên đăng nhập và mật khẩu của tài khoản game.</li>
+              <li>Lấy lại mật khẩu thông qua IP và mã PIN.</li>
+            </ul>
+            <a class="more" href="wiki.html#lien-ket">Xem chi tiết trong wiki</a>
+          </article>
+
+          <article class="panel" role="tabpanel" id="panel-crates" aria-labelledby="tab-crates">
+            <div class="panel-head">
+              <span data-icon="chest" data-size="64"></span>
+              <div>
+                <h3>Crates</h3>
+                <p>Mở crate theo cơ chế gacha ngẫu nhiên, hồi hộp từng lần mở.</p>
+              </div>
+            </div>
+            <ul>
+              <li>Vật phẩm vanilla.</li>
+              <li>Nguyên liệu đặc biệt.</li>
+              <li>Spawner, amethyst tools và nhiều phần thưởng khác.</li>
+            </ul>
+            <a class="more" href="wiki.html#crates">Xem chi tiết trong wiki</a>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CÁCH THAM GIA ================= -->
+  <section id="tham-gia" class="section join">
+    <div class="wrap join-grid">
+      <div>
+        <h2>Vào chơi trong ba bước</h2>
+        <p class="section-lead">Java và Bedrock đều chơi chung một máy chủ.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>Thêm máy chủ</h3>
+          <p>Java: nhập <strong data-ip-host-inline>play.zennez.net</strong> vào ô địa chỉ.
+             Bedrock: nhập cùng địa chỉ đó và đổi cổng thành <strong data-ip-port-inline>19018</strong>.</p>
+        </li>
+        <li>
+          <h3>Tạo tài khoản và đăng nhập</h3>
+          <p>Vào game, làm theo hướng dẫn trên màn hình để đăng ký tên đăng nhập và mật khẩu.</p>
+        </li>
+        <li>
+          <h3>Liên kết Discord</h3>
+          <p>Nối tài khoản với Discord để bảo mật, và có thể lấy lại mật khẩu bằng mã PIN khi quên.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="section cta">
+    <div class="wrap cta-inner">
+      <div>
+        <h2>Gặp cộng đồng trên Discord</h2>
+        <p class="section-lead">Xin hỗ trợ, tìm party đi hầm ngục, cập nhật tin mới của máy chủ.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" data-discord href="#" rel="noopener">Vào Discord</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="brand brand-foot">
+      <img src="assets/logo-small.webp" alt="" width="32" height="32">
+      <span>ZennezMC</span>
+    </div>
+    <p>Máy chủ Minecraft Eco SMP Việt Nam. Không phải sản phẩm chính thức của Mojang hay Microsoft.</p>
+    <ul class="foot-links">
+      <li><a href="wiki.html">Wiki</a></li>
+      <li><a data-discord href="#" rel="noopener">Discord</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
