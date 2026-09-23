@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hồ sơ — ZennezMC</title>
+  <meta name="theme-color" content="#0c1a12">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .profile-scene {
+      position: relative; min-height: 100svh;
+      padding: 0 20px 60px; overflow: hidden;
+    }
+    #particles { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+    .profile-glow {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background: radial-gradient(ellipse 60% 40% at 70% 0%, rgba(176,74,240,.16) 0%, transparent 65%);
+    }
+
+    .profile-nav {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 0 32px;
+      border-bottom: 2px solid var(--forest-800);
+      margin-bottom: 40px;
+    }
+    .profile-nav a { display: flex; align-items: center; gap: 10px; color: var(--bone); text-decoration: none; font-weight: 800; font-size: 1.1rem; }
+    .profile-nav a img { border: 2px solid var(--forest-700); }
+    .profile-nav a:hover { color: var(--bone); }
+    .nav-spacer { flex: 1; }
+    .btn-sm {
+      padding: 8px 16px;
+      background: var(--forest-800); color: var(--mist);
+      border: 2px solid var(--forest-700);
+      font: 600 .88rem/1 var(--font-body);
+      cursor: pointer; text-decoration: none;
+      box-shadow: 0 3px 0 #0a130d;
+      transition: transform .08s, box-shadow .08s;
+    }
+    .btn-sm:hover { color: var(--bone); background: var(--forest-700); }
+    .btn-sm:active { transform: translateY(2px); box-shadow: 0 1px 0 #0a130d; }
+    .btn-sm-danger { border-color: #7a2a20; color: #f0a899; }
+    .btn-sm-danger:hover { background: rgba(226,96,77,.12); color: #f5c0b3; }
+
+    .profile-wrap { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
+
+    /* Hero card */
+    .hero-card {
+      background: rgba(16,36,26,.9);
+      border: 2px solid var(--forest-700);
+      padding: 36px 40px;
+      display: flex; align-items: center; gap: 32px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
+    }
+    .avatar-frame {
+      position: relative; flex: none;
+    }
+    .avatar-frame img {
+      width: 88px; height: 88px;
+      border: 4px solid var(--forest-700);
+      display: block;
+    }
+    .avatar-frame::after {
+      content: ""; position: absolute; inset: -6px;
+      border: 2px solid var(--amethyst);
+      opacity: .5;
+    }
+    .hero-info { flex: 1; min-width: 0; }
+    .hero-name { font-size: 1.8rem; font-weight: 800; margin: 0 0 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .hero-tag { font-size: .92rem; color: var(--mist); margin: 0; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; margin-top: 12px;
+      background: rgba(143,212,60,.1); border: 2px solid rgba(143,212,60,.3);
+      font: 700 .82rem/1 var(--font-pixel); color: var(--leaf);
+    }
+    .dot-live { width: 8px; height: 8px; background: var(--leaf); box-shadow: 0 0 8px var(--leaf); animation: blink 1.4s ease-in-out infinite; }
+    @keyframes blink { 50% { opacity: .3; } }
+
+    /* Stat grid */
+    .stat-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px; margin-bottom: 24px;
+    }
+    .stat-card {
+      background: rgba(16,36,26,.85);
+      border: 2px solid var(--forest-700);
+      padding: 24px 24px 20px;
+      backdrop-filter: blur(8px);
+    }
+    .stat-label { font-size: .82rem; color: var(--mist); margin: 0 0 8px; text-transform: uppercase; letter-spacing: .06em; }
+    .stat-value { font: 700 1.4rem/1 var(--font-pixel); color: var(--bone); margin: 0; word-break: break-all; }
+    .stat-value.accent { color: var(--leaf); }
+    .stat-value.accent-purple { color: var(--amethyst-soft); }
+    .stat-value.unlinked { color: var(--mist); font-size: 1rem; }
+
+    /* Action zone */
+    .action-zone {
+      background: rgba(16,36,26,.85);
+      border: 2px solid var(--forest-700);
+      padding: 28px 32px;
+      backdrop-filter: blur(8px);
+    }
+    .action-zone h2 { font-size: 1.1rem; margin: 0 0 20px; }
+    .action-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .action-desc { font-size: .9rem; color: var(--mist); margin: 0 0 16px; max-width: 52ch; }
+
+    /* Modal hủy liên kết */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,.7); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-backdrop[hidden] { display: none; }
+    .modal {
+      background: var(--forest-900); border: 3px solid var(--forest-700);
+      padding: 36px 32px; width: 100%; max-width: 420px;
+    }
+    .modal h2 { font-size: 1.3rem; margin: 0 0 8px; }
+    .modal p { color: var(--mist); margin: 0 0 24px; }
+    .modal input {
+      width: 100%; padding: 14px 16px;
+      background: var(--forest-950); color: var(--bone);
+      border: 2px solid var(--forest-700);
+      font: 500 1rem var(--font-body);
+      margin-bottom: 20px;
+    }
+    .modal input:focus { border-color: var(--amethyst); outline: none; }
+    .modal-error { font-size: .9rem; color: #f0a899; margin: -12px 0 16px; display: none; }
+    .modal-error.show { display: block; }
+    .modal-actions { display: flex; gap: 12px; }
+
+    /* Loading */
+    .loading { text-align: center; padding: 80px 20px; color: var(--mist); }
+    .spinner {
+      width: 40px; height: 40px; margin: 0 auto 20px;
+      border: 3px solid var(--forest-700); border-top-color: var(--leaf);
+      border-radius: 50%; animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+<div class="profile-scene">
+  <canvas id="particles"></canvas>
+  <div class="profile-glow" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <nav class="profile-nav">
+      <a href="index.html">
+        <img src="assets/logo-small.webp" alt="" width="36" height="36">
+        ZennezMC
+      </a>
+      <div class="nav-spacer"></div>
+      <button class="btn-sm" id="btn-logout" type="button">Đăng xuất</button>
+    </nav>
+  </div>
+
+  <!-- Loading -->
+  <div class="wrap" id="view-loading">
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Đang tải hồ sơ…</p>
+    </div>
+  </div>
+
+  <!-- Profile content -->
+  <div class="wrap profile-wrap" id="view-profile" hidden>
+    <!-- Hero card -->
+    <div class="hero-card" data-tilt data-tilt-intensity="4">
+      <div class="avatar-frame">
+        <img id="avatar" src="" alt="">
+      </div>
+      <div class="hero-info">
+        <p class="hero-name" id="username"></p>
+        <p class="hero-tag" id="discord-tag"></p>
+        <span class="hero-badge" id="linked-badge" hidden>
+          <span class="dot-live"></span>
+          Đã liên kết game
+        </span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stat-grid">
+      <div class="stat-card" data-tilt data-tilt-intensity="5">
+        <p class="stat-label">Tài khoản game</p>
+        <p class="stat-value accent" id="stat-game">—</p>
+      </div>
+      <div class="stat-card" data-tilt data-tilt-intensity="5">
+        <p class="stat-label">Discord ID</p>
+        <p class="stat-value accent-purple" id="stat-discord">—</p>
+      </div>
+      <div class="stat-card" data-tilt data-tilt-intensity="5">
+        <p class="stat-label">Trạng thái</p>
+        <p class="stat-value" id="stat-status">—</p>
+      </div>
+    </div>
+
+    <!-- Action: chưa liên kết -->
+    <div class="action-zone" id="zone-unlinked" hidden>
+      <h2>Liên kết tài khoản game</h2>
+      <p class="action-desc">Nhập tên đăng nhập và mật khẩu tài khoản Minecraft để liên kết với Discord.</p>
+      <div class="action-row">
+        <a class="btn btn-primary" href="link.html">Liên kết ngay</a>
+      </div>
+    </div>
+
+    <!-- Action: đã liên kết -->
+    <div class="action-zone" id="zone-linked" hidden>
+      <h2>Quản lý liên kết</h2>
+      <p class="action-desc">Tài khoản Discord đang liên kết với tài khoản game. Để thay đổi, bạn cần hủy liên kết trước.</p>
+      <div class="action-row">
+        <button class="btn-sm btn-sm-danger" id="btn-unlink" type="button">Hủy liên kết</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal hủy liên kết -->
+<div class="modal-backdrop" id="modal-unlink" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <h2 id="modal-title">Xác nhận hủy liên kết</h2>
+    <p>Nhập mật khẩu tài khoản game để xác nhận. Bạn có thể liên kết lại bất kỳ lúc nào.</p>
+    <input type="password" id="unlink-pw" placeholder="Mật khẩu tài khoản game" autocomplete="current-password">
+    <p class="modal-error" id="unlink-err"></p>
+    <div class="modal-actions">
+      <button class="btn btn-primary btn-sm-danger" id="btn-unlink-confirm" type="button" style="--face:var(--danger);--edge:#7a2a20;border-color:#e2604d">Hủy liên kết</button>
+      <button class="btn btn-ghost" id="btn-unlink-cancel" type="button">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/effects.js"></script>
+<script>
+var API = "https://api.zennez.net";
+
+function $(id){ return document.getElementById(id); }
+
+function showError(msg) {
+  $("view-loading").hidden = true;
+  $("view-profile").hidden = true;
+  document.querySelector(".wrap").innerHTML = '<div class="loading"><p style="color:var(--danger)">' + msg + '</p><a class="btn btn-ghost" href="login.html" style="margin-top:20px;display:inline-block">Đăng nhập lại</a></div>';
+}
+
+fetch(API + "/api/me", { credentials: "include" })
+  .then(function(r){
+    if (r.status === 401) { location.href = "login.html"; return null; }
+    return r.json();
+  })
+  .then(function(d){
+    if (!d) return;
+    $("view-loading").hidden = true;
+    $("view-profile").hidden = false;
+
+    // Điền thông tin
+    $("avatar").src = d.discord.avatar;
+    $("avatar").alt = d.discord.username;
+    $("username").textContent = d.discord.username;
+    $("discord-tag").textContent = "Discord ID: " + d.discord.id;
+    $("stat-discord").textContent = d.discord.id;
+
+    if (d.linked_game) {
+      $("stat-game").textContent = d.linked_game;
+      $("stat-status").textContent = "Đã liên kết";
+      $("stat-status").classList.add("accent");
+      $("linked-badge").hidden = false;
+      $("zone-linked").hidden = false;
+    } else {
+      $("stat-game").textContent = "Chưa liên kết";
+      $("stat-game").classList.add("unlinked");
+      $("stat-status").textContent = "Chưa liên kết";
+      $("zone-unlinked").hidden = false;
+    }
+  })
+  .catch(function(){ showError("Không kết nối được máy chủ."); });
+
+// Đăng xuất
+$("btn-logout").addEventListener("click", function(){
+  fetch(API + "/api/logout", { method: "POST", credentials: "include" })
+    .finally(function(){ location.href = "login.html"; });
+});
+
+// Hủy liên kết — mở modal
+$("btn-unlink").addEventListener("click", function(){
+  $("modal-unlink").hidden = false;
+  $("unlink-pw").value = "";
+  $("unlink-err").classList.remove("show");
+  $("unlink-pw").focus();
+});
+$("btn-unlink-cancel").addEventListener("click", function(){ $("modal-unlink").hidden = true; });
+
+// Hủy liên kết — xác nhận
+$("btn-unlink-confirm").addEventListener("click", function(){
+  var pw = $("unlink-pw").value.trim();
+  if (!pw) { $("unlink-err").textContent = "Vui lòng nhập mật khẩu."; $("unlink-err").classList.add("show"); return; }
+  var btn = $("btn-unlink-confirm");
+  btn.textContent = "Đang xử lý…"; btn.disabled = true;
+  fetch(API + "/api/unlink", {
+    method: "POST", credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ password: pw })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if (d.success) { location.reload(); }
+    else { $("unlink-err").textContent = d.error || "Có lỗi xảy ra."; $("unlink-err").classList.add("show"); }
+  })
+  .catch(function(){ $("unlink-err").textContent = "Không kết nối được máy chủ."; $("unlink-err").classList.add("show"); })
+  .finally(function(){ btn.textContent = "Hủy liên kết"; btn.disabled = false; });
+});
+</script>
+</body>
+</html>

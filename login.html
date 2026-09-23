@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Đăng nhập — ZennezMC</title>
+  <meta name="theme-color" content="#0c1a12">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-scene {
+      position: relative; min-height: 100svh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 40px 20px;
+      overflow: hidden;
+    }
+    #particles {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .auth-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% -5%, rgba(176,74,240,.22) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 80% 110%, rgba(143,212,60,.14) 0%, transparent 60%);
+    }
+    .auth-card {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 460px;
+      background: rgba(16,36,26,.92);
+      border: 2px solid var(--forest-700);
+      padding: 52px 44px 44px;
+      backdrop-filter: blur(12px);
+    }
+    .auth-brand {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 36px;
+    }
+    .auth-brand img { border: 2px solid var(--forest-700); }
+    .auth-brand span { font: 800 1.25rem/1 var(--font-body); color: var(--bone); }
+    .auth-card h1 { font-size: 1.75rem; margin: 0 0 10px; }
+    .auth-sub { color: var(--mist); margin: 0 0 36px; max-width: 38ch; line-height: 1.6; }
+
+    .error-box {
+      display: none;
+      background: rgba(226,96,77,.12); border: 2px solid var(--danger);
+      padding: 14px 16px; margin-bottom: 24px;
+      font-size: .92rem; color: #f0a899;
+    }
+    .error-box.show { display: block; }
+
+    .btn-discord {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      width: 100%; padding: 18px 20px;
+      background: #5865F2; color: #fff;
+      border: 2px solid #4752c4;
+      box-shadow: 0 5px 0 #2e3aab;
+      font: 700 1.05rem/1 var(--font-body);
+      text-decoration: none; cursor: pointer;
+      transition: transform .08s, box-shadow .08s, background .12s;
+    }
+    .btn-discord:hover { background: #4752c4; color: #fff; }
+    .btn-discord:active { transform: translateY(4px); box-shadow: 0 1px 0 #2e3aab; }
+
+    .auth-sep {
+      display: flex; align-items: center; gap: 14px;
+      margin: 28px 0; color: var(--mist); font-size: .88rem;
+    }
+    .auth-sep::before, .auth-sep::after {
+      content: ""; flex: 1; height: 1px; background: var(--forest-700);
+    }
+    .auth-hint { font-size: .88rem; color: #7f9385; line-height: 1.65; }
+    .auth-hint strong { color: var(--leaf); font-family: var(--font-pixel); font-size: .85em; }
+    .auth-back { margin-top: 28px; }
+    .auth-back a { color: var(--mist); font-size: .9rem; }
+    .auth-back a:hover { color: var(--bone); }
+  </style>
+</head>
+<body>
+<main class="auth-scene">
+  <canvas id="particles"></canvas>
+  <div class="auth-glow" aria-hidden="true"></div>
+
+  <div class="auth-card" data-tilt data-tilt-intensity="6">
+    <div class="auth-brand">
+      <img src="assets/logo-small.webp" alt="" width="40" height="40">
+      <span>ZennezMC</span>
+    </div>
+
+    <h1>Đăng nhập</h1>
+    <p class="auth-sub">Kết nối tài khoản Discord để xem hồ sơ và quản lý tài khoản game của bạn.</p>
+
+    <div class="error-box" id="err"></div>
+
+    <a class="btn-discord" href="https://api.zennez.net/auth/login">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+      </svg>
+      Tiếp tục với Discord
+    </a>
+
+    <div class="auth-sep">hoặc</div>
+    <p class="auth-hint">
+      Chưa có tài khoản game? Vào server tại <strong>play.zennez.net</strong>, đăng ký trong game, sau đó quay lại đây để liên kết.
+    </p>
+
+    <div class="auth-back"><a href="index.html">← Về trang chủ</a></div>
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/effects.js"></script>
+<script>
+  var p = new URLSearchParams(location.search), e = p.get("error");
+  if (e) {
+    var box = document.getElementById("err");
+    var m = { no_code:"Đăng nhập Discord thất bại. Vui lòng thử lại.", token_fail:"Không lấy được thông tin từ Discord.", server_error:"Lỗi máy chủ. Vui lòng thử lại sau." };
+    box.textContent = m[e] || "Đã có lỗi. Vui lòng thử lại.";
+    box.classList.add("show");
+  }
+  fetch("https://api.zennez.net/api/me", { credentials:"include" })
+    .then(function(r){ if(r.ok) location.href="profile.html"; })
+    .catch(function(){});
+</script>
+</body>
+</html>

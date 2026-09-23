@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ZennezMC — Máy chủ Minecraft Eco SMP Việt Nam</title>
-  <meta name="description" content="ZennezMC là máy chủ Minecraft Eco SMP Việt Nam: vũ khí huyền thoại, hầm ngục theo party, enchant tùy chỉnh, crates. IP Java: play.zennez.net, Bedrock cổng 19018.">
+  <title>ZennezMC — Máy chủ Minecraft Survival Eco Việt Nam</title>
+  <meta name="description" content="ZennezMC là máy chủ Minecraft Survival Eco Việt Nam: vũ khí huyền thoại, hầm ngục theo party, enchant tùy chỉnh, crates. IP Java: play.zennez.net, Bedrock cổng 19018.">
   <meta name="theme-color" content="#0c1a12">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="ZennezMC — Máy chủ Minecraft Eco SMP Việt Nam">
+  <meta property="og:title" content="ZennezMC — Máy chủ Minecraft Survival Eco Việt Nam">
   <meta property="og:description" content="Vũ khí huyền thoại, hầm ngục theo party, enchant tùy chỉnh, crates. Vào chơi: play.zennez.net">
   <meta property="og:image" content="assets/og-image.jpg">
 
@@ -33,6 +33,7 @@
       <li><a href="#tham-gia">Cách tham gia</a></li>
       <li><a href="wiki.html">Wiki</a></li>
     </ul>
+    <a class="btn btn-ghost" href="login.html">Đăng nhập</a>
     <a class="btn btn-ghost" data-discord href="#" rel="noopener">Discord</a>
   </nav>
 </header>
@@ -41,12 +42,13 @@
 
   <!-- ================= HERO ================= -->
   <section class="hero">
+  <canvas id="particles" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <h1>Sinh tồn, buôn bán và săn boss cùng bạn bè.</h1>
         <p class="lead">
-          ZennezMC là máy chủ Minecraft Eco SMP của người Việt. Lập party vào hầm ngục,
+          ZennezMC là máy chủ Minecraft Survival Eco của người Việt. Lập party vào hầm ngục,
           lấy nguyên liệu từ boss để chế vũ khí huyền thoại, rồi tự xây nền kinh tế riêng của bạn.
         </p>
 
@@ -82,7 +84,7 @@
       </div>
 
       <figure class="hero-art">
-        <div class="frame">
+        <div class="frame" data-tilt data-tilt-intensity="5">
           <img src="assets/logo.webp" alt="Logo Zennez Network giữa khu rừng Minecraft" width="1200" height="1200" fetchpriority="high">
         </div>
       </figure>
@@ -269,7 +271,7 @@
       <img src="assets/logo-small.webp" alt="" width="32" height="32">
       <span>ZennezMC</span>
     </div>
-    <p>Máy chủ Minecraft Eco SMP Việt Nam. Không phải sản phẩm chính thức của Mojang hay Microsoft.</p>
+    <p>Máy chủ Minecraft Survival Eco Việt Nam. Không phải sản phẩm chính thức của Mojang hay Microsoft.</p>
     <ul class="foot-links">
       <li><a href="wiki.html">Wiki</a></li>
       <li><a data-discord href="#" rel="noopener">Discord</a></li>
@@ -279,6 +281,7 @@
 
 <script src="js/config.js"></script>
 <script src="js/icons.js"></script>
+<script src="js/effects.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

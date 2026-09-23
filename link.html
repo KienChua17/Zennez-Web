@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Liên kết tài khoản — ZennezMC</title>
+  <meta name="theme-color" content="#0c1a12">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .link-scene {
+      position: relative; min-height: 100svh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 40px 20px; overflow: hidden;
+    }
+    #particles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .link-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 0%, rgba(143,212,60,.14) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 100%, rgba(176,74,240,.16) 0%, transparent 60%);
+    }
+    .link-card {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 480px;
+      background: rgba(16,36,26,.92);
+      border: 2px solid var(--forest-700);
+      padding: 52px 44px 44px;
+      backdrop-filter: blur(12px);
+    }
+    .link-brand {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 32px;
+    }
+    .link-brand img { border: 2px solid var(--forest-700); }
+    .link-brand span { font: 800 1.15rem/1 var(--font-body); color: var(--bone); }
+
+    .discord-user {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 16px; margin-bottom: 32px;
+      background: var(--forest-950); border: 2px solid var(--forest-700);
+    }
+    .discord-user img { width: 40px; height: 40px; border-radius: 0; border: 2px solid var(--forest-700); }
+    .discord-user-name { font-weight: 700; font-size: .95rem; }
+    .discord-user-id { font-size: .82rem; color: var(--mist); }
+
+    .link-card h1 { font-size: 1.6rem; margin: 0 0 8px; }
+    .link-card p { color: var(--mist); margin: 0 0 28px; max-width: 40ch; line-height: 1.6; }
+
+    .field-group { margin-bottom: 20px; }
+    .field-group label { display: block; font: 700 .88rem/1 var(--font-body); color: var(--mist); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em; }
+    .field-group input {
+      width: 100%; padding: 14px 16px;
+      background: var(--forest-950); color: var(--bone);
+      border: 2px solid var(--forest-700);
+      font: 500 1rem var(--font-body);
+    }
+    .field-group input:focus { border-color: var(--amethyst-soft); outline: none; }
+
+    .error-box { display: none; font-size: .9rem; color: #f0a899; margin-bottom: 16px; padding: 12px 14px; border: 2px solid var(--danger); background: rgba(226,96,77,.1); }
+    .error-box.show { display: block; }
+    .success-box { display: none; font-size: .9rem; color: var(--leaf); margin-bottom: 16px; padding: 12px 14px; border: 2px solid rgba(143,212,60,.4); background: rgba(143,212,60,.08); }
+    .success-box.show { display: block; }
+
+    .btn-submit {
+      width: 100%; padding: 16px;
+      background: var(--leaf); color: #0d1f07;
+      border: 2px solid #c4ee8a;
+      box-shadow: 0 4px 0 var(--leaf-deep);
+      font: 700 1rem/1 var(--font-body); cursor: pointer;
+      transition: transform .08s, box-shadow .08s, background .12s;
+    }
+    .btn-submit:hover { background: #a6e35a; }
+    .btn-submit:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--leaf-deep); }
+    .btn-submit:disabled { opacity: .55; cursor: not-allowed; }
+    .link-back { margin-top: 24px; }
+    .link-back a { color: var(--mist); font-size: .9rem; }
+    .link-back a:hover { color: var(--bone); }
+  </style>
+</head>
+<body>
+<main class="link-scene">
+  <canvas id="particles"></canvas>
+  <div class="link-glow" aria-hidden="true"></div>
+
+  <div class="link-card" data-tilt data-tilt-intensity="5">
+    <div class="link-brand">
+      <img src="assets/logo-small.webp" alt="" width="36" height="36">
+      <span>ZennezMC</span>
+    </div>
+
+    <div class="discord-user" id="discord-user" hidden>
+      <img id="dc-avatar" src="" alt="">
+      <div>
+        <div class="discord-user-name" id="dc-name"></div>
+        <div class="discord-user-id" id="dc-id"></div>
+      </div>
+    </div>
+
+    <h1>Liên kết tài khoản game</h1>
+    <p>Nhập tên đăng nhập và mật khẩu tài khoản Minecraft để nối với Discord của bạn.</p>
+
+    <div class="error-box" id="err"></div>
+    <div class="success-box" id="ok"></div>
+
+    <div class="field-group">
+      <label for="username">Tên đăng nhập game</label>
+      <input type="text" id="username" placeholder="Tên dùng để đăng nhập vào server" autocomplete="username" spellcheck="false">
+    </div>
+    <div class="field-group">
+      <label for="password">Mật khẩu</label>
+      <input type="password" id="password" placeholder="Mật khẩu tài khoản game" autocomplete="current-password">
+    </div>
+
+    <button class="btn-submit" id="btn-link" type="button">Liên kết tài khoản</button>
+
+    <div class="link-back">
+      <a href="profile.html">← Về hồ sơ</a>
+    </div>
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/effects.js"></script>
+<script>
+var API = "https://api.zennez.net";
+function $(id){ return document.getElementById(id); }
+function showErr(msg){ var b=$("err"); b.textContent=msg; b.classList.add("show"); $("ok").classList.remove("show"); }
+function showOk(msg){ var b=$("ok"); b.textContent=msg; b.classList.add("show"); $("err").classList.remove("show"); }
+
+// Tải thông tin Discord
+fetch(API + "/api/me", { credentials: "include" })
+  .then(function(r){
+    if (r.status === 401) { location.href = "login.html"; return null; }
+    return r.json();
+  })
+  .then(function(d){
+    if (!d) return;
+    if (d.linked_game) { location.href = "profile.html"; return; }
+    $("dc-avatar").src = d.discord.avatar;
+    $("dc-name").textContent = d.discord.username;
+    $("dc-id").textContent = "ID: " + d.discord.id;
+    $("discord-user").hidden = false;
+  })
+  .catch(function(){ showErr("Không kết nối được máy chủ. Vui lòng tải lại trang."); });
+
+$("btn-link").addEventListener("click", function(){
+  var username = $("username").value.trim();
+  var password = $("password").value;
+  if (!username) { showErr("Vui lòng nhập tên đăng nhập game."); $("username").focus(); return; }
+  if (!password) { showErr("Vui lòng nhập mật khẩu."); $("password").focus(); return; }
+
+  var btn = $("btn-link");
+  btn.textContent = "Đang liên kết…"; btn.disabled = true;
+
+  fetch(API + "/api/link", {
+    method: "POST", credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username: username, password: password })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if (d.success) {
+      showOk("Liên kết thành công! Đang chuyển về hồ sơ…");
+      setTimeout(function(){ location.href = "profile.html"; }, 1200);
+    } else {
+      showErr(d.error || "Có lỗi xảy ra.");
+    }
+  })
+  .catch(function(){ showErr("Không kết nối được máy chủ."); })
+  .finally(function(){ btn.textContent = "Liên kết tài khoản"; btn.disabled = false; });
+});
+
+// Enter để submit
+["username","password"].forEach(function(id){
+  $(id).addEventListener("keydown", function(e){ if(e.key === "Enter") $("btn-link").click(); });
+});
+</script>
+</body>
+</html>
