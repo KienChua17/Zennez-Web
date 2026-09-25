@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZennezMC - Máy Chủ Minecraft Survival ECO Chuyên Nghiệp</title>
+    <title>ZennezMC - Máy Chủ Minecraft Survival ECO</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,13 +19,10 @@
                             gold: '#f59e0b',
                             dark: '#0a0a10',
                             card: '#12121e',
-                            glow: '#a855f7',
-                            red: '#ef4444'
+                            glow: '#a855f7'
                         }
                     },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
                     animation: {
                         'pulse-slow': 'pulse 3s infinite',
                         'float': 'float 4s ease-in-out infinite',
@@ -48,55 +45,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #06060c;
-            color: #f3f4f6;
-            overflow-x: hidden;
-        }
-
+        body { font-family: 'Inter', sans-serif; background-color: #06060c; color: #f3f4f6; overflow-x: hidden; }
         #cursor-spotlight {
-            pointer-events: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 9999;
+            pointer-events: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999;
             background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.05) 40%, transparent 80%);
             transition: opacity 0.3s ease;
         }
-
-        .glass-panel {
-            background: rgba(18, 18, 30, 0.65);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .glass-panel-glow {
-            background: rgba(22, 22, 38, 0.75);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(139, 92, 246, 0.25);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(139, 92, 246, 0.15);
-        }
-
-        .tilt-card {
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-
-        .tilt-card:hover {
-            border-color: rgba(6, 182, 212, 0.6);
-            box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.3), 0 0 25px rgba(139, 92, 246, 0.35);
-        }
-
+        .glass-panel { background: rgba(18, 18, 30, 0.65); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-panel-glow { background: rgba(22, 22, 38, 0.75); backdrop-filter: blur(20px); border: 1px solid rgba(139, 92, 246, 0.25); box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(139, 92, 246, 0.15); }
+        .tilt-card { transform-style: preserve-3d; perspective: 1000px; transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease; }
+        .tilt-card:hover { border-color: rgba(6, 182, 212, 0.6); box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.3), 0 0 25px rgba(139, 92, 246, 0.35); }
         .text-glow-purple { text-shadow: 0 0 12px rgba(139, 92, 246, 0.7); }
         .text-glow-cyan { text-shadow: 0 0 12px rgba(6, 182, 212, 0.7); }
         .text-glow-gold { text-shadow: 0 0 12px rgba(245, 158, 11, 0.7); }
-        .text-glow-red { text-shadow: 0 0 12px rgba(239, 68, 68, 0.7); }
-
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #06060c; }
         ::-webkit-scrollbar-thumb { background: #2a2a40; border-radius: 4px; }
@@ -124,7 +85,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wide">
+                <nav class="hidden md:flex items-center space-x-7 text-sm font-semibold tracking-wide">
                     <a href="#about" class="text-gray-300 hover:text-brand-cyan transition-colors flex items-center space-x-2">
                         <i class="fa-solid fa-compass text-xs text-brand-purple"></i>
                         <span>Giới Thiệu</span>
@@ -133,13 +94,13 @@
                         <i class="fa-solid fa-gamepad text-xs text-brand-purple"></i>
                         <span>Lối Chơi</span>
                     </a>
-                    <a href="#store" class="text-gray-300 hover:text-brand-gold transition-colors flex items-center space-x-2">
-                        <i class="fa-solid fa-crown text-xs text-brand-gold"></i>
-                        <span>Cửa Hàng Rank</span>
-                    </a>
                     <a href="#wiki" class="text-gray-300 hover:text-brand-cyan transition-colors flex items-center space-x-2">
                         <i class="fa-solid fa-book-bookmark text-xs text-brand-cyan"></i>
                         <span>Wiki Server</span>
+                    </a>
+                    <a href="#store" class="text-gray-300 hover:text-brand-gold transition-colors flex items-center space-x-2">
+                        <i class="fa-solid fa-crown text-xs text-brand-gold"></i>
+                        <span>Cửa Hàng Rank</span>
                     </a>
                     <a href="#community" class="text-gray-300 hover:text-brand-cyan transition-colors flex items-center space-x-2">
                         <i class="fa-brands fa-discord text-xs text-[#5865F2]"></i>
@@ -175,8 +136,8 @@
         <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/10 px-4 pt-3 pb-6 space-y-3">
             <a href="#about" class="block text-gray-300 hover:text-brand-cyan py-2 font-medium">Giới Thiệu</a>
             <a href="#gamemodes" class="block text-gray-300 hover:text-brand-cyan py-2 font-medium">Lối Chơi</a>
-            <a href="#store" class="block text-brand-gold font-semibold py-2">Cửa Hàng Rank</a>
             <a href="#wiki" class="block text-brand-cyan font-medium py-2">Wiki Server</a>
+            <a href="#store" class="block text-brand-gold font-semibold py-2">Cửa Hàng Rank /rank</a>
             <a href="#community" class="block text-gray-300 hover:text-brand-cyan py-2 font-medium">Cộng Đồng</a>
             
             <div id="auth-section-mobile" class="pt-2">
