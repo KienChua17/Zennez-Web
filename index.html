@@ -22,7 +22,9 @@
                             glow: '#a855f7'
                         }
                     },
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
                     animation: {
                         'pulse-slow': 'pulse 3s infinite',
                         'float': 'float 4s ease-in-out infinite',
@@ -30,7 +32,7 @@
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
+                            '50%': { transform: 'translateY(-12px)' },
                         }
                     }
                 }
@@ -38,39 +40,102 @@
         }
     </script>
     
-    <!-- Fonts & Icons -->
+    <!-- Google Fonts & Font Awesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #06060c; color: #f3f4f6; overflow-x: hidden; }
-        #cursor-spotlight {
-            pointer-events: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999;
-            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(139, 92, 246, 0.12), rgba(6, 182, 212, 0.04) 40%, transparent 80%);
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #06060c;
+            color: #f3f4f6;
+            overflow-x: hidden;
         }
-        .glass-panel { background: rgba(18, 18, 30, 0.65); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .glass-panel-glow { background: rgba(22, 22, 38, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(139, 92, 246, 0.25); box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(139, 92, 246, 0.15); }
-        .tilt-card { transform-style: preserve-3d; perspective: 1000px; transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease; }
-        .tilt-card:hover { border-color: rgba(6, 182, 212, 0.6); box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.3), 0 0 25px rgba(139, 92, 246, 0.4); }
-        .text-glow-purple { text-shadow: 0 0 12px rgba(139, 92, 246, 0.7); }
-        .text-glow-cyan { text-shadow: 0 0 12px rgba(6, 182, 212, 0.7); }
-        .text-glow-gold { text-shadow: 0 0 12px rgba(245, 158, 11, 0.7); }
+
+        /* Spotlight Cursor Effect Background */
+        #cursor-spotlight {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(139, 92, 246, 0.14), rgba(6, 182, 212, 0.05) 40%, transparent 80%);
+            transition: opacity 0.3s ease;
+        }
+
+        /* Glassmorphism Styling */
+        .glass-panel {
+            background: rgba(18, 18, 30, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-panel-glow {
+            background: rgba(22, 22, 38, 0.75);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(139, 92, 246, 0.15);
+        }
+
+        /* 3D Tilt Card Base Effect */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .tilt-card:hover {
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.3), 0 0 25px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Neon Text Utilities */
+        .text-glow-purple {
+            text-shadow: 0 0 12px rgba(139, 92, 246, 0.7);
+        }
+        .text-glow-cyan {
+            text-shadow: 0 0 12px rgba(6, 182, 212, 0.7);
+        }
+        .text-glow-gold {
+            text-shadow: 0 0 12px rgba(245, 158, 11, 0.7);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #06060c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a40;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
     </style>
 </head>
 <body class="relative selection:bg-brand-purple selection:text-white">
 
+    <!-- Mouse Spotlight Layer -->
     <div id="cursor-spotlight"></div>
+
+    <!-- Canvas Background Particles -->
     <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
-    <!-- Header Navbar -->
+    <!-- Header Navigation -->
     <header class="sticky top-0 z-50 glass-panel border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-purple to-brand-cyan flex items-center justify-center font-black text-2xl text-white shadow-lg shadow-brand-purple/30">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-purple to-brand-cyan flex items-center justify-center font-black text-2xl text-white shadow-lg shadow-brand-purple/30 animate-pulse-slow">
                         Z
                     </div>
                     <div>
@@ -79,7 +144,7 @@
                     </div>
                 </div>
 
-                <!-- Navigation Links -->
+                <!-- Desktop Navigation Menu -->
                 <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wide">
                     <a href="#about" class="text-gray-300 hover:text-brand-cyan transition-colors flex items-center space-x-2">
                         <i class="fa-solid fa-compass text-xs text-brand-purple"></i>
@@ -99,14 +164,14 @@
                     </a>
                 </nav>
 
-                <!-- Actions: IP Button & Discord Auth Profile -->
+                <!-- Quick Actions & Auth -->
                 <div class="hidden lg:flex items-center space-x-4">
-                    <button onclick="copyServerIP()" class="glass-panel hover:bg-white/10 text-white px-3.5 py-2 rounded-xl text-xs font-bold border border-brand-purple/40 hover:border-brand-cyan transition-all flex items-center space-x-2">
+                    <button onclick="copyServerIP()" class="glass-panel hover:bg-white/10 text-white px-3.5 py-2 rounded-xl text-xs font-bold tracking-wide border border-brand-purple/40 hover:border-brand-cyan transition-all flex items-center space-x-2">
                         <i class="fa-regular fa-copy text-brand-cyan"></i>
                         <span>play.zennez.net</span>
                     </button>
 
-                    <!-- Discord Login Button / User Profile Indicator -->
+                    <!-- Auth Box (Tự động đổi trạng thái Login / User info) -->
                     <div id="auth-section">
                         <button onclick="loginWithDiscord()" class="bg-[#5865F2] hover:bg-[#4752C4] text-white px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 shadow-lg shadow-[#5865F2]/30">
                             <i class="fa-brands fa-discord text-base"></i>
@@ -117,20 +182,44 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white p-2">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white p-2 focus:outline-none">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/10 px-4 pt-3 pb-6 space-y-3">
+            <a href="#about" class="block text-gray-300 hover:text-brand-cyan py-2 font-medium">Giới Thiệu</a>
+            <a href="#gamemodes" class="block text-gray-300 hover:text-brand-cyan py-2 font-medium">Lối Chơi</a>
+            <a href="#store" class="block text-brand-gold font-semibold py-2">Cửa Hàng Rank VIP</a>
+            <a href="#community" class="block text-gray-300 hover:text-brand-cyan py-2 font-medium">Cộng Đồng</a>
+            
+            <div id="auth-section-mobile" class="pt-2">
+                <button onclick="loginWithDiscord()" class="w-full bg-[#5865F2] hover:bg-[#4752C4] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-discord text-base"></i>
+                    <span>Đăng Nhập Discord</span>
+                </button>
+            </div>
+            
+            <button onclick="copyServerIP()" class="w-full bg-brand-purple/20 border border-brand-purple/50 text-white py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2">
+                <i class="fa-regular fa-copy text-brand-cyan"></i>
+                <span>Copy IP: play.zennez.net</span>
+            </button>
+        </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative pt-16 pb-20 md:pt-24 md:pb-32 z-10 text-center">
-        <div class="max-w-7xl mx-auto px-4">
+    <section class="relative pt-16 pb-24 md:pt-28 md:pb-36 z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+            
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-purple/20 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-brand-cyan/20 rounded-full blur-[100px] pointer-events-none"></div>
+
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-brand-cyan/30 text-xs sm:text-sm font-semibold text-brand-cyan mb-8 animate-float">
                 <i class="fa-solid fa-fire text-brand-gold"></i>
-                <span>MÁY CHỦ MINECRAFT SURVIVAL ECO HÀNG ĐẦU 1.21.X</span>
+                <span>TRẢI NGHIỆM CHIẾN ĐẤU & KINH TẾ SURVIVAL ECO ĐỈNH CAO 1.21.X</span>
             </div>
 
             <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-6 uppercase">
@@ -138,38 +227,116 @@
                 SURVIVAL <span class="text-brand-gold text-glow-gold">ECO</span>
             </h1>
 
-            <p class="max-w-2xl mx-auto text-base sm:text-lg text-gray-300 mb-10">
-                Hệ thống kinh tế cân bằng, Chợ Đấu Giá zAuctionHouse, Claim Đất an toàn tuyệt đối và Đua Top nhận thưởng tiền mặt định kỳ!
+            <p class="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-gray-300 mb-10 font-normal leading-relaxed">
+                Khám phá máy chủ Minecraft thế hệ mới với hệ thống **Kinh Tế Cân Bằng**, Chợ Đấu Giá **zAuctionHouse**, Claim Đất Chống Griefing và **Resource Pack Custom 3D** cực độc đáo!
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto mb-10">
-                <div onclick="copyServerIP()" class="tilt-card glass-panel-glow w-full p-4 rounded-2xl flex items-center justify-between gap-4 cursor-pointer hover:bg-brand-purple/10 border-2 border-brand-purple/40">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-2xl mx-auto mb-12">
+                <!-- IP Card -->
+                <div onclick="copyServerIP()" class="tilt-card glass-panel-glow w-full sm:w-auto flex-1 p-4 rounded-2xl flex items-center justify-between gap-4 cursor-pointer group hover:bg-brand-purple/10 border-2 border-brand-purple/40">
                     <div class="flex items-center gap-3 text-left">
-                        <div class="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center text-brand-cyan text-xl">
-                            <i class="fa-solid fa-server"></i>
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-purple/30 to-brand-cyan/30 flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-server text-xl text-brand-cyan"></i>
                         </div>
                         <div>
-                            <p class="text-[10px] text-gray-400 font-bold uppercase">IP MÁY CHỦ</p>
-                            <p class="text-base font-black text-white">play.zennez.net</p>
+                            <p class="text-[11px] text-gray-400 font-bold uppercase tracking-wider">ĐỊA CHỈ MÁY CHỦ (IP)</p>
+                            <p class="text-lg font-black text-white group-hover:text-brand-cyan transition-colors tracking-wide">play.zennez.net</p>
                         </div>
                     </div>
-                    <span class="text-xs font-bold text-brand-purple bg-brand-purple/20 px-3 py-1.5 rounded-lg">Copy IP</span>
+                    <button class="bg-brand-purple hover:bg-brand-purple/80 text-white p-3 rounded-xl shadow-lg transition-all flex items-center gap-2">
+                        <i class="fa-regular fa-copy text-base"></i>
+                        <span class="text-xs font-bold hidden sm:inline">Sao Chép</span>
+                    </button>
                 </div>
 
-                <a href="#store" class="tilt-card glass-panel w-full sm:w-auto px-8 py-4 rounded-2xl flex items-center justify-center gap-2 text-brand-gold font-extrabold border border-brand-gold/30 hover:border-brand-gold">
-                    <i class="fa-solid fa-crown"></i>
-                    <span>CỬA HÀNG RANK</span>
+                <!-- Discord Button -->
+                <a href="#community" class="tilt-card glass-panel w-full sm:w-auto px-8 py-5 rounded-2xl flex items-center justify-center gap-3 text-white font-extrabold hover:border-brand-purple hover:text-brand-cyan transition-all border border-white/10">
+                    <i class="fa-brands fa-discord text-2xl text-[#5865F2]"></i>
+                    <span class="tracking-wide">VÀO DISCORD</span>
+                </a>
+
+                <!-- Store Button -->
+                <a href="#store" class="tilt-card glass-panel w-full sm:w-auto px-8 py-5 rounded-2xl flex items-center justify-center gap-3 text-brand-gold font-extrabold hover:border-brand-gold transition-all border border-brand-gold/30">
+                    <i class="fa-solid fa-crown text-xl"></i>
+                    <span class="tracking-wide">MUA RANK</span>
                 </a>
             </div>
 
-            <!-- Server Status Indicator -->
-            <div class="inline-flex items-center gap-4 glass-panel px-6 py-2.5 rounded-full text-xs font-semibold">
-                <span class="flex items-center gap-2 text-emerald-400 font-bold">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-                    24/7 Hoạt Động
-                </span>
-                <span class="text-gray-500">|</span>
-                <span class="text-brand-cyan font-bold" id="server-online-count"><i class="fa-solid fa-users mr-1"></i> Đang tải...</span>
+            <!-- Server Status Bar -->
+            <div class="inline-flex flex-wrap items-center justify-center gap-6 glass-panel px-6 py-3 rounded-2xl border border-white/10 text-xs sm:text-sm font-semibold">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-signal text-emerald-400"></i>
+                    <span class="text-gray-300">Trạng Thái:</span>
+                    <span class="text-emerald-400 font-bold">Hoạt Động 24/7</span>
+                </div>
+                <div class="hidden sm:block text-gray-600">|</div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-users text-brand-cyan"></i>
+                    <span class="text-gray-300">Người Chơi:</span>
+                    <span id="hero-online-count" class="text-white font-bold text-glow-cyan"><i class="fa-solid fa-spinner fa-spin"></i> Đang tải...</span>
+                </div>
+                <div class="hidden sm:block text-gray-600">|</div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-code-branch text-brand-purple"></i>
+                    <span class="text-gray-300">Phiên Bản:</span>
+                    <span class="text-brand-purple font-bold">1.21.x (Paper/Leaf)</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Gamemodes Section -->
+    <section id="gamemodes" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-xs font-bold text-brand-cyan uppercase tracking-widest mb-2">CHẾ ĐỘ CHƠI CHÍNH</h2>
+                <p class="text-3xl sm:text-5xl font-black text-white">TRẢI NGHIỆM <span class="text-brand-purple text-glow-purple">SURVIVAL ECO</span> CỰC ĐỈNH</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-brand-purple to-brand-cyan mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="tilt-card glass-panel-glow p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-purple to-indigo-600 flex items-center justify-center text-white text-3xl mb-6 shadow-lg shadow-brand-purple/30">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-white mb-4">SURVIVAL ECO</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Nền kinh tế cân bằng chuẩn chỉnh. Mua bán vật phẩm qua **ShopGUI+**, tự do đấu giá item quý hiếm trên **zAuctionHouse** cùng hàng ngàn gamer khác.
+                    </p>
+                    <ul class="space-y-3 text-xs sm:text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-cyan"></i> ShopGUI+ tiện lợi & trực quan</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-cyan"></i> Đấu giá vật phẩm zAuctionHouse</li>
+                    </ul>
+                </div>
+
+                <div class="tilt-card glass-panel-glow p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-cyan to-teal-500 flex items-center justify-center text-white text-3xl mb-6 shadow-lg shadow-brand-cyan/30">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-white mb-4">CLAIM ĐẤT & BANG HỘI</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Xây dựng lãnh địa an toàn chống Griefing. Tạo lập Team, mời bạn bè cùng sinh tồn, chia sẻ tài nguyên và xưng bá trên máy chủ ZennezMC.
+                    </p>
+                    <ul class="space-y-3 text-xs sm:text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-purple"></i> Bảo vệ vùng đất an toàn 100%</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-purple"></i> Quản lý phân quyền thành viên Land</li>
+                    </ul>
+                </div>
+
+                <div class="tilt-card glass-panel-glow p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-gold to-orange-500 flex items-center justify-center text-white text-3xl mb-6 shadow-lg shadow-brand-gold/30">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-white mb-4">DẪN ĐẦU BẢNG XẾP HẠNG</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Đua top tài sản, cấp độ và thời gian chơi. Tham gia các Event Đua Top tháng nhận thưởng phần quà tiền mặt & Rank cao cấp.
+                    </p>
+                    <ul class="space-y-3 text-xs sm:text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-gold"></i> Bảng xếp hạng thời gian thực</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-gold"></i> Phần thưởng TOP cực khủng</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -178,163 +345,251 @@
     <section id="store" class="py-20 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-xs font-bold text-brand-gold uppercase tracking-widest mb-2">ĐẶC QUYỀN MÁY CHỦ</h2>
-                <p class="text-3xl sm:text-5xl font-black text-white">CÁC GÓI <span class="text-brand-gold text-glow-gold">RANK VIP</span></p>
+                <h2 class="text-xs font-bold text-brand-gold uppercase tracking-widest mb-2">NẠP THẺ & CỬA HÀNG</h2>
+                <p class="text-3xl sm:text-5xl font-black text-white">CÁC GÓI <span class="text-brand-gold text-glow-gold">RANK VIP</span> ĐẶC QUYỀN</p>
+                <p class="text-gray-400 text-sm mt-3 max-w-xl mx-auto">Ủng hộ máy chủ duy trì và nhận các danh hiệu, đặc quyền và bộ Kit ingame độc quyền.</p>
                 <div class="w-24 h-1 bg-gradient-to-r from-brand-gold to-orange-500 mx-auto mt-4 rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- VIP -->
-                <div class="tilt-card glass-panel p-8 rounded-3xl border border-purple-500/30 flex flex-col justify-between">
+                <!-- VIP Card -->
+                <div class="tilt-card glass-panel p-8 rounded-3xl border border-purple-500/30 hover:border-purple-500 flex flex-col justify-between relative group">
                     <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-xs font-bold bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full">CƠ BẢN</span>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-xs font-extrabold bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full border border-purple-500/40">GÓI CƠ BẢN</span>
                             <i class="fa-solid fa-crown text-2xl text-purple-400"></i>
                         </div>
                         <h3 class="text-3xl font-black text-white mb-2">VIP</h3>
-                        <div class="text-2xl font-bold text-brand-purple mb-6">50.000 VNĐ / Coin</div>
+                        <div class="text-2xl font-bold text-brand-purple mb-6">50.000 VNĐ</div>
                         <ul class="space-y-3 text-sm text-gray-300 mb-8">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Prefix <span class="text-purple-400 font-bold">[VIP]</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Danh hiệu <span class="text-purple-400 font-bold">[VIP]</span> nổi bật</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Mở rộng 3 Home cá nhân</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Lệnh /hat, /craft, /enderchest</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> +1.000 Zennez Cash thưởng</li>
                         </ul>
                     </div>
-                    <button onclick="handleBuyRank('VIP', 50000)" class="w-full py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition-all shadow-lg shadow-purple-600/30">
-                        MUA NGAY
+                    <button onclick="handleBuyRank('VIP', '50.000 VNĐ')" class="w-full py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition-all shadow-lg shadow-purple-600/30">
+                        SỞ HỮU NGAY
                     </button>
                 </div>
 
-                <!-- MVP -->
-                <div class="tilt-card glass-panel-glow p-8 rounded-3xl border-2 border-brand-cyan flex flex-col justify-between scale-105">
+                <!-- MVP Card -->
+                <div class="tilt-card glass-panel-glow p-8 rounded-3xl border-2 border-brand-cyan flex flex-col justify-between relative group scale-105 shadow-2xl">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-cyan to-blue-600 text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">
+                        PHỔ BIẾN NHẤT
+                    </div>
                     <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-xs font-bold bg-brand-cyan/20 text-brand-cyan px-3 py-1 rounded-full">PHỔ BIẾN NHẤT</span>
+                        <div class="flex justify-between items-center mb-6 mt-2">
+                            <span class="text-xs font-extrabold bg-brand-cyan/20 text-brand-cyan px-3 py-1 rounded-full border border-brand-cyan/40">GÓI PHỔ BIẾN</span>
                             <i class="fa-solid fa-shield-cat text-3xl text-brand-cyan"></i>
                         </div>
                         <h3 class="text-3xl font-black text-white mb-2">MVP</h3>
-                        <div class="text-3xl font-black text-brand-cyan mb-6">150.000 VNĐ / Coin</div>
+                        <div class="text-3xl font-black text-brand-cyan mb-6">150.000 VNĐ</div>
                         <ul class="space-y-3 text-sm text-gray-200 mb-8">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-cyan"></i> Toàn bộ quyền lợi của VIP</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-cyan"></i> Prefix <span class="text-brand-cyan font-bold">[MVP]</span> Neon</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-cyan"></i> Toàn bộ quyền lợi của **VIP**</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-cyan"></i> Danh hiệu <span class="text-brand-cyan font-bold">[MVP]</span> Neon cực đẹp</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-cyan"></i> Lệnh Bay /fly tại Spawn & Claim</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-cyan"></i> Mở rộng 7 Home + Kit MVP hàng tuần</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-cyan"></i> Mở rộng 7 Home + Bộ Kit MVP 7 ngày</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-cyan"></i> +5.000 Zennez Cash + 50 Coin</li>
                         </ul>
                     </div>
-                    <button onclick="handleBuyRank('MVP', 150000)" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-cyan to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-black transition-all shadow-xl shadow-brand-cyan/40">
-                        MUA NGAY
+                    <button onclick="handleBuyRank('MVP', '150.000 VNĐ')" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-cyan to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-extrabold transition-all shadow-xl shadow-brand-cyan/40">
+                        SỞ HỮU NGAY
                     </button>
                 </div>
 
-                <!-- LEGEND -->
-                <div class="tilt-card glass-panel p-8 rounded-3xl border border-brand-gold/40 flex flex-col justify-between">
+                <!-- LEGEND Card -->
+                <div class="tilt-card glass-panel p-8 rounded-3xl border border-brand-gold/40 hover:border-brand-gold flex flex-col justify-between relative group">
                     <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-xs font-bold bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full">HUYỀN THOẠI</span>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-xs font-extrabold bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full border border-amber-500/40">GÓI HUYỀN THOẠI</span>
                             <i class="fa-solid fa-dragon text-2xl text-brand-gold"></i>
                         </div>
                         <h3 class="text-3xl font-black text-white mb-2">LEGEND</h3>
-                        <div class="text-2xl font-bold text-brand-gold mb-6">300.000 VNĐ / Coin</div>
+                        <div class="text-2xl font-bold text-brand-gold mb-6">300.000 VNĐ</div>
                         <ul class="space-y-3 text-sm text-gray-300 mb-8">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold"></i> Toàn bộ đặc quyền của MVP</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold"></i> Prefix <span class="text-brand-gold font-bold">[LEGEND]</span> Lấp Lánh</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold"></i> Toàn bộ đặc quyền **MVP**</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold"></i> Danh hiệu <span class="text-brand-gold font-bold">[LEGEND]</span> Lấp Lánh</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold"></i> Quyền /fly không giới hạn Survival</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold"></i> Tăng giới hạn bán Đấu Giá + Vũ khí Custom 3D</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold"></i> Tăng giới hạn bán Chợ Đấu Giá zAuction</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold"></i> Khung Chat Vàng Kim & Vũ Khí 3D Legend</li>
                         </ul>
                     </div>
-                    <button onclick="handleBuyRank('LEGEND', 300000)" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-gold to-orange-500 text-white font-bold transition-all shadow-lg shadow-brand-gold/30">
-                        MUA NGAY
+                    <button onclick="handleBuyRank('LEGEND', '300.000 VNĐ')" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-gold to-orange-500 hover:opacity-90 text-white font-bold transition-all shadow-lg shadow-brand-gold/30">
+                        SỞ HỮU NGAY
                     </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modal Tài Khoản / Liên Kết Minecraft -->
+    <!-- Community Section -->
+    <section id="community" class="py-20 relative z-10 bg-black/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="tilt-card glass-panel-glow p-8 sm:p-12 rounded-3xl border border-brand-purple/30 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div class="max-w-2xl text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#5865F2]/20 text-[#5865F2] font-bold text-xs mb-4">
+                        <i class="fa-brands fa-discord"></i> DISCORD OFFICIAL COMMUNITY
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">THAM GIA CỘNG ĐỒNG ZENNEZMC</h2>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        Kết nối cùng hàng ngàn người chơi khác, nhận thông báo sự kiện, cập nhật phiên bản mới nhất và tìm kiếm đồng đội làm giàu trên Survival ECO!
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                    <a href="https://discord.zennez.net" target="_blank" class="px-8 py-4 rounded-2xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-extrabold flex items-center justify-center gap-3 transition-all shadow-lg shadow-[#5865F2]/40 text-center">
+                        <i class="fa-brands fa-discord text-2xl"></i>
+                        <span>Tham Gia Discord</span>
+                    </a>
+                    <button onclick="copyServerIP()" class="px-8 py-4 rounded-2xl glass-panel hover:bg-white/10 text-white font-extrabold border border-white/20 flex items-center justify-center gap-3 transition-all text-center">
+                        <i class="fa-solid fa-gamepad text-brand-cyan"></i>
+                        <span>Vào Game Ngay</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 glass-panel border-t border-white/10 pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+                <p>&copy; 2026 ZennezMC. All rights reserved. Not an official Minecraft product.</p>
+                <p>Designed for ZennezMC Minecraft Server</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Copy IP Toast -->
+    <div id="copy-toast" class="fixed bottom-8 right-8 z-50 transform translate-y-32 opacity-0 transition-all duration-300 ease-out pointer-events-none">
+        <div class="glass-panel-glow px-6 py-4 rounded-2xl flex items-center gap-3 border-2 border-emerald-500 text-white shadow-2xl">
+            <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                <i class="fa-solid fa-check text-lg"></i>
+            </div>
+            <div>
+                <p class="font-extrabold text-sm text-emerald-400">ĐÃ SAO CHÉP IP!</p>
+                <p class="text-xs text-gray-300">Đã lưu <span class="text-white font-bold">play.zennez.net</span> vào bộ nhớ tạm.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Hồ Sơ & Liên Kết Tài Khoản Game (nLogin) -->
     <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
-        <div class="glass-panel-glow p-6 sm:p-8 rounded-3xl max-w-lg w-full mx-4 border border-brand-purple/40 relative">
+        <div class="glass-panel-glow p-6 sm:p-8 rounded-3xl max-w-md w-full mx-4 border border-brand-purple/40 relative">
             <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <!-- Header Profile -->
-            <div class="flex items-center gap-4 border-b border-white/10 pb-6 mb-6">
-                <img id="user-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" class="w-16 h-16 rounded-2xl border-2 border-brand-purple" alt="Avatar">
+            <!-- Discord User Profile Info -->
+            <div class="flex items-center gap-4 border-b border-white/10 pb-5 mb-5">
+                <img id="user-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" class="w-14 h-14 rounded-2xl border-2 border-brand-purple shadow-md" alt="Avatar">
                 <div>
-                    <h3 id="user-discord-name" class="text-xl font-bold text-white">Discord User</h3>
+                    <h3 id="user-discord-name" class="text-lg font-bold text-white">Discord User</h3>
                     <p id="user-discord-id" class="text-xs text-gray-400">ID: ...</p>
                     <span id="link-badge" class="inline-block mt-1 text-[11px] font-bold px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30">Chưa liên kết Minecraft</span>
                 </div>
             </div>
 
-            <!-- Trường Hợp 1: Đã liên kết tài khoản Game -->
+            <!-- View 1: Khi Đã Liên Kết -->
             <div id="linked-view" class="hidden space-y-4">
-                <div class="glass-panel p-4 rounded-2xl flex items-center gap-4">
-                    <img id="mc-avatar" src="https://mc-heads.net/avatar/Steve" class="w-14 h-14 rounded-xl border border-brand-cyan" alt="MC Head">
+                <div class="glass-panel p-4 rounded-2xl flex items-center gap-4 border border-brand-cyan/30">
+                    <img id="mc-avatar" src="https://mc-heads.net/avatar/Steve" class="w-12 h-12 rounded-xl border border-brand-cyan" alt="MC Skin">
                     <div class="flex-1">
                         <div class="flex justify-between items-center">
                             <span class="text-xs text-gray-400">Tên In-game:</span>
                             <span id="mc-name" class="text-sm font-black text-brand-cyan">Steve</span>
                         </div>
                         <div class="flex justify-between items-center mt-1">
-                            <span class="text-xs text-gray-400">Rank:</span>
-                            <span id="mc-rank" class="text-xs font-bold text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded">Member</span>
-                        </div>
-                        <div class="flex justify-between items-center mt-1">
-                            <span class="text-xs text-gray-400">Số dư Cash:</span>
-                            <span id="mc-money" class="text-xs font-bold text-emerald-400">0$</span>
+                            <span class="text-xs text-gray-400">Cấp bậc:</span>
+                            <span id="mc-rank" class="text-xs font-bold text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded">Thành Viên</span>
                         </div>
                     </div>
                 </div>
-                <button onclick="unlinkMinecraft()" class="w-full py-2.5 rounded-xl bg-red-500/20 border border-red-500/40 text-red-400 text-xs font-bold hover:bg-red-500/30 transition-all">
+
+                <button onclick="unlinkMinecraft()" id="btn-unlink" class="w-full py-2.5 rounded-xl bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 text-xs font-bold transition-all">
                     Hủy liên kết tài khoản
                 </button>
             </div>
 
-            <!-- Trường Hợp 2: Chưa liên kết, Form xác thực qua AuthMe -->
+            <!-- View 2: Khi Chưa Liên Kết (Form Nhập Mật Khẩu nLogin) -->
             <div id="unlinked-view" class="space-y-4">
-                <p class="text-xs text-gray-300">
-                    Nhập đúng tên tài khoản và mật khẩu bạn dùng khi gõ lệnh <code class="text-brand-cyan font-bold">/login &lt;mật khẩu&gt;</code> trong server để liên kết:
+                <p class="text-xs text-gray-300 leading-relaxed">
+                    Nhập đúng tên tài khoản và mật khẩu in-game (mật khẩu dùng khi gõ lệnh <code class="text-brand-cyan font-bold">/login</code>) để đồng bộ dữ liệu:
                 </p>
 
                 <div>
                     <label class="block text-xs font-bold text-gray-300 mb-1">Tên nhân vật In-game</label>
-                    <input type="text" id="link-mc-username" placeholder="Ví dụ: KienChua17" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-purple">
+                    <input type="text" id="link-mc-username" placeholder="Ví dụ: KienChua17" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-purple">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-gray-300 mb-1">Mật khẩu In-game</label>
-                    <input type="password" id="link-mc-password" placeholder="Mật khẩu AuthMe..." class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-purple">
+                    <input type="password" id="link-mc-password" placeholder="Mật khẩu nLogin..." class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-purple">
                 </div>
 
-                <div id="link-error" class="text-xs text-red-400 hidden"></div>
+                <div id="link-error" class="text-xs text-red-400 hidden bg-red-500/10 p-2.5 rounded-xl border border-red-500/20"></div>
 
-                <button onclick="submitLinkAccount()" id="btn-link-submit" class="w-full py-3 rounded-xl bg-brand-purple hover:bg-brand-purple/80 text-white font-bold transition-all text-sm">
+                <button onclick="submitLinkAccount()" id="btn-link-submit" class="w-full py-3 rounded-xl bg-brand-purple hover:bg-brand-purple/80 text-white font-bold transition-all text-sm shadow-lg shadow-brand-purple/30">
                     Xác Thực & Liên Kết Ngay
                 </button>
             </div>
 
-            <div class="mt-6 pt-4 border-t border-white/10 flex justify-between">
-                <button onclick="logoutDiscord()" class="text-xs text-gray-400 hover:text-red-400 font-semibold flex items-center gap-1">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+            <!-- Modal Footer -->
+            <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center">
+                <button onclick="logoutDiscord()" class="text-xs text-gray-400 hover:text-red-400 font-semibold flex items-center gap-1.5 transition-colors">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất Discord
                 </button>
-                <button onclick="closeProfileModal()" class="text-xs text-gray-400 hover:text-white">Đóng</button>
+                <button onclick="closeProfileModal()" class="text-xs text-gray-400 hover:text-white font-semibold">Đóng</button>
             </div>
         </div>
     </div>
 
-    <!-- Script Xử Lý Kết Nối Backend -->
-    <script>
-        const API_BASE = "https://api.zennez.net"; // Tunnel trỏ vào backend của bạn
+    <!-- Modal Mua Rank -->
+    <div id="store-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="glass-panel-glow p-8 rounded-3xl max-w-md w-full mx-4 border border-brand-gold/40 relative">
+            <button onclick="closeStoreModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 rounded-2xl bg-brand-gold/20 text-brand-gold flex items-center justify-center text-3xl mx-auto mb-3">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <h3 class="text-2xl font-black text-white">NẠP GÓI <span id="modal-rank-name" class="text-brand-gold">VIP</span></h3>
+                <p id="modal-rank-price" class="text-sm font-bold text-brand-cyan mt-1">50.000 VNĐ</p>
+            </div>
 
-        // 1. Mouse Spotlight & 3D Tilt Effect
+            <div class="space-y-3 mb-6 text-xs text-gray-300 glass-panel p-4 rounded-2xl">
+                <div class="flex justify-between">
+                    <span>Người nhận:</span>
+                    <span id="modal-player-target" class="font-bold text-white">Chưa liên kết</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Phương thức:</span>
+                    <span class="font-bold text-brand-gold">ATM / Momo / Thẻ Cào</span>
+                </div>
+            </div>
+
+            <a href="https://discord.zennez.net" target="_blank" class="w-full py-3.5 rounded-xl bg-brand-gold hover:bg-amber-400 text-black font-black block text-center transition-all shadow-lg shadow-brand-gold/30">
+                MỞ TICKET DISCORD NẠP NGAY
+            </a>
+        </div>
+    </div>
+
+    <!-- Script Xử Lý Toàn Bộ Logic -->
+    <script>
+        const API_BASE = "https://api.zennez.net";
+        let currentUser = null;
+
+        // 1. Hiệu Ứng Chuột Spotlight
         const cursorSpotlight = document.getElementById('cursor-spotlight');
         window.addEventListener('mousemove', (e) => {
             cursorSpotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
             cursorSpotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
         });
 
+        // 2. Hiệu Ứng 3D Tilt Cards
         document.querySelectorAll('.tilt-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
@@ -347,101 +602,164 @@
             });
         });
 
-        // 2. Fetch Server Status (Ping real-time qua mcstatus.io)
+        // 3. Canvas Particles Hiệu Ứng Hạt
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.5 + 0.2;
+                this.color = Math.random() > 0.5 ? '#8b5cf6' : '#06b6d4';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 40; i++) particles.push(new Particle());
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // 4. Lấy Số Lượng Người Chơi Real-time
         async function fetchServerStatus() {
             try {
                 const res = await fetch("https://api.mcstatus.io/v2/status/java/play.zennez.net");
                 const data = await res.json();
                 if (data && data.online) {
-                    document.getElementById('server-online-count').innerHTML = `<i class="fa-solid fa-users mr-1"></i> ${data.players.online} / ${data.players.max} Online`;
+                    const txt = `${data.players.online} / ${data.players.max} Online`;
+                    document.getElementById('hero-online-count').innerText = txt;
                 } else {
-                    document.getElementById('server-online-count').innerText = "Máy chủ Offline";
+                    document.getElementById('hero-online-count').innerText = "Máy Chủ Bảo Trì";
                 }
             } catch(e) {
-                document.getElementById('server-online-count').innerText = "128 / 500 Online";
+                document.getElementById('hero-online-count').innerText = "128 / 500 Online";
             }
         }
         fetchServerStatus();
         setInterval(fetchServerStatus, 15000);
 
+        // 5. Sao Chép IP Máy Chủ
         function copyServerIP() {
             navigator.clipboard.writeText("play.zennez.net");
-            alert("Đã sao chép địa chỉ IP: play.zennez.net");
+            const toast = document.getElementById('copy-toast');
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3000);
         }
 
-        // 3. Discord Login Flow
+        // 6. Xử Lý Đăng Nhập Discord & Token
         function loginWithDiscord() {
-            window.location.href = `${API_BASE}/api/auth/discord`;
+            // Chuyển hướng chính xác vào route Discord trên backend
+            window.location.href = `${API_BASE}/auth/discord`;
         }
 
-        // Kiểm tra xem URL có token trả về sau khi OAuth2 Discord hoàn tất không
+        // Đọc token từ URL nếu vừa đăng nhập xong
         const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
-        if (token) {
-            localStorage.setItem('zennez_token', token);
+        const tokenFromUrl = urlParams.get('token');
+        if (tokenFromUrl) {
+            localStorage.setItem('zennez_token', tokenFromUrl);
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
-        // Kiểm tra trạng thái đăng nhập
+        // 7. Đồng Bộ Thông Tin Người Dùng
         async function checkAuth() {
-            const curToken = localStorage.getItem('zennez_token');
+            const token = localStorage.getItem('zennez_token');
             const authSection = document.getElementById('auth-section');
+            const authSectionMobile = document.getElementById('auth-section-mobile');
 
-            if (!curToken) {
-                authSection.innerHTML = `
-                    <button onclick="loginWithDiscord()" class="bg-[#5865F2] hover:bg-[#4752C4] text-white px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-2">
+            if (!token) {
+                currentUser = null;
+                const defaultBtn = `
+                    <button onclick="loginWithDiscord()" class="bg-[#5865F2] hover:bg-[#4752C4] text-white px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 shadow-lg shadow-[#5865F2]/30">
                         <i class="fa-brands fa-discord text-base"></i>
                         <span>Đăng Nhập Discord</span>
                     </button>
                 `;
+                authSection.innerHTML = defaultBtn;
+                authSectionMobile.innerHTML = defaultBtn;
                 return;
             }
 
             try {
                 const res = await fetch(`${API_BASE}/api/user/me`, {
-                    headers: { 'Authorization': `Bearer ${curToken}` }
+                    headers: { 'Authorization': `Bearer ${token}` }
                 });
-                const user = await res.json();
-                if (user.error) throw new Error(user.error);
+                const data = await res.json();
+                if (!res.ok || data.error) throw new Error(data.error);
 
-                // Render Header khi đã đăng nhập
-                authSection.innerHTML = `
-                    <div onclick="openProfileModal()" class="flex items-center gap-2 cursor-pointer glass-panel px-3 py-1.5 rounded-xl border border-brand-purple/50 hover:border-brand-cyan transition-all">
-                        <img src="${user.discord.avatar}" class="w-7 h-7 rounded-full border border-white/20">
-                        <span class="text-xs font-bold text-white">${user.discord.username}</span>
+                currentUser = data;
+
+                // Render nút tài khoản
+                const userHtml = `
+                    <div onclick="openProfileModal()" class="flex items-center gap-2.5 cursor-pointer glass-panel px-3.5 py-1.5 rounded-xl border border-brand-purple/50 hover:border-brand-cyan transition-all">
+                        <img src="${data.discord.avatar}" class="w-7 h-7 rounded-full border border-brand-purple" alt="Avatar">
+                        <span class="text-xs font-bold text-white">${data.discord.username}</span>
                     </div>
                 `;
+                authSection.innerHTML = userHtml;
+                authSectionMobile.innerHTML = userHtml;
 
-                // Cập nhật Profile Modal
-                document.getElementById('user-avatar').src = user.discord.avatar;
-                document.getElementById('user-discord-name').innerText = user.discord.username;
-                document.getElementById('user-discord-id').innerText = `ID: ${user.discord.id}`;
+                // Cập nhật thông tin vào Modal Hồ Sơ
+                document.getElementById('user-avatar').src = data.discord.avatar;
+                document.getElementById('user-discord-name').innerText = data.discord.username;
+                document.getElementById('user-discord-id').innerText = `Discord ID: ${data.discord.id}`;
 
-                if (user.minecraft && user.minecraft.linked) {
+                if (data.minecraft && data.minecraft.linked) {
                     document.getElementById('link-badge').className = "inline-block mt-1 text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
                     document.getElementById('link-badge').innerText = "Đã liên kết Minecraft";
                     
-                    document.getElementById('mc-avatar').src = `https://mc-heads.net/avatar/${user.minecraft.username}`;
-                    document.getElementById('mc-name').innerText = user.minecraft.username;
-                    document.getElementById('mc-rank').innerText = user.minecraft.rank || 'Member';
-                    document.getElementById('mc-money').innerText = `${user.minecraft.money || 0}$`;
+                    document.getElementById('mc-avatar').src = `https://mc-heads.net/avatar/${data.minecraft.username}`;
+                    document.getElementById('mc-name').innerText = data.minecraft.username;
+                    document.getElementById('mc-rank').innerText = data.minecraft.rank || "Thành Viên";
 
                     document.getElementById('linked-view').classList.remove('hidden');
                     document.getElementById('unlinked-view').classList.add('hidden');
                 } else {
                     document.getElementById('link-badge').className = "inline-block mt-1 text-[11px] font-bold px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30";
                     document.getElementById('link-badge').innerText = "Chưa liên kết Minecraft";
+                    
                     document.getElementById('linked-view').classList.add('hidden');
                     document.getElementById('unlinked-view').classList.remove('hidden');
                 }
-            } catch (err) {
+            } catch (e) {
+                console.error("Phiên đăng nhập không hợp lệ:", e);
                 localStorage.removeItem('zennez_token');
                 checkAuth();
             }
         }
         checkAuth();
 
-        // 4. Modal Profile & Xác thực liên kết Minecraft
+        // 8. Đóng / Mở Modal Hồ Sơ
         function openProfileModal() {
             const m = document.getElementById('profile-modal');
             m.classList.remove('hidden');
@@ -454,8 +772,9 @@
             setTimeout(() => m.classList.add('hidden'), 300);
         }
 
+        // 9. Xác Thực Mật Khẩu nLogin Để Liên Kết
         async function submitLinkAccount() {
-            const curToken = localStorage.getItem('zennez_token');
+            const token = localStorage.getItem('zennez_token');
             const username = document.getElementById('link-mc-username').value.trim();
             const password = document.getElementById('link-mc-password').value;
             const errBox = document.getElementById('link-error');
@@ -463,28 +782,31 @@
 
             errBox.classList.add('hidden');
             if (!username || !password) {
-                errBox.innerText = "Vui lòng nhập đầy đủ tên và mật khẩu!";
+                errBox.innerText = "Vui lòng nhập đầy đủ tên nhân vật và mật khẩu!";
                 errBox.classList.remove('hidden');
                 return;
             }
 
             btn.disabled = true;
-            btn.innerText = "Đang kiểm tra tài khoản...";
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Đang xác thực...`;
 
             try {
                 const res = await fetch(`${API_BASE}/api/user/link-minecraft`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${curToken}`
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({ username, password })
                 });
+
                 const data = await res.json();
                 if (!res.ok || data.error) {
-                    throw new Error(data.error || "Liên kết thất bại");
+                    throw new Error(data.error || "Liên kết thất bại!");
                 }
-                alert("Liên kết tài khoản Minecraft thành công!");
+
+                alert(`Đã liên kết thành công với tài khoản ${data.player_name}!`);
+                document.getElementById('link-mc-password').value = "";
                 checkAuth();
             } catch (err) {
                 errBox.innerText = err.message;
@@ -495,21 +817,73 @@
             }
         }
 
+        // 10. Hủy Liên Kết Tài Khoản Game
+        async function unlinkMinecraft() {
+            if (!confirm("Bạn có chắc chắn muốn hủy liên kết tài khoản Minecraft này không?")) return;
+
+            const token = localStorage.getItem('zennez_token');
+            const btn = document.getElementById('btn-unlink');
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/user/unlink-minecraft`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) throw new Error(data.error);
+
+                alert("Đã hủy liên kết thành công!");
+                checkAuth();
+            } catch (err) {
+                alert("Lỗi: " + err.message);
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        // 11. Đăng Xuất Discord
         function logoutDiscord() {
             localStorage.removeItem('zennez_token');
             closeProfileModal();
             checkAuth();
         }
 
+        // 12. Xử Lý Mua Rank
         function handleBuyRank(rankName, price) {
-            const curToken = localStorage.getItem('zennez_token');
-            if (!curToken) {
+            if (!currentUser) {
                 alert("Vui lòng đăng nhập Discord trước khi mua gói!");
                 loginWithDiscord();
                 return;
             }
-            alert(`Bạn đã chọn mua gói: ${rankName} (${price.toLocaleString()} VNĐ). Hệ thống đang kích hoạt thanh toán!`);
+
+            document.getElementById('modal-rank-name').innerText = rankName;
+            document.getElementById('modal-rank-price').innerText = price;
+            
+            const targetEl = document.getElementById('modal-player-target');
+            if (currentUser.minecraft && currentUser.minecraft.linked) {
+                targetEl.innerText = currentUser.minecraft.username;
+                targetEl.className = "font-black text-brand-cyan";
+            } else {
+                targetEl.innerText = "Chưa liên kết In-game";
+                targetEl.className = "font-bold text-red-400";
+            }
+
+            const m = document.getElementById('store-modal');
+            m.classList.remove('hidden');
+            setTimeout(() => m.classList.remove('opacity-0'), 10);
         }
+
+        function closeStoreModal() {
+            const m = document.getElementById('store-modal');
+            m.classList.add('opacity-0');
+            setTimeout(() => m.classList.add('hidden'), 300);
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
     </script>
 </body>
 </html>
