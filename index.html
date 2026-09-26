@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZennezMC - Máy Chủ Minecraft Survival ECO Chuyên Nghiệp</title>
+    <title>ZennezMC - Máy Chủ Minecraft Survival ECO</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -69,7 +69,7 @@
     <div id="cursor-spotlight"></div>
     <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
-    <!-- Header Navbar -->
+    <!-- Header Navigation -->
     <header class="sticky top-0 z-50 glass-panel border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -108,7 +108,7 @@
                     </a>
                 </nav>
 
-                <!-- Actions: IP & Discord Auth Profile -->
+                <!-- Actions: IP Button & Profile -->
                 <div class="hidden lg:flex items-center space-x-4">
                     <button onclick="copyServerIP()" class="glass-panel hover:bg-white/10 text-white px-3.5 py-2 rounded-xl text-xs font-bold border border-brand-purple/40 hover:border-brand-cyan transition-all flex items-center space-x-2">
                         <i class="fa-regular fa-copy text-brand-cyan"></i>
@@ -123,7 +123,6 @@
                     </div>
                 </div>
 
-                <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-gray-300 hover:text-white p-2">
                         <i class="fa-solid fa-bars text-2xl"></i>
@@ -132,7 +131,7 @@
             </div>
         </div>
 
-        <!-- Mobile Navigation Menu -->
+        <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/10 px-4 pt-3 pb-6 space-y-3">
             <a href="#about" class="block text-gray-300 hover:text-brand-cyan py-2 font-medium">Giới Thiệu</a>
             <a href="#gamemodes" class="block text-gray-300 hover:text-brand-cyan py-2 font-medium">Lối Chơi</a>
@@ -278,7 +277,6 @@
                 <div class="w-24 h-1 bg-gradient-to-r from-brand-cyan to-brand-purple mx-auto mt-4 rounded-full"></div>
             </div>
 
-            <!-- Tab Buttons -->
             <div class="flex flex-wrap justify-center gap-3 mb-12">
                 <button onclick="switchWikiTab('dungeon')" id="tab-btn-dungeon" class="wiki-tab-btn px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-brand-purple text-white shadow-lg shadow-brand-purple/30 transition-all flex items-center gap-2">
                     <i class="fa-solid fa-dungeon"></i>
@@ -341,7 +339,7 @@
                 </div>
             </div>
 
-            <!-- Tab 2: Vũ Khí Huyền Thoại 3D -->
+            <!-- Tab 2: Weapons -->
             <div id="wiki-tab-weapons" class="wiki-tab-content hidden grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="glass-panel p-6 rounded-2xl border border-brand-cyan/30">
                     <div class="w-10 h-10 rounded-lg bg-brand-cyan/20 text-brand-cyan flex items-center justify-center text-xl mb-3">
@@ -377,7 +375,7 @@
                 </div>
             </div>
 
-            <!-- Tab 3: Shard & Booster -->
+            <!-- Tab 3: Shard -->
             <div id="wiki-tab-shard" class="wiki-tab-content hidden grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="glass-panel p-8 rounded-3xl border border-white/10">
                     <h4 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
@@ -425,7 +423,7 @@
                 </div>
             </div>
 
-            <!-- Tab 4: Lệnh Cơ Bản -->
+            <!-- Tab 4: Commands -->
             <div id="wiki-tab-commands" class="wiki-tab-content hidden">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div class="glass-panel p-4 rounded-xl text-xs"><code class="text-brand-cyan font-bold">/sethome &lt;tên&gt;</code> - Lưu tọa độ nhà riêng</div>
@@ -442,7 +440,7 @@
         </div>
     </section>
 
-    <!-- CỬA HÀNG RANK (TỪ DELUXEMENUS YAML FILE) -->
+    <!-- CỬA HÀNG RANK -->
     <section id="store" class="py-24 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -459,7 +457,7 @@
             </h3>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-                <!-- RANK KNIGHT -->
+                <!-- KNIGHT -->
                 <div class="tilt-card glass-panel p-6 rounded-3xl border border-blue-500/40 hover:border-blue-400 flex flex-col justify-between relative group">
                     <div>
                         <div class="flex justify-between items-center mb-4">
@@ -487,7 +485,7 @@
                     </button>
                 </div>
 
-                <!-- RANK TEMPLAR -->
+                <!-- TEMPLAR -->
                 <div class="tilt-card glass-panel p-6 rounded-3xl border border-red-500/40 hover:border-red-400 flex flex-col justify-between relative group">
                     <div>
                         <div class="flex justify-between items-center mb-4">
@@ -516,7 +514,7 @@
                     </button>
                 </div>
 
-                <!-- RANK PALADIN -->
+                <!-- PALADIN -->
                 <div class="tilt-card glass-panel p-6 rounded-3xl border border-yellow-500/50 hover:border-yellow-400 flex flex-col justify-between relative group">
                     <div>
                         <div class="flex justify-between items-center mb-4">
@@ -544,7 +542,7 @@
                     </button>
                 </div>
 
-                <!-- RANK GOD -->
+                <!-- GOD -->
                 <div class="tilt-card glass-panel-glow p-6 rounded-3xl border-2 border-brand-gold flex flex-col justify-between relative group scale-105 shadow-2xl">
                     <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-gold to-orange-500 text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
                         TỐI THƯỢNG
@@ -729,14 +727,14 @@
         </div>
     </div>
 
-    <!-- Modal Hồ Sơ & Đồng Bộ nLogin -->
+    <!-- Modal Hồ Sơ & Đồng Bộ nLogin / Discord / Rank -->
     <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
         <div class="glass-panel-glow p-6 sm:p-8 rounded-3xl max-w-md w-full mx-4 border border-brand-purple/40 relative">
             <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <!-- Discord User Profile Info -->
+            <!-- Discord Profile Info -->
             <div class="flex items-center gap-4 border-b border-white/10 pb-5 mb-5">
                 <div class="relative">
                     <img id="user-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" class="w-14 h-14 rounded-2xl border-2 border-[#5865F2] shadow-md" alt="Avatar">
@@ -765,17 +763,17 @@
                     <div class="flex-1">
                         <div class="flex justify-between items-center">
                             <span class="text-xs text-gray-400">Nhân vật ingame:</span>
-                            <span id="mc-name" class="text-sm font-black text-brand-cyan">Steve</span>
+                            <span id="mc-name" class="text-base font-black text-brand-cyan">Steve</span>
                         </div>
-                        <div class="flex justify-between items-center mt-1.5">
+                        <div class="flex justify-between items-center mt-2">
                             <span class="text-xs text-gray-400">Hạng / Rank:</span>
-                            <span id="mc-rank" class="text-xs font-bold text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded border border-brand-gold/20">Thành Viên</span>
+                            <span id="mc-rank" class="text-xs font-black px-2.5 py-0.5 rounded border">Member</span>
                         </div>
                     </div>
                 </div>
 
                 <button onclick="unlinkMinecraft()" id="btn-unlink" class="w-full py-2.5 rounded-xl bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-link-slash"></i> Hủy liên kết tài khoản này
+                    <i class="fa-solid fa-link-slash"></i> Hủy liên kết (Cả trong Discord & Game)
                 </button>
             </div>
 
@@ -914,7 +912,7 @@
         }
         animateParticles();
 
-        // 4. Fetch Real-time Online Player Count
+        // 4. Fetch Realtime Player Count
         async function fetchServerStatus() {
             try {
                 const res = await fetch("https://api.mcstatus.io/v2/status/java/play.zennez.net");
@@ -931,7 +929,6 @@
         fetchServerStatus();
         setInterval(fetchServerStatus, 15000);
 
-        // 5. Copy IP Toast
         function copyServerIP() {
             navigator.clipboard.writeText("play.zennez.net");
             const toast = document.getElementById('copy-toast');
@@ -943,7 +940,6 @@
             }, 3000);
         }
 
-        // 6. Chuyển Tab Wiki
         function switchWikiTab(tabId) {
             document.querySelectorAll('.wiki-tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.wiki-tab-btn').forEach(btn => {
@@ -955,7 +951,7 @@
             activeBtn.className = "wiki-tab-btn px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-brand-purple text-white shadow-lg shadow-brand-purple/30 transition-all flex items-center gap-2";
         }
 
-        // 7. Logic Đăng nhập Discord & Check Session
+        // 5. Discord Login & Token Handler
         function loginWithDiscord() {
             window.location.href = `${API_BASE}/auth/discord`;
         }
@@ -965,6 +961,31 @@
         if (tokenFromUrl) {
             localStorage.setItem('zennez_token', tokenFromUrl);
             window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        // Helper đổi màu theo Rank
+        function applyRankColor(rank) {
+            const el = document.getElementById('mc-rank');
+            el.innerText = rank || 'Member';
+            
+            const r = (rank || '').toLowerCase();
+            if (r === 'god') {
+                el.className = "text-xs font-black text-amber-300 bg-amber-500/20 px-2.5 py-0.5 rounded border border-amber-500/40 text-glow-gold";
+            } else if (r === 'paladin') {
+                el.className = "text-xs font-black text-yellow-300 bg-yellow-500/20 px-2.5 py-0.5 rounded border border-yellow-500/40";
+            } else if (r === 'templar') {
+                el.className = "text-xs font-black text-red-400 bg-red-500/20 px-2.5 py-0.5 rounded border border-red-500/40";
+            } else if (r === 'knight') {
+                el.className = "text-xs font-black text-blue-400 bg-blue-500/20 px-2.5 py-0.5 rounded border border-blue-500/40";
+            } else if (r === 'warrior') {
+                el.className = "text-xs font-black text-orange-400 bg-orange-500/20 px-2.5 py-0.5 rounded border border-orange-500/40";
+            } else if (r === 'farmer') {
+                el.className = "text-xs font-black text-emerald-400 bg-emerald-500/20 px-2.5 py-0.5 rounded border border-emerald-500/40";
+            } else if (r === 'media' || r === 'booster') {
+                el.className = "text-xs font-black text-pink-400 bg-pink-500/20 px-2.5 py-0.5 rounded border border-pink-500/40";
+            } else {
+                el.className = "text-xs font-bold text-gray-300 bg-white/10 px-2.5 py-0.5 rounded border border-white/20";
+            }
         }
 
         async function checkAuth() {
@@ -1013,7 +1034,7 @@
                     
                     document.getElementById('mc-avatar').src = `https://mc-heads.net/avatar/${data.minecraft.username}`;
                     document.getElementById('mc-name').innerText = data.minecraft.username;
-                    document.getElementById('mc-rank').innerText = data.minecraft.rank || "Thành Viên";
+                    applyRankColor(data.minecraft.rank);
 
                     document.getElementById('linked-view').classList.remove('hidden');
                     document.getElementById('unlinked-view').classList.add('hidden');
@@ -1073,7 +1094,7 @@
                 const data = await res.json();
                 if (!res.ok || data.error) throw new Error(data.error || "Liên kết thất bại!");
 
-                alert(`Đã liên kết thành công với nhân vật: ${data.player_name}!`);
+                alert(`Đã liên kết thành công với nhân vật ${data.player_name}!`);
                 document.getElementById('link-mc-password').value = "";
                 checkAuth();
             } catch (err) {
@@ -1086,7 +1107,7 @@
         }
 
         async function unlinkMinecraft() {
-            if (!confirm("Bạn có chắc chắn muốn hủy liên kết tài khoản Minecraft này không?")) return;
+            if (!confirm("Bạn có chắc chắn muốn hủy liên kết tài khoản? Trạng thái liên kết trên Discord và trong server cũng sẽ bị hủy!")) return;
             const token = localStorage.getItem('zennez_token');
             const btn = document.getElementById('btn-unlink');
             btn.disabled = true;
@@ -1099,7 +1120,7 @@
                 const data = await res.json();
                 if (!res.ok || data.error) throw new Error(data.error);
 
-                alert("Đã hủy liên kết thành công!");
+                alert("Đã hủy liên kết thành công trên cả web và máy chủ!");
                 checkAuth();
             } catch (err) {
                 alert("Lỗi: " + err.message);
