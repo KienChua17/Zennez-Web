@@ -45,15 +45,49 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* --- KHAI BÁO BIẾN MÀU THEME - GỐC LÀ EMERALD CỦA BẠN --- */
+        :root {
+            --bg: #050b07;
+            --bg2: rgba(10, 20, 14, 0.75);
+            --bg3: rgba(10, 20, 14, 0.85);
+            --text: #ecfdf5;
+            --text2: #9ca3af;
+            --accent: #34d399; /* Emerald 400 */
+            --accent-hover: #10b981; /* Emerald 500 */
+            --border: rgba(16, 185, 129, 0.2); /* Emerald 500 / 20% */
+            --border-glow: rgba(52, 211, 153, 0.35);
+        }
+
+        /* --- CÁC THEME GIAO DIỆN KHÁC --- */
+        body.theme-royal { --bg: #FAF7EE; --bg2: rgba(255,255,255,0.7); --bg3: rgba(255,255,255,0.9); --text: #2A2410; --text2: #5E5430; --accent: #B8860B; --accent-hover: #D4AF37; --border: rgba(184,134,11,0.2); --border-glow: rgba(184,134,11,0.4); }
+        body.theme-obsidian { --bg: #0A0712; --bg2: rgba(29,19,51,0.75); --bg3: rgba(29,19,51,0.9); --text: #EDE6FA; --text2: #B5A3D9; --accent: #9B5CF0; --accent-hover: #C792EA; --border: rgba(155,92,240,0.2); --border-glow: rgba(155,92,240,0.4); }
+        body.theme-sky { --bg: #EFF8FF; --bg2: rgba(255,255,255,0.75); --bg3: rgba(255,255,255,0.9); --text: #112B40; --text2: #3E6A88; --accent: #1E9FE0; --accent-hover: #5BC9D8; --border: rgba(30,159,224,0.2); --border-glow: rgba(30,159,224,0.4); }
+        body.theme-ocean { --bg: #06222F; --bg2: rgba(15,63,82,0.75); --bg3: rgba(15,63,82,0.9); --text: #E3F6F7; --text2: #9FCFD8; --accent: #18B7AA; --accent-hover: #4FE8D4; --border: rgba(24,183,170,0.2); --border-glow: rgba(24,183,170,0.4); }
+        body.theme-hell { --bg: #160605; --bg2: rgba(39,11,8,0.75); --bg3: rgba(39,11,8,0.9); --text: #FFEDE2; --text2: #E8A98C; --accent: #E0402A; --accent-hover: #FF8C30; --border: rgba(224,64,42,0.2); --border-glow: rgba(224,64,42,0.4); }
+        body.theme-galaxy { --bg: #0A0A1A; --bg2: rgba(28,24,64,0.75); --bg3: rgba(28,24,64,0.9); --text: #F0EEFF; --text2: #B8AEE0; --accent: #7B5EE8; --accent-hover: #C8C2FF; --border: rgba(123,94,232,0.2); --border-glow: rgba(123,94,232,0.4); }
+        body.theme-dream { --bg: #FBF3FA; --bg2: rgba(255,255,255,0.75); --bg3: rgba(255,255,255,0.9); --text: #3A2E45; --text2: #7A6584; --accent: #C77DD6; --accent-hover: #9B8CF0; --border: rgba(199,125,214,0.2); --border-glow: rgba(199,125,214,0.4); }
+        body.theme-hacker { --bg: #050805; --bg2: rgba(10,15,10,0.75); --bg3: rgba(10,15,10,0.9); --text: #C8FFD4; --text2: #7FE89A; --accent: #00FF66; --accent-hover: #00CC55; --border: rgba(0,255,102,0.2); --border-glow: rgba(0,255,102,0.4); }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #050b07;
-            color: #ecfdf5;
+            background-color: var(--bg);
+            color: var(--text);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(5, 150, 105, 0.08) 0%, transparent 45%);
+                radial-gradient(circle at 15% 15%, var(--border) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, var(--border) 0%, transparent 45%);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
+
+        /* --- Helpers tự động nhận màu theo theme --- */
+        .text-main { color: var(--text) !important; }
+        .text-muted { color: var(--text2) !important; }
+        .text-accent { color: var(--accent) !important; }
+        .bg-accent { background-color: var(--accent) !important; }
+        .bg-accent-hover:hover { background-color: var(--accent-hover) !important; }
+        .border-accent { border-color: var(--border-glow) !important; }
+        .hover-text-accent:hover { color: var(--accent) !important; }
+        .hover-border-accent:hover { border-color: var(--accent) !important; }
 
         .font-pixel {
             font-family: 'Silkscreen', monospace;
@@ -66,22 +100,24 @@
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             z-index: 9999;
-            background: radial-gradient(650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(16, 185, 129, 0.14), rgba(52, 211, 153, 0.04) 40%, transparent 80%);
+            background: radial-gradient(650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--border), transparent 80%);
             transition: opacity 0.3s ease;
         }
 
-        /* Glassmorphism Emerald */
+        /* Glassmorphism */
         .glass-panel {
-            background: rgba(10, 20, 14, 0.75);
+            background: var(--bg2);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(16, 185, 129, 0.18);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
         }
 
         .glass-panel-glow {
-            background: rgba(10, 20, 14, 0.85);
+            background: var(--bg3);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(52, 211, 153, 0.35);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px var(--border);
+            transition: all 0.3s ease;
         }
 
         /* 3D Tilt Card */
@@ -91,13 +127,13 @@
             transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .tilt-card:hover {
-            border-color: rgba(52, 211, 153, 0.7);
-            box-shadow: 0 15px 35px -10px rgba(16, 185, 129, 0.3);
+            border-color: var(--accent);
+            box-shadow: 0 15px 35px -10px var(--border);
         }
 
         /* Chữ đổi màu kim cương lướt sang phải */
         .animate-gradient-text {
-            background: linear-gradient(90deg, #34d399, #10b981, #6ee7b7, #fbbf24, #34d399);
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover), #6ee7b7, #fbbf24, var(--accent));
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
@@ -122,7 +158,7 @@
         .typewriter-cursor {
             display: inline-block;
             width: 3px;
-            background-color: #34d399;
+            background-color: var(--accent);
             animation: blink 0.8s infinite;
         }
         @keyframes blink {
@@ -131,72 +167,97 @@
         }
 
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050b07; }
-        ::-webkit-scrollbar-thumb { background: #134e4a; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border-glow); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* --- CSS CHO MENU THEME --- */
+        .theme-toggle-btn {
+            position: fixed; left: 18px; bottom: 18px; z-index: 5000; display: flex; align-items: center; gap: 7px;
+            padding: 9px 14px; background: var(--bg2); border: 1px solid var(--border); border-radius: 999px;
+            font-weight: bold; cursor: pointer; backdrop-filter: blur(14px); color: var(--text); transition: all 0.3s ease;
+        }
+        .theme-toggle-btn:hover { background: var(--bg3); transform: translateY(-3px); }
+        .theme-toggle-btn svg { width: 16px; height: 16px; }
+
+        .theme-menu-overlay { position: fixed; inset: 0; z-index: 5999; background: transparent; display: none; }
+        .theme-menu-overlay.open { display: block; }
+        
+        .theme-menu {
+            position: fixed; left: 18px; bottom: 64px; z-index: 6000; width: 270px; max-height: 70vh; overflow-y: auto;
+            background: var(--bg); border: 1px solid var(--border); border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); padding: 14px; display: none; color: var(--text);
+            transition: all 0.3s ease;
+        }
+        .theme-menu.open { display: block; }
+        .theme-menu-title { font-size: 11px; font-weight: bold; color: var(--text2); margin-bottom: 10px; }
+        .mode-switch { display: flex; gap: 4px; background: var(--bg2); padding: 4px; border-radius: 12px; margin-bottom: 12px; }
+        .mode-option { flex: 1; padding: 6px; font-size: 12px; border-radius: 8px; cursor: pointer; text-align: center; color: var(--text2); border: none; background: transparent;}
+        .mode-option.active { background: var(--accent); color: var(--bg); font-weight: bold; }
+        .theme-menu-sep { height: 1px; background: var(--border); margin: 12px 0; }
+        .theme-option { display: flex; align-items: center; gap: 11px; padding: 10px; margin-bottom: 6px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; background: var(--bg2); transition: all 0.2s;}
+        .theme-option.active { border-color: var(--accent); background: var(--bg3); }
+        .theme-option-swatch { width: 30px; height: 30px; border-radius: 9px; }
+        .theme-option-text { flex: 1; }
+        .theme-option-name { font-weight: bold; font-size: 13px; color: var(--text); }
+        .theme-option-desc { font-size: 11px; color: var(--text2); }
     </style>
 </head>
-<body class="relative selection:bg-emerald-500 selection:text-black">
+<body class="relative">
 
     <div id="cursor-spotlight"></div>
 
-    <!-- HEADER / NAVIGATION (Phân chia các trang riêng biệt giống MineRua) -->
-    <header class="sticky top-0 z-50 glass-panel border-b border-emerald-500/20">
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-accent">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 
-                <!-- Logo ZennezMC -->
                 <a href="index.html" class="flex items-center space-x-3 cursor-pointer">
-                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center font-black text-2xl text-black shadow-lg shadow-emerald-500/30 font-pixel border border-emerald-300">
-                        Z
-                    </div>
+                    <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1550524114446454804/Khong_Co_Tieu_e5_20260918210904.png?ex=6ab888dc&is=6ab7375c&hm=fc44632a58b129e6c8f87674d74d969ff1f1e8900e7f0d3b3369985fbda248cf&" alt="ZennezMC Logo" class="h-12 w-auto rounded-lg border border-accent">
                     <div>
-                        <span class="text-xl font-black font-pixel tracking-wider text-white">ZENNEZ<span class="text-emerald-400">MC</span></span>
-                        <span class="block text-[10px] tracking-widest text-emerald-400 font-bold uppercase">SURVIVAL ECO 1.21.X</span>
+                        <span class="text-xl font-black font-pixel tracking-wider text-main">ZENNEZ<span class="text-accent">MC</span></span>
+                        <span class="block text-[10px] tracking-widest text-accent font-bold uppercase">SURVIVAL ECO 1.21.X</span>
                     </div>
                 </a>
 
-                <!-- Navigation Links: Các trang riêng biệt -->
                 <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold tracking-wide">
-                    <a href="index.html" class="text-emerald-400 font-bold flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
-                        <i class="fa-solid fa-house text-xs"></i>
+                    <a href="index.html" class="text-accent font-bold flex items-center space-x-1.5 px-3 py-1.5 rounded-lg border border-accent" style="background: var(--bg2);">
+                        <i class="fa-solid fa-house text-xs text-accent"></i>
                         <span>Trang Chủ</span>
                     </a>
-                    <a href="media.html" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-1.5">
-                        <i class="fa-solid fa-photo-film text-xs text-emerald-500"></i>
+                    <a href="media.html" class="text-muted hover-text-accent transition-colors flex items-center space-x-1.5">
+                        <i class="fa-solid fa-photo-film text-xs text-accent"></i>
                         <span>Media</span>
                     </a>
-                    <a href="https://discord.zennez.net" target="_blank" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-1.5">
+                    <a href="https://discord.zennez.net" target="_blank" class="text-muted hover-text-accent transition-colors flex items-center space-x-1.5">
                         <i class="fa-brands fa-discord text-xs text-[#5865F2]"></i>
                         <span>Cộng Đồng</span>
                     </a>
-                    <a href="luatchoi.html" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-1.5">
-                        <i class="fa-solid fa-scale-balanced text-xs text-emerald-500"></i>
+                    <a href="luatchoi.html" class="text-muted hover-text-accent transition-colors flex items-center space-x-1.5">
+                        <i class="fa-solid fa-scale-balanced text-xs text-accent"></i>
                         <span>Luật Chơi</span>
                     </a>
-                    <a href="#store" class="text-gray-300 hover:text-brand-gold transition-colors flex items-center space-x-1.5">
+                    <a href="#store" class="text-muted hover:text-brand-gold transition-colors flex items-center space-x-1.5">
                         <i class="fa-solid fa-crown text-xs text-brand-gold"></i>
                         <span>Ủng Hộ</span>
                     </a>
 
-                    <!-- Dropdown Khám phá nội dung liền của trang chủ -->
                     <div class="relative group">
-                        <button class="text-gray-300 group-hover:text-emerald-400 transition-colors flex items-center space-x-1.5 py-2">
+                        <button class="text-muted group-hover:text-accent transition-colors flex items-center space-x-1.5 py-2">
                             <span>Khám Phá</span>
                             <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-hover:rotate-180"></i>
                         </button>
-                        <div class="absolute left-0 top-full hidden group-hover:block w-48 glass-panel-glow p-2 rounded-2xl border border-emerald-500/30 shadow-2xl space-y-1">
-                            <a href="#gamemodes" class="block px-3 py-2 rounded-xl text-xs font-semibold text-gray-300 hover:text-emerald-400 hover:bg-emerald-500/10">Lối Chơi Survival</a>
-                            <a href="#wiki" class="block px-3 py-2 rounded-xl text-xs font-semibold text-gray-300 hover:text-emerald-400 hover:bg-emerald-500/10">Vũ Khí 3D & Boss</a>
-                            <a href="#wiki" class="block px-3 py-2 rounded-xl text-xs font-semibold text-gray-300 hover:text-emerald-400 hover:bg-emerald-500/10">Động Vật Mới</a>
+                        <div class="absolute left-0 top-full hidden group-hover:block w-48 glass-panel-glow p-2 rounded-2xl border border-accent shadow-2xl space-y-1">
+                            <a href="#gamemodes" class="block px-3 py-2 rounded-xl text-xs font-semibold text-muted hover-text-accent hover:bg-white/10">Lối Chơi Survival</a>
+                            <a href="#wiki" class="block px-3 py-2 rounded-xl text-xs font-semibold text-muted hover-text-accent hover:bg-white/10">Vũ Khí 3D & Boss</a>
+                            <a href="#wiki" class="block px-3 py-2 rounded-xl text-xs font-semibold text-muted hover-text-accent hover:bg-white/10">Động Vật Mới</a>
                         </div>
                     </div>
                 </nav>
 
-                <!-- Actions: Copy IP & Discord Auth -->
                 <div class="hidden lg:flex items-center space-x-4">
-                    <button onclick="copyServerIP()" class="glass-panel hover:bg-emerald-500/10 text-emerald-300 px-4 py-2.5 rounded-xl text-xs font-bold border border-emerald-500/40 hover:border-emerald-400 transition-all flex items-center space-x-2">
-                        <i class="fa-regular fa-copy text-emerald-400"></i>
+                    <button onclick="copyServerIP()" class="glass-panel text-accent px-4 py-2.5 rounded-xl text-xs font-bold border hover-border-accent transition-all flex items-center space-x-2">
+                        <i class="fa-regular fa-copy text-accent"></i>
                         <span>play.zennez.net</span>
                     </button>
 
@@ -209,19 +270,18 @@
                 </div>
 
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white p-2">
+                    <button id="mobile-menu-btn" class="text-muted hover-text-main p-2">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-emerald-500/20 px-4 pt-3 pb-6 space-y-3 text-sm font-semibold">
-            <a href="index.html" class="block text-emerald-400 py-2">Trang Chủ</a>
-            <a href="media.html" class="block text-gray-300 hover:text-emerald-400 py-2">Media</a>
-            <a href="https://discord.zennez.net" target="_blank" class="block text-gray-300 hover:text-emerald-400 py-2">Cộng Đồng Discord</a>
-            <a href="luatchoi.html" class="block text-gray-300 hover:text-emerald-400 py-2">Luật Chơi</a>
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-accent px-4 pt-3 pb-6 space-y-3 text-sm font-semibold">
+            <a href="index.html" class="block text-accent py-2">Trang Chủ</a>
+            <a href="media.html" class="block text-muted hover-text-accent py-2">Media</a>
+            <a href="https://discord.zennez.net" target="_blank" class="block text-muted hover-text-accent py-2">Cộng Đồng Discord</a>
+            <a href="luatchoi.html" class="block text-muted hover-text-accent py-2">Luật Chơi</a>
             <a href="#store" class="block text-brand-gold py-2">Ủng Hộ / Cửa Hàng</a>
             
             <div id="auth-section-mobile" class="pt-2">
@@ -231,7 +291,7 @@
                 </button>
             </div>
             
-            <button onclick="copyServerIP()" class="w-full bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+            <button onclick="copyServerIP()" class="w-full bg-white/5 border border-accent text-accent py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 mt-2">
                 <i class="fa-regular fa-copy"></i>
                 <span>Copy IP: play.zennez.net</span>
             </button>
@@ -243,77 +303,75 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
-                <!-- Cột trái: Tiêu đề lướt màu và chữ gõ tự động -->
                 <div class="lg:col-span-7 text-left space-y-6">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-bold text-emerald-400">
-                        <i class="fa-solid fa-leaf text-emerald-400"></i>
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent text-xs font-bold text-accent" style="background: var(--bg2);">
+                        <i class="fa-solid fa-leaf text-accent"></i>
                         <span>MÁY CHỦ MINECRAFT VIỆT NAM 1.21.X</span>
                     </div>
 
                     <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight uppercase leading-tight">
                         <span class="animate-gradient-text">ZENNEZMC</span><br/>
-                        <span class="text-2xl sm:text-4xl md:text-5xl text-white font-extrabold block mt-1">ĐỈNH CAO SURVIVAL ECO</span>
+                        <span class="text-2xl sm:text-4xl md:text-5xl text-main font-extrabold block mt-1">ĐỈNH CAO SURVIVAL ECO</span>
                     </h1>
 
-                    <div class="text-base sm:text-lg text-gray-300 font-medium flex items-center gap-2 min-h-[32px]">
+                    <div class="text-base sm:text-lg text-muted font-medium flex items-center gap-2 min-h-[32px]">
                         <span>Trải nghiệm:</span>
-                        <span id="typewriter-text" class="text-emerald-400 font-bold"></span>
+                        <span id="typewriter-text" class="text-accent font-bold"></span>
                         <span class="typewriter-cursor h-5"></span>
                     </div>
 
-                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed max-w-xl font-normal">
+                    <p class="text-muted text-sm sm:text-base leading-relaxed max-w-xl font-normal">
                         Nơi bắt đầu cuộc phiêu lưu đích thực: Thu thập nguyên liệu từ Hầm Ngục Dungeon chế tạo Thần Khí 3D độc quyền, khám phá quần xã sinh vật và đồng bộ tài khoản tự động với Discord.
                     </p>
 
                     <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
-                        <button onclick="copyServerIP()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-400 hover:from-emerald-500 hover:to-emerald-300 text-black font-extrabold text-sm transition-all shadow-xl shadow-emerald-500/30 flex items-center justify-center gap-2">
+                        <button onclick="copyServerIP()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-accent bg-accent-hover text-black font-extrabold text-sm transition-all shadow-xl flex items-center justify-center gap-2">
                             <i class="fa-solid fa-play"></i>
                             <span>THAM GIA NGAY</span>
                         </button>
 
-                        <button onclick="copyServerIP()" class="w-full sm:w-auto px-6 py-4 rounded-xl glass-panel text-emerald-400 hover:border-emerald-400 text-sm font-bold flex items-center justify-center gap-2 transition-all">
+                        <button onclick="copyServerIP()" class="w-full sm:w-auto px-6 py-4 rounded-xl glass-panel text-accent hover-border-accent text-sm font-bold flex items-center justify-center gap-2 transition-all">
                             <i class="fa-regular fa-copy"></i>
                             <span>play.zennez.net</span>
                         </button>
                     </div>
 
-                    <div class="pt-6 grid grid-cols-3 gap-4 border-t border-emerald-500/20 max-w-md">
+                    <div class="pt-6 grid grid-cols-3 gap-4 border-t border-accent max-w-md">
                         <div>
-                            <span class="text-xs text-gray-400 uppercase font-semibold block">Trạng thái</span>
-                            <span class="text-sm font-bold text-emerald-400 flex items-center gap-1.5 mt-0.5">
-                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Online 24/7
+                            <span class="text-xs text-muted uppercase font-semibold block">Trạng thái</span>
+                            <span class="text-sm font-bold text-accent flex items-center gap-1.5 mt-0.5">
+                                <span class="w-2 h-2 rounded-full bg-accent animate-ping"></span> Online 24/7
                             </span>
                         </div>
                         <div>
-                            <span class="text-xs text-gray-400 uppercase font-semibold block">Online</span>
-                            <span id="hero-online-count" class="text-sm font-bold text-white mt-0.5 block">Đang tải...</span>
+                            <span class="text-xs text-muted uppercase font-semibold block">Online</span>
+                            <span id="hero-online-count" class="text-sm font-bold text-main mt-0.5 block">Đang tải...</span>
                         </div>
                         <div>
-                            <span class="text-xs text-gray-400 uppercase font-semibold block">Phiên bản</span>
-                            <span class="text-sm font-bold text-emerald-400 mt-0.5 block">1.21.x</span>
+                            <span class="text-xs text-muted uppercase font-semibold block">Phiên bản</span>
+                            <span class="text-sm font-bold text-accent mt-0.5 block">1.21.x</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Cột phải: Khung ảnh Spawn chính chủ ZennezMC -->
                 <div class="lg:col-span-5">
-                    <div class="tilt-card glass-panel-glow p-2 rounded-2xl border-2 border-emerald-500/40 relative shadow-2xl">
-                        <div class="bg-black/60 rounded-t-xl px-4 py-2.5 flex items-center justify-between border-b border-emerald-500/20 text-xs">
+                    <div class="tilt-card glass-panel-glow p-2 rounded-2xl border-2 border-accent relative shadow-2xl">
+                        <div class="bg-black/40 rounded-t-xl px-4 py-2.5 flex items-center justify-between border-b border-accent text-xs">
                             <div class="flex items-center gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
                                 <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
                                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
                             </div>
-                            <span class="text-emerald-400 font-bold text-xs tracking-wider">ZENNEZMC • SẢNH SPAWN</span>
-                            <i class="fa-solid fa-cube text-emerald-400 text-xs"></i>
+                            <span class="text-accent font-bold text-xs tracking-wider">ZENNEZMC • SẢNH SPAWN</span>
+                            <i class="fa-solid fa-cube text-accent text-xs"></i>
                         </div>
                         
                         <div class="overflow-hidden rounded-b-xl relative group">
                             <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1553415968242401461/image.png?ex=6ab92adb&is=6ab7d95b&hm=d5bd53f9b91ea453fb18844fa6c511a3f7e6f945a1f1294d11d214a4f78446b6&" class="w-full h-80 object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Spawn ZennezMC">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-4">
                                 <div>
-                                    <p class="text-sm font-bold text-emerald-300">SẢNH TRUNG TÂM ZENNEZ</p>
-                                    <p class="text-xs text-gray-300">Khám phá thế giới sinh tồn sống động cùng bạn bè</p>
+                                    <p class="text-sm font-bold text-accent">SẢNH TRUNG TÂM ZENNEZ</p>
+                                    <p class="text-xs text-muted">Khám phá thế giới sinh tồn sống động cùng bạn bè</p>
                                 </div>
                             </div>
                         </div>
@@ -329,37 +387,37 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             
             <div class="reveal-on-scroll mb-16">
-                <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-2">KHÁM PHÁ</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">CHẾ ĐỘ CHƠI MÁY CHỦ</h2>
-                <p class="text-gray-400 text-sm mt-3 max-w-lg mx-auto">Chọn chế độ yêu thích và bắt đầu hành trình của bạn tại ZennezMC</p>
-                <div class="w-20 h-1 bg-emerald-500 mx-auto mt-4 rounded-full"></div>
+                <span class="text-xs font-bold text-accent uppercase tracking-widest block mb-2">KHÁM PHÁ</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-main">CHẾ ĐỘ CHƠI MÁY CHỦ</h2>
+                <p class="text-muted text-sm mt-3 max-w-lg mx-auto">Chọn chế độ yêu thích và bắt đầu hành trình của bạn tại ZennezMC</p>
+                <div class="w-20 h-1 bg-accent mx-auto mt-4 rounded-full"></div>
             </div>
 
             <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
                 
                 <!-- Card 1: SURVIVAL ECO -->
-                <div class="tilt-card glass-panel-glow p-8 rounded-3xl border-2 border-emerald-500 relative flex flex-col justify-between text-left reveal-on-scroll">
-                    <div class="absolute top-4 right-4 bg-emerald-500 text-black text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                <div class="tilt-card glass-panel-glow p-8 rounded-3xl border-2 border-accent relative flex flex-col justify-between text-left reveal-on-scroll">
+                    <div class="absolute top-4 right-4 bg-accent text-bg text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
                         HOT
                     </div>
                     <div>
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center text-2xl mb-6">
+                        <div class="w-14 h-14 rounded-2xl border border-accent text-accent flex items-center justify-center text-2xl mb-6" style="background: var(--bg2);">
                             <i class="fa-solid fa-tree"></i>
                         </div>
-                        <h3 class="text-2xl font-black text-white mb-2">SURVIVAL ECO</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-6 font-normal">
+                        <h3 class="text-2xl font-black text-main mb-2">SURVIVAL ECO</h3>
+                        <p class="text-muted text-sm leading-relaxed mb-6 font-normal">
                             Sinh tồn thuần túy kết hợp nền kinh tế hiện đại, dungeon phó bản, săn Boss, thú cưỡi mới lạ cùng cộng đồng văn minh, công bằng.
                         </p>
                     </div>
 
-                    <div class="space-y-3 pt-4 border-t border-emerald-500/20">
+                    <div class="space-y-3 pt-4 border-t border-accent">
                         <div class="flex items-center justify-between text-xs font-semibold">
-                            <span class="text-gray-400">Trạng thái:</span>
-                            <span class="text-emerald-400 font-bold flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-emerald-400"></span> ONLINE
+                            <span class="text-muted">Trạng thái:</span>
+                            <span class="text-accent font-bold flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-accent"></span> ONLINE
                             </span>
                         </div>
-                        <a href="#wiki" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs flex items-center justify-center gap-2 transition-all">
+                        <a href="#wiki" class="w-full py-3 rounded-xl bg-accent bg-accent-hover text-bg font-extrabold text-xs flex items-center justify-center gap-2 transition-all">
                             <i class="fa-solid fa-circle-info"></i>
                             <span>XEM CHI TIẾT TÍNH NĂNG</span>
                         </a>
@@ -367,7 +425,7 @@
                 </div>
 
                 <!-- Card 2: DUNGEON & BOSS -->
-                <div class="tilt-card glass-panel p-8 rounded-3xl border border-emerald-500/30 relative flex flex-col justify-between text-left reveal-on-scroll">
+                <div class="tilt-card glass-panel p-8 rounded-3xl border border-accent relative flex flex-col justify-between text-left reveal-on-scroll">
                     <div class="absolute top-4 right-4 bg-yellow-500/20 text-yellow-300 border border-yellow-500/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase">
                         PHÓ BẢN
                     </div>
@@ -375,18 +433,18 @@
                         <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 flex items-center justify-center text-2xl mb-6">
                             <i class="fa-solid fa-dungeon"></i>
                         </div>
-                        <h3 class="text-2xl font-black text-white mb-2">DUNGEON & BOSS</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-6 font-normal">
+                        <h3 class="text-2xl font-black text-main mb-2">DUNGEON & BOSS</h3>
+                        <p class="text-muted text-sm leading-relaxed mb-6 font-normal">
                             Vượt ải hầm ngục tiêu diệt quái biến dị, đối đầu các boss rồng lửa khổng lồ để thu thập nguyên liệu chế tạo vũ khí tối thượng.
                         </p>
                     </div>
 
                     <div class="space-y-3 pt-4 border-t border-white/10">
                         <div class="flex items-center justify-between text-xs font-semibold">
-                            <span class="text-gray-400">Sự kiện:</span>
+                            <span class="text-muted">Sự kiện:</span>
                             <span class="text-yellow-400 font-bold">HÀNG TUẦN</span>
                         </div>
-                        <a href="#wiki" class="w-full py-3 rounded-xl glass-panel text-white hover:text-emerald-400 font-bold text-xs flex items-center justify-center gap-2 transition-all">
+                        <a href="#wiki" class="w-full py-3 rounded-xl glass-panel text-main hover-text-accent font-bold text-xs flex items-center justify-center gap-2 transition-all">
                             <i class="fa-solid fa-shield-halved"></i>
                             <span>KHÁM PHÁ BOSS</span>
                         </a>
@@ -397,61 +455,61 @@
         </div>
     </section>
 
-    <!-- CHI TIẾT TÍNH NĂNG (Tích hợp ảnh thật 100% của server bạn gửi) -->
-    <section id="wiki" class="py-24 relative z-10 bg-black/40 border-y border-emerald-500/20">
+    <!-- CHI TIẾT TÍNH NĂNG -->
+    <section id="wiki" class="py-24 relative z-10 bg-black/20 border-y border-accent">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="text-center mb-20 reveal-on-scroll">
-                <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-2">TÍNH NĂNG NỔI BẬT</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">TRẢI NGHIỆM ĐỘC QUYỀN TẠI SERVER</h2>
-                <p class="text-gray-400 text-sm mt-3 max-w-xl mx-auto">Toàn bộ những trải nghiệm đặc biệt được xây dựng tỉ mỉ dành riêng cho game thủ ZennezMC</p>
-                <div class="w-24 h-1 bg-emerald-500 mx-auto mt-4 rounded-full"></div>
+                <span class="text-xs font-bold text-accent uppercase tracking-widest block mb-2">TÍNH NĂNG NỔI BẬT</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-main">TRẢI NGHIỆM ĐỘC QUYỀN TẠI SERVER</h2>
+                <p class="text-muted text-sm mt-3 max-w-xl mx-auto">Toàn bộ những trải nghiệm đặc biệt được xây dựng tỉ mỉ dành riêng cho game thủ ZennezMC</p>
+                <div class="w-24 h-1 bg-accent mx-auto mt-4 rounded-full"></div>
             </div>
 
             <div class="space-y-16">
                 
                 <!-- 1. Hệ thống ECO đầy đủ -->
-                <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-accent reveal-on-scroll">
                     <div class="flex flex-col lg:flex-row items-center gap-8">
-                        <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl shrink-0 border border-emerald-500/30">
+                        <div class="w-16 h-16 rounded-2xl text-accent flex items-center justify-center text-3xl shrink-0 border border-accent" style="background: var(--bg2);">
                             <i class="fa-solid fa-coins"></i>
                         </div>
                         <div class="flex-1">
-                            <h3 class="text-xl sm:text-2xl font-extrabold text-white mb-2">HỆ THỐNG ECO ĐẦY ĐỦ</h3>
-                            <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                                Hệ thống ECO đầy đủ, từ <code class="text-emerald-400 font-bold bg-black/50 px-2 py-0.5 rounded">/home</code>, <code class="text-emerald-400 font-bold bg-black/50 px-2 py-0.5 rounded">/tpa</code>, <code class="text-emerald-400 font-bold bg-black/50 px-2 py-0.5 rounded">/ah</code>, <code class="text-emerald-400 font-bold bg-black/50 px-2 py-0.5 rounded">/order</code>, <code class="text-emerald-400 font-bold bg-black/50 px-2 py-0.5 rounded">/shop</code>,.. và còn vô vàn thứ khác chờ bạn khám phá!
+                            <h3 class="text-xl sm:text-2xl font-extrabold text-main mb-2">HỆ THỐNG ECO ĐẦY ĐỦ</h3>
+                            <p class="text-muted text-sm leading-relaxed mb-4">
+                                Hệ thống ECO đầy đủ, từ <code class="text-accent font-bold bg-black/30 px-2 py-0.5 rounded">/home</code>, <code class="text-accent font-bold bg-black/30 px-2 py-0.5 rounded">/tpa</code>, <code class="text-accent font-bold bg-black/30 px-2 py-0.5 rounded">/ah</code>, <code class="text-accent font-bold bg-black/30 px-2 py-0.5 rounded">/order</code>, <code class="text-accent font-bold bg-black/30 px-2 py-0.5 rounded">/shop</code>,.. và còn vô vàn thứ khác chờ bạn khám phá!
                             </p>
-                            <div class="flex flex-wrap gap-2 text-xs font-semibold text-emerald-300">
-                                <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">Chợ Đấu Giá /ah</span>
-                                <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">Cửa Hàng /shop</span>
-                                <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">Đặt Đơn /order</span>
+                            <div class="flex flex-wrap gap-2 text-xs font-semibold text-accent">
+                                <span class="px-3 py-1 rounded-full border border-accent" style="background: var(--bg2);">Chợ Đấu Giá /ah</span>
+                                <span class="px-3 py-1 rounded-full border border-accent" style="background: var(--bg2);">Cửa Hàng /shop</span>
+                                <span class="px-3 py-1 rounded-full border border-accent" style="background: var(--bg2);">Đặt Đơn /order</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. Vũ Khí Huyền Thoại (Ảnh Thần Khí 1 & 2) -->
-                <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                <!-- 2. Vũ Khí Huyền Thoại -->
+                <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-accent reveal-on-scroll">
                     <div class="space-y-6">
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div>
                                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 text-xs font-bold mb-2">
                                     <i class="fa-solid fa-wand-magic-sparkles"></i> 3D CUSTOM WEAPONS
                                 </div>
-                                <h3 class="text-xl sm:text-2xl font-extrabold text-white">VŨ KHÍ HUYỀN THOẠI</h3>
+                                <h3 class="text-xl sm:text-2xl font-extrabold text-main">VŨ KHÍ HUYỀN THOẠI</h3>
                             </div>
-                            <span class="text-xs font-medium text-gray-400 bg-black/40 px-3 py-1.5 rounded-xl border border-white/5">Click trái để chế tạo • Click phải xem công thức</span>
+                            <span class="text-xs font-medium text-muted bg-black/40 px-3 py-1.5 rounded-xl border border-white/5">Click trái để chế tạo • Click phải xem công thức</span>
                         </div>
-                        <p class="text-gray-300 text-sm leading-relaxed">
+                        <p class="text-muted text-sm leading-relaxed">
                             Vũ Khí Huyền Thoại, với những model được đầu tư và chăm chút kĩ lưỡng: **Hỏa Thần Kiếm**, **Môn Xa Tiễn**, **Pháp Huyền Trượng**, **Hàn Thương**, **Ma Đao Kiếm**, **Đại Kiếm Thủy Uyên**... Bạn cần thu thập những nguyên liệu bí ẩn từ Dungeon để chế tạo.
                         </p>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="rounded-2xl overflow-hidden border border-emerald-500/30 shadow-lg group">
+                            <div class="rounded-2xl overflow-hidden border border-accent shadow-lg group">
                                 <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1553415967407607919/image.png?ex=6ab92adb&is=6ab7d95b&hm=0ea782ab3a8a3bd52c148340143fcde21cd7f289ae3809e430caf20c688be544&" class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Vũ Khí Huyền Thoại 1">
                                 <div class="bg-black/60 p-2.5 text-center text-xs font-semibold text-yellow-300 border-t border-white/10">Hỏa Thần Kiếm • Môn Xa Tiễn • Pháp Huyền Trượng</div>
                             </div>
-                            <div class="rounded-2xl overflow-hidden border border-emerald-500/30 shadow-lg group">
+                            <div class="rounded-2xl overflow-hidden border border-accent shadow-lg group">
                                 <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1553415967810392199/image.png?ex=6ab92adb&is=6ab7d95b&hm=8cd598e74cdbd770a7f1da299112498d77079f371cb587201a634a55f8c68bd0&" class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Vũ Khí Huyền Thoại 2">
                                 <div class="bg-black/60 p-2.5 text-center text-xs font-semibold text-yellow-300 border-t border-white/10">Hàn Thương • Ma Đao Kiếm • Đại Kiếm Thủy Uyên</div>
                             </div>
@@ -460,7 +518,7 @@
                 </div>
 
                 <!-- 3. Hầm Ngục & Boss Hoàng Kim -->
-                <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-accent reveal-on-scroll">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                         <div class="lg:col-span-6 order-2 lg:order-1">
                             <div class="rounded-2xl overflow-hidden border border-red-500/40 shadow-xl group">
@@ -471,39 +529,39 @@
                             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-red-400 border border-red-500/30 text-xs font-bold">
                                 <i class="fa-solid fa-skull"></i> DUNGEON PHÓ BẢN
                             </div>
-                            <h3 class="text-xl sm:text-2xl font-extrabold text-white">HẦM NGỤC & BOSS</h3>
-                            <p class="text-gray-300 text-sm leading-relaxed">
+                            <h3 class="text-xl sm:text-2xl font-extrabold text-main">HẦM NGỤC & BOSS</h3>
+                            <p class="text-muted text-sm leading-relaxed">
                                 Hầm ngục, hệ thống Dungeon với những boss mới lạ, những con rồng lửa hay những quái biến dị trong thành phố cổ. Khiến những trận chiến phó bản nghẹt thở và đem về vô số phần thưởng giá trị.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 4. Động Vật Mới (3 ảnh Capybara, Voi, Linh Thú Tuyết) -->
-                <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                <!-- 4. Động Vật Mới -->
+                <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-accent reveal-on-scroll">
                     <div class="space-y-6">
                         <div>
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-bold mb-2">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-accent border border-accent text-xs font-bold mb-2" style="background: var(--bg2);">
                                 <i class="fa-solid fa-paw"></i> NEW MOBS
                             </div>
-                            <h3 class="text-xl sm:text-2xl font-extrabold text-white">ĐỘNG VẬT MỚI LẠ</h3>
-                            <p class="text-gray-300 text-sm leading-relaxed">
+                            <h3 class="text-xl sm:text-2xl font-extrabold text-main">ĐỘNG VẬT MỚI LẠ</h3>
+                            <p class="text-muted text-sm leading-relaxed">
                                 Động vật mới, những mob động vật mới lạ từ Capybara, hổ, sư tử, voi,... được thêm vào khiến hành trình sinh tồn và khám phá thế giới trở nên thú vị.
                             </p>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="rounded-2xl overflow-hidden border border-emerald-500/20 group">
+                            <div class="rounded-2xl overflow-hidden border border-accent group">
                                 <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1553415969144049824/image.png?ex=6ab92adc&is=6ab7d95c&hm=fca78110abecb40f744cec0b76af0ef65af82c6f5b37bd6e31866eb26d2ede69&" class="w-full h-52 object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Capybara">
-                                <div class="bg-black/60 p-2 text-center text-xs font-semibold text-emerald-400 border-t border-white/5">Capybara Thân Thiện</div>
+                                <div class="bg-black/60 p-2 text-center text-xs font-semibold text-accent border-t border-white/5">Capybara Thân Thiện</div>
                             </div>
-                            <div class="rounded-2xl overflow-hidden border border-emerald-500/20 group">
+                            <div class="rounded-2xl overflow-hidden border border-accent group">
                                 <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1553415968640737320/image.png?ex=6ab92adb&is=6ab7d95b&hm=973b2e4293180a10ba8947729f8e018443c4c84a936b516560781945e3b590e1&" class="w-full h-52 object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Voi Rừng">
-                                <div class="bg-black/60 p-2 text-center text-xs font-semibold text-emerald-400 border-t border-white/5">Voi Khổng Lồ</div>
+                                <div class="bg-black/60 p-2 text-center text-xs font-semibold text-accent border-t border-white/5">Voi Khổng Lồ</div>
                             </div>
-                            <div class="rounded-2xl overflow-hidden border border-emerald-500/20 group">
+                            <div class="rounded-2xl overflow-hidden border border-accent group">
                                 <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1553415969601359892/image.png?ex=6ab92adc&is=6ab7d95c&hm=22bfed7915f53c1fb34bca05a7178c1c0a8fa5116fa979ea741b2f70d40520fc&" class="w-full h-52 object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Linh Thú Băng Giá">
-                                <div class="bg-black/60 p-2 text-center text-xs font-semibold text-emerald-400 border-t border-white/5">Linh Thú Băng Giá</div>
+                                <div class="bg-black/60 p-2 text-center text-xs font-semibold text-accent border-t border-white/5">Linh Thú Băng Giá</div>
                             </div>
                         </div>
                     </div>
@@ -511,32 +569,32 @@
 
                 <!-- 5, 6, 7: Custom Biomes, CustomEnchants, Liên Kết Tài Khoản -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="tilt-card glass-panel p-6 rounded-3xl border border-emerald-500/20 space-y-3 reveal-on-scroll">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl">
+                    <div class="tilt-card glass-panel p-6 rounded-3xl border border-accent space-y-3 reveal-on-scroll">
+                        <div class="w-12 h-12 rounded-xl text-accent flex items-center justify-center text-xl" style="background: var(--bg2);">
                             <i class="fa-solid fa-mountain-sun"></i>
                         </div>
-                        <h4 class="text-lg font-bold text-white">CUSTOM BIOME / STRUCTURE</h4>
-                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                        <h4 class="text-lg font-bold text-main">CUSTOM BIOME / STRUCTURE</h4>
+                        <p class="text-xs text-muted leading-relaxed font-normal">
                             Custom Biome / Structure, thêm những biome mới và công trình mới giúp hành trình khám phá thêm thú vị.
                         </p>
                     </div>
 
-                    <div class="tilt-card glass-panel p-6 rounded-3xl border border-emerald-500/20 space-y-3 reveal-on-scroll">
-                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl">
+                    <div class="tilt-card glass-panel p-6 rounded-3xl border border-accent space-y-3 reveal-on-scroll">
+                        <div class="w-12 h-12 rounded-xl text-accent flex items-center justify-center text-xl" style="background: var(--bg2);">
                             <i class="fa-solid fa-book-skull"></i>
                         </div>
-                        <h4 class="text-lg font-bold text-white">CUSTOM ENCHANTS</h4>
-                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                        <h4 class="text-lg font-bold text-main">CUSTOM ENCHANTS</h4>
+                        <p class="text-xs text-muted leading-relaxed font-normal">
                             CustomEnchants, thêm những loại enchant mới giúp sở hữu những kĩ năng hoặc hiệu ứng bá đạo khi chiến đấu.
                         </p>
                     </div>
 
-                    <div class="tilt-card glass-panel p-6 rounded-3xl border border-emerald-500/20 space-y-3 reveal-on-scroll">
-                        <div class="w-12 h-12 rounded-xl bg-[#5865F2]/10 text-[#5865F2] flex items-center justify-center text-xl">
+                    <div class="tilt-card glass-panel p-6 rounded-3xl border border-accent space-y-3 reveal-on-scroll">
+                        <div class="w-12 h-12 rounded-xl text-accent flex items-center justify-center text-xl" style="background: var(--bg2);">
                             <i class="fa-brands fa-discord"></i>
                         </div>
-                        <h4 class="text-lg font-bold text-white">LIÊN KẾT TÀI KHOẢN</h4>
-                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                        <h4 class="text-lg font-bold text-main">LIÊN KẾT TÀI KHOẢN</h4>
+                        <p class="text-xs text-muted leading-relaxed font-normal">
                             Liên kết tài khoản, sử dụng tên đăng kí và mật khẩu để liên kết tài khoản game với discord và website theo thời gian thực.
                         </p>
                     </div>
@@ -551,53 +609,53 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal-on-scroll">
                 <span class="text-xs font-bold text-brand-gold uppercase tracking-widest block mb-2">HỆ THỐNG DANH HIỆU</span>
-                <p class="text-3xl sm:text-4xl font-extrabold text-white">CỬA HÀNG <span class="text-brand-gold">RANK MÁY CHỦ</span></p>
-                <p class="text-gray-400 text-sm mt-3 max-w-xl mx-auto">Tích lũy Xu nâng cấp hoặc cày cuốc hoàn toàn miễn phí bằng EXP & tiền Eco in-game</p>
+                <p class="text-3xl sm:text-4xl font-extrabold text-main">CỬA HÀNG <span class="text-brand-gold">RANK MÁY CHỦ</span></p>
+                <p class="text-muted text-sm mt-3 max-w-xl mx-auto">Tích lũy Xu nâng cấp hoặc cày cuốc hoàn toàn miễn phí bằng EXP & tiền Eco in-game</p>
                 <div class="w-20 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                 <!-- KNIGHT -->
-                <div class="tilt-card glass-panel p-6 rounded-3xl border border-emerald-500/40 flex flex-col justify-between reveal-on-scroll">
+                <div class="tilt-card glass-panel p-6 rounded-3xl border border-accent flex flex-col justify-between reveal-on-scroll">
                     <div>
                         <div class="flex justify-between items-center mb-4">
-                            <span class="text-[11px] font-bold bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full">CẤP 1</span>
-                            <span class="text-xs font-bold text-emerald-400">Knight</span>
+                            <span class="text-[11px] font-bold text-accent px-3 py-1 rounded-full" style="background: var(--bg2);">CẤP 1</span>
+                            <span class="text-xs font-bold text-accent">Knight</span>
                         </div>
-                        <h4 class="text-2xl font-bold text-white mb-2">KNIGHT</h4>
-                        <div class="text-xl font-extrabold text-emerald-400 mb-4">50 Xu</div>
-                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
-                            <li>▪ Claim đất: <span class="text-emerald-300 font-bold">4 vùng</span></li>
-                            <li>▪ Chợ /ah: <span class="text-emerald-300 font-bold">9 Slot</span></li>
-                            <li>▪ Home & WP: <span class="text-emerald-300 font-bold">5 Home | 4 WP</span></li>
-                            <li>▪ Lệnh: <span class="text-white font-semibold">/feed, /back, /fix enchant</span></li>
-                            <li class="pt-2 border-t border-white/10 text-emerald-400 font-bold">+ 50.000$ & 1.000 Claim</li>
+                        <h4 class="text-2xl font-bold text-main mb-2">KNIGHT</h4>
+                        <div class="text-xl font-extrabold text-accent mb-4">50 Xu</div>
+                        <ul class="space-y-2 text-xs text-muted mb-6">
+                            <li>▪ Claim đất: <span class="text-accent font-bold">4 vùng</span></li>
+                            <li>▪ Chợ /ah: <span class="text-accent font-bold">9 Slot</span></li>
+                            <li>▪ Home & WP: <span class="text-accent font-bold">5 Home | 4 WP</span></li>
+                            <li>▪ Lệnh: <span class="text-main font-semibold">/feed, /back, /fix enchant</span></li>
+                            <li class="pt-2 border-t border-white/10 text-accent font-bold">+ 50.000$ & 1.000 Claim</li>
                         </ul>
                     </div>
-                    <button onclick="handleBuyRank('KNIGHT', '50 Xu', 'knight')" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs transition-all shadow-lg shadow-emerald-500/30">
+                    <button onclick="handleBuyRank('KNIGHT', '50 Xu', 'knight')" class="w-full py-3 rounded-xl bg-accent bg-accent-hover text-black font-extrabold text-xs transition-all shadow-lg">
                         MUA RANK KNIGHT
                     </button>
                 </div>
 
                 <!-- TEMPLAR -->
-                <div class="tilt-card glass-panel p-6 rounded-3xl border border-emerald-500/40 flex flex-col justify-between reveal-on-scroll">
+                <div class="tilt-card glass-panel p-6 rounded-3xl border border-accent flex flex-col justify-between reveal-on-scroll">
                     <div>
                         <div class="flex justify-between items-center mb-4">
-                            <span class="text-[11px] font-bold bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full">CẤP 2</span>
-                            <span class="text-xs font-bold text-emerald-400">Templar</span>
+                            <span class="text-[11px] font-bold text-accent px-3 py-1 rounded-full" style="background: var(--bg2);">CẤP 2</span>
+                            <span class="text-xs font-bold text-accent">Templar</span>
                         </div>
-                        <h4 class="text-2xl font-bold text-white mb-2">TEMPLAR</h4>
-                        <div class="text-xl font-extrabold text-emerald-400 mb-1">Bù 50 Xu</div>
-                        <p class="text-[11px] text-gray-400 mb-4">(Giá gốc: 100 Xu)</p>
-                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
-                            <li>▪ Claim đất: <span class="text-emerald-300 font-bold">6 vùng</span></li>
-                            <li>▪ Chợ /ah: <span class="text-emerald-300 font-bold">12 Slot</span></li>
-                            <li>▪ Home & WP: <span class="text-emerald-300 font-bold">8 Home | 6 WP</span></li>
-                            <li>▪ Lệnh: <span class="text-white font-semibold">/feed, /back, /fix hand</span></li>
-                            <li class="pt-2 border-t border-white/10 text-emerald-400 font-bold">+ 100.000$ & 3.000 Claim</li>
+                        <h4 class="text-2xl font-bold text-main mb-2">TEMPLAR</h4>
+                        <div class="text-xl font-extrabold text-accent mb-1">Bù 50 Xu</div>
+                        <p class="text-[11px] text-muted mb-4">(Giá gốc: 100 Xu)</p>
+                        <ul class="space-y-2 text-xs text-muted mb-6">
+                            <li>▪ Claim đất: <span class="text-accent font-bold">6 vùng</span></li>
+                            <li>▪ Chợ /ah: <span class="text-accent font-bold">12 Slot</span></li>
+                            <li>▪ Home & WP: <span class="text-accent font-bold">8 Home | 6 WP</span></li>
+                            <li>▪ Lệnh: <span class="text-main font-semibold">/feed, /back, /fix hand</span></li>
+                            <li class="pt-2 border-t border-white/10 text-accent font-bold">+ 100.000$ & 3.000 Claim</li>
                         </ul>
                     </div>
-                    <button onclick="handleBuyRank('TEMPLAR', '50 Xu (Bù từ Knight)', 'templar')" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs transition-all shadow-lg shadow-emerald-500/30">
+                    <button onclick="handleBuyRank('TEMPLAR', '50 Xu (Bù từ Knight)', 'templar')" class="w-full py-3 rounded-xl bg-accent bg-accent-hover text-black font-extrabold text-xs transition-all shadow-lg">
                         NÂNG CẤP TEMPLAR
                     </button>
                 </div>
@@ -616,8 +674,8 @@
                             <li>▪ Claim đất: <span class="text-yellow-300 font-bold">8 vùng</span></li>
                             <li>▪ Chợ /ah: <span class="text-yellow-300 font-bold">16 Slot</span></li>
                             <li>▪ Home & WP: <span class="text-yellow-300 font-bold">12 Home | 8 WP</span></li>
-                            <li>▪ Lương: <span class="text-emerald-400 font-bold">2.000$ mỗi ngày</span></li>
-                            <li class="pt-2 border-t border-white/10 text-emerald-400 font-bold">+ 300.000$ & 8.000 Claim</li>
+                            <li>▪ Lương: <span class="text-accent font-bold">2.000$ mỗi ngày</span></li>
+                            <li class="pt-2 border-t border-white/10 text-accent font-bold">+ 300.000$ & 8.000 Claim</li>
                         </ul>
                     </div>
                     <button onclick="handleBuyRank('PALADIN', '70 Xu (Bù từ Templar)', 'paladin')" class="w-full py-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-extrabold text-xs transition-all shadow-lg shadow-yellow-500/30">
@@ -637,10 +695,10 @@
                         <p class="text-[11px] text-gray-400 mb-4">(Giá gốc: 250 Xu)</p>
                         <ul class="space-y-2 text-xs text-gray-200 mb-6">
                             <li>▪ Claim đất: <span class="text-brand-gold font-bold">10 vùng</span></li>
-                            <li>▪ Bay: <span class="text-emerald-400 font-bold">/team fly trong claim</span></li>
+                            <li>▪ Bay: <span class="text-accent font-bold">/team fly trong claim</span></li>
                             <li>▪ Lệnh: <span class="text-brand-gold font-bold">/feed, /back, /fix enchant VÔ HẠN</span></li>
-                            <li>▪ Lương: <span class="text-emerald-400 font-bold">5.000$ mỗi ngày</span></li>
-                            <li class="pt-2 border-t border-white/10 text-emerald-400 font-bold">+ 500.000$ & 12.000 Claim</li>
+                            <li>▪ Lương: <span class="text-accent font-bold">5.000$ mỗi ngày</span></li>
+                            <li class="pt-2 border-t border-white/10 text-accent font-bold">+ 500.000$ & 12.000 Claim</li>
                         </ul>
                     </div>
                     <button onclick="handleBuyRank('GOD', '80 Xu (Bù từ Paladin)', 'god')" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-gold to-orange-500 text-black font-extrabold text-xs transition-all shadow-xl shadow-brand-gold/40 hover:opacity-95">
@@ -651,64 +709,56 @@
         </div>
     </section>
 
-    <!-- CHÂN TRANG FOOTER (Thiết kế chuẩn 1:1 theo phong cách MineRua) -->
-    <footer class="relative z-10 bg-[#040805] border-t border-emerald-500/20 pt-16 pb-8 text-gray-400">
+    <!-- Footer -->
+    <footer class="relative z-10 pt-16 pb-8 text-muted" style="background: var(--bg2); border-top: 1px solid var(--border);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Banner mô tả toàn cảnh ở trên đầu Footer -->
-            <div class="text-center max-w-4xl mx-auto mb-16 pb-12 border-b border-emerald-500/10 reveal-on-scroll">
-                <p class="text-xs sm:text-sm leading-relaxed text-gray-400">
-                    Máy chủ Minecraft Việt Nam ZennezMC (<span class="text-emerald-400 font-semibold">play.zennez.net</span>) cung cấp trải nghiệm Survival ECO, Dungeon Boss Cổ Đại, Vũ Khí Huyền Thoại 3D và thế giới Động Vật mới lạ. Kết nối ngay hôm nay để trở thành huyền thoại tiếp theo!
+            <div class="text-center max-w-4xl mx-auto mb-16 pb-12" style="border-bottom: 1px solid var(--border);">
+                <p class="text-xs sm:text-sm leading-relaxed text-muted">
+                    Máy chủ Minecraft Việt Nam ZennezMC (<span class="text-accent font-semibold">play.zennez.net</span>) cung cấp trải nghiệm Survival ECO, Dungeon Boss Cổ Đại, Vũ Khí Huyền Thoại 3D và thế giới Động Vật mới lạ. Kết nối ngay hôm nay để trở thành huyền thoại tiếp theo!
                 </p>
             </div>
 
-            <!-- Lưới 4 cột Footer -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-16 reveal-on-scroll">
-                
-                <!-- Cột 1: Thông tin Server ZennezMC (4 cols) -->
                 <div class="lg:col-span-4 space-y-4">
                     <div class="flex items-center space-x-2">
-                        <span class="text-2xl font-black font-pixel text-white">ZENNEZ<span class="text-emerald-400">MC</span></span>
+                        <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1550524114446454804/Khong_Co_Tieu_e5_20260918210904.png?ex=6ab888dc&is=6ab7375c&hm=fc44632a58b129e6c8f87674d74d969ff1f1e8900e7f0d3b3369985fbda248cf&" alt="Logo" class="h-10 w-auto rounded border border-accent">
                     </div>
-                    <p class="text-xs leading-relaxed text-gray-400 pr-4">
+                    <p class="text-xs leading-relaxed text-muted pr-4">
                         Máy chủ Minecraft Việt Nam hàng đầu – Survival ECO 1.21.x, Dungeon Boss, Vũ Khí 3D & Thú Mới. Hỗ trợ đầy đủ PC Java & Mobile Bedrock.
                     </p>
                     <div class="pt-2">
-                        <div onclick="copyServerIP()" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/60 border border-emerald-500/30 text-xs font-semibold text-emerald-400 cursor-pointer hover:border-emerald-400 transition-colors">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <div onclick="copyServerIP()" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-accent text-xs font-semibold text-accent cursor-pointer hover-border-accent transition-colors" style="background: var(--bg2);">
+                            <span class="w-2 h-2 rounded-full bg-accent"></span>
                             <span>IP: play.zennez.net</span>
-                            <i class="fa-regular fa-copy ml-1 text-gray-400"></i>
+                            <i class="fa-regular fa-copy ml-1 text-muted"></i>
                         </div>
                     </div>
                 </div>
 
-                <!-- Cột 2: LIÊN KẾT (3 cols) -->
                 <div class="lg:col-span-3 space-y-3">
-                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">LIÊN KẾT</h4>
+                    <h4 class="text-xs font-bold text-main uppercase tracking-wider">LIÊN KẾT</h4>
                     <ul class="space-y-2 text-xs">
-                        <li><a href="index.html" class="hover:text-emerald-400 transition-colors">Trang Chủ</a></li>
-                        <li><a href="media.html" class="hover:text-emerald-400 transition-colors">Media & Video</a></li>
-                        <li><a href="#store" class="hover:text-emerald-400 transition-colors">Cửa Hàng Rank</a></li>
-                        <li><a href="#wiki" class="hover:text-emerald-400 transition-colors">Vũ Khí 3D & Dungeon</a></li>
-                        <li><a href="#gamemodes" class="hover:text-emerald-400 transition-colors">Chế Độ Chơi</a></li>
+                        <li><a href="index.html" class="hover-text-accent transition-colors">Trang Chủ</a></li>
+                        <li><a href="media.html" class="hover-text-accent transition-colors">Media & Video</a></li>
+                        <li><a href="#store" class="hover-text-accent transition-colors">Cửa Hàng Rank</a></li>
+                        <li><a href="#wiki" class="hover-text-accent transition-colors">Vũ Khí 3D & Dungeon</a></li>
+                        <li><a href="#gamemodes" class="hover-text-accent transition-colors">Chế Độ Chơi</a></li>
                     </ul>
                 </div>
 
-                <!-- Cột 3: HỖ TRỢ (2 cols) -->
                 <div class="lg:col-span-2 space-y-3">
-                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">HỖ TRỢ</h4>
+                    <h4 class="text-xs font-bold text-main uppercase tracking-wider">HỖ TRỢ</h4>
                     <ul class="space-y-2 text-xs">
-                        <li><a href="luatchoi.html" class="hover:text-emerald-400 transition-colors">Luật Chơi</a></li>
-                        <li><a href="luatchoi.html" class="hover:text-emerald-400 transition-colors">Quy Định Xử Phạt</a></li>
-                        <li><a href="#store" class="hover:text-emerald-400 transition-colors">Quy Định Ủng Hộ</a></li>
-                        <li><a href="https://discord.zennez.net" target="_blank" class="hover:text-emerald-400 transition-colors">Discord Ticket</a></li>
+                        <li><a href="luatchoi.html" class="hover-text-accent transition-colors">Luật Chơi</a></li>
+                        <li><a href="luatchoi.html" class="hover-text-accent transition-colors">Quy Định Xử Phạt</a></li>
+                        <li><a href="#store" class="hover-text-accent transition-colors">Quy Định Ủng Hộ</a></li>
+                        <li><a href="https://discord.zennez.net" target="_blank" class="hover-text-accent transition-colors">Discord Ticket</a></li>
                     </ul>
                 </div>
 
-                <!-- Cột 4: CỘNG ĐỒNG (3 cols) -->
                 <div class="lg:col-span-3 space-y-3">
-                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">CỘNG ĐỒNG</h4>
-                    <p class="text-xs leading-relaxed text-gray-400">
+                    <h4 class="text-xs font-bold text-main uppercase tracking-wider">CỘNG ĐỒNG</h4>
+                    <p class="text-xs leading-relaxed text-muted">
                         Tham gia cộng đồng ZennezMC để nhận tin tức, sự kiện và giao lưu cùng các thành viên.
                     </p>
                     <div class="flex items-center gap-3 pt-2">
@@ -726,49 +776,46 @@
                         </a>
                     </div>
                 </div>
-
             </div>
 
-            <!-- Thanh đáy bản quyền & nút cuộn lên đầu trang -->
-            <div class="pt-8 border-t border-emerald-500/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4">
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-muted gap-4" style="border-top: 1px solid var(--border);">
                 <p>&copy; 2026 ZennezMC Network. Không liên kết với Mojang AB. Website đang thử nghiệm.</p>
                 <div class="flex items-center gap-6">
-                    <span class="flex items-center gap-1.5 text-emerald-400 font-semibold">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Hệ Thống Hoạt Động
+                    <span class="flex items-center gap-1.5 text-accent font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-accent"></span> Hệ Thống Hoạt Động
                     </span>
-                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-emerald-400 font-bold flex items-center gap-1 transition-colors">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover-text-accent font-bold flex items-center gap-1 transition-colors">
                         <span>↑ Đầu trang</span>
                     </button>
                 </div>
             </div>
-
         </div>
     </footer>
 
     <!-- COPY IP TOAST -->
     <div id="copy-toast" class="fixed bottom-8 right-8 z-50 transform translate-y-32 opacity-0 transition-all duration-300 ease-out pointer-events-none">
-        <div class="glass-panel-glow px-6 py-4 rounded-2xl flex items-center gap-3 border-2 border-emerald-400 text-white shadow-2xl">
-            <i class="fa-solid fa-circle-check text-emerald-400 text-xl"></i>
+        <div class="glass-panel-glow px-6 py-4 rounded-2xl flex items-center gap-3 border-2 border-accent text-main shadow-2xl">
+            <i class="fa-solid fa-circle-check text-accent text-xl"></i>
             <div>
-                <p class="font-extrabold text-xs text-emerald-400">ĐÃ SAO CHÉP IP!</p>
-                <p class="text-xs text-gray-300">Đã lưu <span class="text-white font-bold">play.zennez.net</span> vào bộ nhớ tạm.</p>
+                <p class="font-extrabold text-xs text-accent">ĐÃ SAO CHÉP IP!</p>
+                <p class="text-xs text-muted">Đã lưu <span class="text-main font-bold">play.zennez.net</span> vào bộ nhớ tạm.</p>
             </div>
         </div>
     </div>
 
     <!-- MODAL TÀI KHOẢN -->
     <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
-        <div class="glass-panel-glow p-6 sm:p-8 rounded-3xl max-w-md w-full mx-4 border border-emerald-500/40 relative">
-            <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+        <div class="glass-panel-glow p-6 sm:p-8 rounded-3xl max-w-md w-full mx-4 border border-accent relative">
+            <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-muted hover-text-main text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
             <!-- Discord Info -->
-            <div class="flex items-center gap-4 border-b border-emerald-500/20 pb-5 mb-5">
+            <div class="flex items-center gap-4 border-b border-accent pb-5 mb-5">
                 <img id="user-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" class="w-14 h-14 rounded-2xl border-2 border-[#5865F2]" alt="Avatar">
                 <div class="flex-1">
-                    <h3 id="user-discord-name" class="text-base font-bold text-white">Discord User</h3>
-                    <p id="user-discord-id" class="text-xs text-gray-400">ID: ...</p>
+                    <h3 id="user-discord-name" class="text-base font-bold text-main">Discord User</h3>
+                    <p id="user-discord-id" class="text-xs text-muted">ID: ...</p>
                     <span id="link-badge" class="inline-flex items-center gap-1.5 mt-1 text-xs font-bold px-2.5 py-0.5 rounded-full bg-red-500/20 text-red-400 border border-red-500/30">
                         <i class="fa-solid fa-circle-xmark"></i> Chưa liên kết
                     </span>
@@ -777,16 +824,16 @@
 
             <!-- View 1: ĐÃ LIÊN KẾT -->
             <div id="linked-view" class="hidden space-y-4">
-                <div class="glass-panel p-4 rounded-2xl space-y-3 border border-emerald-500/40">
+                <div class="glass-panel p-4 rounded-2xl space-y-3 border border-accent">
                     <div class="flex items-center gap-4">
-                        <img id="mc-avatar" src="https://mc-heads.net/avatar/Steve" class="w-12 h-12 rounded-xl border border-emerald-400" alt="Skin">
+                        <img id="mc-avatar" src="https://mc-heads.net/avatar/Steve" class="w-12 h-12 rounded-xl border border-accent" alt="Skin">
                         <div class="flex-1">
                             <div class="flex justify-between items-center">
-                                <span class="text-xs text-gray-400">Nhân vật:</span>
-                                <span id="mc-name" class="text-base font-extrabold text-emerald-400">Steve</span>
+                                <span class="text-xs text-muted">Nhân vật:</span>
+                                <span id="mc-name" class="text-base font-extrabold text-accent">Steve</span>
                             </div>
                             <div class="flex justify-between items-center mt-1.5">
-                                <span class="text-xs text-gray-400">Hạng:</span>
+                                <span class="text-xs text-muted">Hạng:</span>
                                 <span id="mc-rank" class="text-xs font-bold px-2.5 py-0.5 rounded border">Member</span>
                             </div>
                         </div>
@@ -795,11 +842,11 @@
                     <!-- Tiền Eco & Xu -->
                     <div class="grid grid-cols-2 gap-2 pt-2 border-t border-white/10 text-xs">
                         <div class="bg-black/50 p-2.5 rounded-xl flex items-center justify-between border border-white/5">
-                            <span class="text-gray-400"><i class="fa-solid fa-coins text-emerald-400 mr-1"></i> Eco:</span>
-                            <span id="mc-money" class="font-bold text-emerald-400">0 $</span>
+                            <span class="text-muted"><i class="fa-solid fa-coins text-accent mr-1"></i> Eco:</span>
+                            <span id="mc-money" class="font-bold text-accent">0 $</span>
                         </div>
                         <div class="bg-black/50 p-2.5 rounded-xl flex items-center justify-between border border-white/5">
-                            <span class="text-gray-400"><i class="fa-solid fa-gem text-brand-gold mr-1"></i> Xu:</span>
+                            <span class="text-muted"><i class="fa-solid fa-gem text-brand-gold mr-1"></i> Xu:</span>
                             <span id="mc-points" class="font-bold text-brand-gold">0</span>
                         </div>
                     </div>
@@ -813,25 +860,25 @@
             <!-- View 2: CHƯA LIÊN KẾT -->
             <div id="unlinked-view" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-gray-300 mb-1">Tên nhân vật In-game</label>
-                    <input type="text" id="link-mc-username" placeholder="Ví dụ: KienChua17" class="w-full bg-black/60 border border-emerald-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                    <label class="block text-xs font-bold text-muted mb-1">Tên nhân vật In-game</label>
+                    <input type="text" id="link-mc-username" placeholder="Ví dụ: KienChua17" class="w-full bg-black/60 border border-accent rounded-xl px-4 py-2.5 text-sm text-main focus:outline-none focus:border-accent">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-gray-300 mb-1">Mật khẩu In-game (nLogin)</label>
-                    <input type="password" id="link-mc-password" placeholder="Mật khẩu /login trong server..." class="w-full bg-black/60 border border-emerald-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                    <label class="block text-xs font-bold text-muted mb-1">Mật khẩu In-game (nLogin)</label>
+                    <input type="password" id="link-mc-password" placeholder="Mật khẩu /login trong server..." class="w-full bg-black/60 border border-accent rounded-xl px-4 py-2.5 text-sm text-main focus:outline-none focus:border-accent">
                 </div>
 
                 <div id="link-error" class="text-xs text-red-400 hidden bg-red-500/10 p-2.5 rounded-xl border border-red-500/20"></div>
 
-                <button onclick="submitLinkAccount()" id="btn-link-submit" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs transition-all shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2">
+                <button onclick="submitLinkAccount()" id="btn-link-submit" class="w-full py-3 rounded-xl bg-accent bg-accent-hover text-black font-extrabold text-xs transition-all shadow-lg flex items-center justify-center gap-2">
                     <i class="fa-solid fa-check"></i> Xác Thực & Liên Kết
                 </button>
             </div>
 
             <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs">
-                <button onclick="logoutDiscord()" class="text-gray-400 hover:text-red-400 font-semibold transition-colors">Đăng xuất Discord</button>
-                <button onclick="closeProfileModal()" class="text-gray-400 hover:text-white">Đóng</button>
+                <button onclick="logoutDiscord()" class="text-muted hover:text-red-400 font-semibold transition-colors">Đăng xuất Discord</button>
+                <button onclick="closeProfileModal()" class="text-muted hover-text-main">Đóng</button>
             </div>
         </div>
     </div>
@@ -839,7 +886,7 @@
     <!-- MODAL MUA RANK -->
     <div id="store-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
         <div class="glass-panel-glow p-8 rounded-3xl max-w-md w-full mx-4 border border-brand-gold/40 relative">
-            <button onclick="closeStoreModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2">
+            <button onclick="closeStoreModal()" class="absolute top-4 right-4 text-muted hover-text-main p-2">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
             
@@ -847,21 +894,97 @@
                 <div class="w-14 h-14 rounded-2xl bg-brand-gold/20 text-brand-gold flex items-center justify-center text-2xl mx-auto mb-3">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </div>
-                <h3 class="text-xl font-bold text-white">XÁC NHẬN NẠP RANK</h3>
+                <h3 class="text-xl font-bold text-main">XÁC NHẬN NẠP RANK</h3>
                 <p id="modal-rank-name" class="text-base font-bold text-brand-gold mt-1">RANK KNIGHT</p>
-                <p id="modal-rank-price" class="text-sm font-bold text-emerald-400">50 Xu</p>
+                <p id="modal-rank-price" class="text-sm font-bold text-accent">50 Xu</p>
             </div>
 
-            <div class="space-y-2 mb-6 text-xs text-gray-300 glass-panel p-4 rounded-2xl">
+            <div class="space-y-2 mb-6 text-xs text-muted glass-panel p-4 rounded-2xl">
                 <div class="flex justify-between">
                     <span>Nhân vật nhận:</span>
-                    <span id="modal-player-target" class="font-bold text-white">Chưa liên kết</span>
+                    <span id="modal-player-target" class="font-bold text-main">Chưa liên kết</span>
                 </div>
             </div>
 
             <a href="https://discord.zennez.net" target="_blank" class="w-full py-3.5 rounded-xl bg-brand-gold hover:bg-amber-400 text-black font-extrabold block text-center transition-all shadow-lg shadow-brand-gold/30">
                 MỞ TICKET DISCORD NẠP
             </a>
+        </div>
+    </div>
+
+    <!-- THEME CHANGER UI -->
+    <button class="theme-toggle-btn" onclick="toggleThemeMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path><path d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2v10h10z"></path></svg>
+        GIAO DIỆN
+    </button>
+
+    <div class="theme-menu-overlay" id="themeMenuOverlay" onclick="closeThemeMenu()"></div>
+    <div class="theme-menu" id="themeMenu">
+        <div class="theme-menu-title">CHẾ ĐỘ HIỂN THỊ</div>
+        <div class="mode-switch" id="modeSwitchContainer">
+            <button class="mode-option active" data-mode="system" onclick="setMode('system')">Hệ thống</button>
+            <button class="mode-option" data-mode="light" onclick="setMode('light')">Sáng</button>
+            <button class="mode-option" data-mode="dark" onclick="setMode('dark')">Tối</button>
+        </div>
+        <div class="theme-menu-sep"></div>
+
+        <div class="theme-menu-title">CHỌN THEME</div>
+        <div id="themeList">
+            <div class="theme-option active" data-theme="" onclick="setTheme('', this)">
+                <div class="theme-option-swatch" style="background: #10b981;"></div>
+                <div class="theme-option-text">
+                    <div class="theme-option-name">Emerald Mặc định</div>
+                    <div class="theme-option-desc">Theme gốc ZennezMC</div>
+                </div>
+            </div>
+            <div class="theme-option" data-theme="theme-royal" onclick="setTheme('theme-royal', this)">
+                <div class="theme-option-swatch" style="background: linear-gradient(135deg,#D4A017,#FFFFFF 50%,#C9C9D6);"></div>
+                <div class="theme-option-text">
+                    <div class="theme-option-name">Hoàng Gia</div><div class="theme-option-desc">Vàng · Trắng · Bạc</div>
+                </div>
+            </div>
+            <div class="theme-option" data-theme="theme-obsidian" onclick="setTheme('theme-obsidian', this)">
+                <div class="theme-option-swatch" style="background: linear-gradient(135deg,#1A1022,#6C2BD9 60%,#2D1B4E);"></div>
+                <div class="theme-option-text">
+                    <div class="theme-option-name">Obsidian</div><div class="theme-option-desc">Đen · Tím · Tím đậm</div>
+                </div>
+            </div>
+            <div class="theme-option" data-theme="theme-sky" onclick="setTheme('theme-sky', this)">
+                <div class="theme-option-swatch" style="background: linear-gradient(135deg,#4FA8E8,#FFFFFF 55%,#00C9D4);"></div>
+                <div class="theme-option-text">
+                    <div class="theme-option-name">Bầu Trời</div><div class="theme-option-desc">Xanh trời · Trắng</div>
+                </div>
+            </div>
+            <div class="theme-option" data-theme="theme-ocean" onclick="setTheme('theme-ocean', this)">
+                <div class="theme-option-swatch" style="background: linear-gradient(135deg,#0B3D5C,#0F9E8E 55%,#063048);"></div>
+                <div class="theme-option-text">
+                    <div class="theme-option-name">Đại Dương</div><div class="theme-option-desc">Xanh biển · Ngọc</div>
+                </div>
+            </div>
+            <div class="theme-option" data-theme="theme-hell" onclick="setTheme('theme-hell', this)">
+                <div class="theme-option-swatch" style="background: linear-gradient(135deg,#1A0805,#E0402A 55%,#FF8C30);"></div>
+                <div class="theme-option-text">
+                    <div class="theme-option-name">Địa Ngục</div><div class="theme-option-desc">Đỏ · Cam · Đen</div>
+                </div>
+            </div>
+            <div class="theme-option" data-theme="theme-galaxy" onclick="setTheme('theme-galaxy', this)">
+                <div class="theme-option-swatch" style="background: linear-gradient(135deg,#0B0A1F,#7B5EE8 55%,#FFFFFF);"></div>
+                <div class="theme-option-text">
+                    <div class="theme-option-name">Vì Sao</div><div class="theme-option-desc">Xanh đêm · Tím</div>
+                </div>
+            </div>
+            <div class="theme-option" data-theme="theme-dream" onclick="setTheme('theme-dream', this)">
+                <div class="theme-option-swatch" style="background: linear-gradient(135deg,#FFD9EC,#E3D2FF 55%,#CFEBFF);"></div>
+                <div class="theme-option-text">
+                    <div class="theme-option-name">Giấc Mơ</div><div class="theme-option-desc">Hồng · Tím nhạt</div>
+                </div>
+            </div>
+            <div class="theme-option" data-theme="theme-hacker" onclick="setTheme('theme-hacker', this)">
+                <div class="theme-option-swatch" style="background: linear-gradient(135deg,#000000,#0A1F0F 55%,#00FF66);"></div>
+                <div class="theme-option-text">
+                    <div class="theme-option-name">Hacker</div><div class="theme-option-desc">Đen · Xanh lá</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -991,7 +1114,7 @@
             } else if (r === 'templar') {
                 el.className = "text-xs font-bold text-red-400 bg-red-500/20 px-2.5 py-0.5 rounded border border-red-500/40";
             } else if (r === 'knight') {
-                el.className = "text-xs font-bold text-emerald-400 bg-emerald-500/20 px-2.5 py-0.5 rounded border border-emerald-500/40";
+                el.className = "text-xs font-bold text-accent bg-accent/20 px-2.5 py-0.5 rounded border border-accent/40";
             } else {
                 el.className = "text-xs font-bold text-gray-300 bg-white/10 px-2.5 py-0.5 rounded border border-white/20";
             }
@@ -1025,9 +1148,9 @@
                 currentUser = data;
 
                 const userHtml = `
-                    <div onclick="openProfileModal()" class="flex items-center gap-2.5 cursor-pointer glass-panel px-3.5 py-1.5 rounded-xl border border-emerald-500/50 hover:border-emerald-400 transition-all">
-                        <img src="${data.discord.avatar}" class="w-7 h-7 rounded-full border border-emerald-400" alt="Avatar">
-                        <span class="text-xs font-bold text-white">${data.discord.username}</span>
+                    <div onclick="openProfileModal()" class="flex items-center gap-2.5 cursor-pointer glass-panel px-3.5 py-1.5 rounded-xl border border-accent hover-border-accent transition-all">
+                        <img src="${data.discord.avatar}" class="w-7 h-7 rounded-full border border-accent" alt="Avatar">
+                        <span class="text-xs font-bold text-main">${data.discord.username}</span>
                     </div>
                 `;
                 authSection.innerHTML = userHtml;
@@ -1038,7 +1161,7 @@
                 document.getElementById('user-discord-id').innerText = `ID: ${data.discord.id}`;
 
                 if (data.minecraft && data.minecraft.linked) {
-                    document.getElementById('link-badge').className = "inline-flex items-center gap-1.5 mt-1 text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+                    document.getElementById('link-badge').className = "inline-flex items-center gap-1.5 mt-1 text-xs font-bold px-2.5 py-0.5 rounded-full bg-accent/20 text-accent border border-accent/30";
                     document.getElementById('link-badge').innerHTML = '<i class="fa-solid fa-circle-check"></i> Đã liên kết';
                     
                     document.getElementById('mc-avatar').src = `https://mc-heads.net/avatar/${data.minecraft.username}`;
@@ -1153,7 +1276,7 @@
             const targetEl = document.getElementById('modal-player-target');
             if (currentUser.minecraft && currentUser.minecraft.linked) {
                 targetEl.innerText = currentUser.minecraft.username;
-                targetEl.className = "font-black text-emerald-400";
+                targetEl.className = "font-black text-accent";
             } else {
                 targetEl.innerText = "Chưa liên kết In-game (Hãy liên kết trước)";
                 targetEl.className = "font-bold text-red-400";
@@ -1171,6 +1294,71 @@
 
         document.getElementById('mobile-menu-btn').addEventListener('click', () => {
             document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // --- THEME JS ---
+        function toggleThemeMenu() {
+            document.getElementById('themeMenu').classList.toggle('open');
+            document.getElementById('themeMenuOverlay').classList.toggle('open');
+        }
+
+        function closeThemeMenu() {
+            document.getElementById('themeMenu').classList.remove('open');
+            document.getElementById('themeMenuOverlay').classList.remove('open');
+        }
+
+        function setTheme(themeName, element) {
+            localStorage.setItem("zennez_theme", themeName);
+            document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('active'));
+            if (element) {
+                element.classList.add('active');
+            } else {
+                let activeEl = document.querySelector(`.theme-option[data-theme="${themeName}"]`);
+                if(activeEl) activeEl.classList.add('active');
+            }
+            document.body.className = document.body.className.replace(/\btheme-\S+/g, '');
+            if (themeName !== "") {
+                document.body.classList.add(themeName);
+            }
+        }
+
+        function setMode(mode) {
+            localStorage.setItem("zennez_mode", mode);
+            document.querySelectorAll('.mode-option').forEach(btn => btn.classList.remove('active'));
+            let activeModeBtn = document.querySelector(`.mode-option[data-mode="${mode}"]`);
+            if(activeModeBtn) activeModeBtn.classList.add('active');
+
+            var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (mode === 'dark' || (mode === 'system' && sysDark)) {
+                document.documentElement.classList.add('dark');
+                document.documentElement.style.setProperty('--bg', '#050b07');
+                document.documentElement.style.setProperty('--bg2', 'rgba(10, 20, 14, 0.75)');
+                document.documentElement.style.setProperty('--bg3', 'rgba(10, 20, 14, 0.85)');
+                document.documentElement.style.setProperty('--text', '#ecfdf5');
+                document.documentElement.style.setProperty('--text2', '#9ca3af');
+                document.documentElement.style.setProperty('--accent', '#34d399');
+                document.documentElement.style.setProperty('--accent-hover', '#10b981');
+                document.documentElement.style.setProperty('--border', 'rgba(16, 185, 129, 0.2)');
+                document.documentElement.style.setProperty('--border-glow', 'rgba(52, 211, 153, 0.35)');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.style.setProperty('--bg', '#f4f4f5');
+                document.documentElement.style.setProperty('--bg2', 'rgba(255, 255, 255, 0.75)');
+                document.documentElement.style.setProperty('--bg3', 'rgba(255, 255, 255, 0.9)');
+                document.documentElement.style.setProperty('--text', '#18181b');
+                document.documentElement.style.setProperty('--text2', '#52525b');
+                document.documentElement.style.setProperty('--accent', '#059669');
+                document.documentElement.style.setProperty('--accent-hover', '#047857');
+                document.documentElement.style.setProperty('--border', 'rgba(5, 150, 105, 0.2)');
+                document.documentElement.style.setProperty('--border-glow', 'rgba(5, 150, 105, 0.4)');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            var savedTheme = localStorage.getItem("zennez_theme") || "";
+            var savedMode = localStorage.getItem("zennez_mode") || "dark";
+            setTheme(savedTheme);
+            setMode(savedMode);
         });
     </script>
 </body>
