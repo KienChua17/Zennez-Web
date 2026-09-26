@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luật Chơi & Quy Định Xử Phạt - ZennezMC</title>
+    <title>Luật Chơi & Quy Định - ZennezMC</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -18,6 +18,9 @@
                             600: '#059669',
                             700: '#047857',
                             900: '#064e3b'
+                        },
+                        brand: {
+                            gold: '#fbbf24'
                         }
                     },
                     fontFamily: {
@@ -90,7 +93,7 @@
 
     <div id="cursor-spotlight"></div>
 
-    <!-- Navigation -->
+    <!-- Navigation Bar -->
     <header class="sticky top-0 z-50 glass-panel border-b border-emerald-500/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -130,153 +133,242 @@
                         <i class="fa-regular fa-copy text-emerald-400"></i>
                         <span>play.zennez.net</span>
                     </button>
+                    <a href="https://discord.zennez.net" target="_blank" class="bg-[#5865F2] hover:bg-[#4752C4] text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 shadow-lg shadow-[#5865F2]/30">
+                        <i class="fa-brands fa-discord text-base"></i>
+                        <span>Tham Gia Discord</span>
+                    </a>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Header Section -->
-    <section class="pt-16 pb-12 text-center relative z-10">
+    <!-- Header Tiêu Đề -->
+    <section class="pt-16 pb-10 text-center relative z-10">
         <div class="max-w-4xl mx-auto px-4">
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-semibold text-emerald-400 mb-4">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>QUY ĐỊNH & ĐIỀU KHOẢN</span>
+                <i class="fa-solid fa-scroll"></i>
+                <span>NỘI QUY & QUY ĐỊNH MÁY CHỦ</span>
             </div>
-            <h1 class="text-4xl sm:text-6xl font-black text-white mb-3">Luật Chơi & Xử Phạt</h1>
+            <h1 class="text-4xl sm:text-6xl font-black text-white mb-3">Luật ZennezMC</h1>
             <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">
-                Vui lòng đọc kỹ và nghiêm túc tuân thủ để xây dựng môi trường ZennezMC công bằng và văn minh.
+                Vui lòng đọc kỹ và nghiêm túc tuân thủ để xây dựng môi trường ZennezMC công bằng, văn minh và vui vẻ.
             </p>
+
+            <!-- Tab chuyển đổi Luật Game & Luật Discord -->
+            <div class="flex items-center justify-center gap-3 mt-8">
+                <button onclick="switchRuleTab('mc')" id="btn-tab-mc" class="px-6 py-2.5 rounded-xl bg-emerald-500 text-black font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/30 transition-all">
+                    <i class="fa-solid fa-cube"></i>
+                    <span>Luật Server Minecraft</span>
+                </button>
+                <button onclick="switchRuleTab('discord')" id="btn-tab-discord" class="px-6 py-2.5 rounded-xl glass-panel text-gray-300 hover:text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 transition-all">
+                    <i class="fa-brands fa-discord text-[#5865F2]"></i>
+                    <span>Luật Server Discord</span>
+                </button>
+            </div>
         </div>
     </section>
 
-    <!-- Danh sách điều luật -->
+    <!-- NỘI DUNG LUẬT -->
     <section class="pb-24 relative z-10">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Điều 1: Hack / Cheat -->
-            <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-red-500/30 reveal-on-scroll">
-                <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center text-xl shrink-0 border border-red-500/30">
-                        <i class="fa-solid fa-ban"></i>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="text-lg sm:text-xl font-bold text-white">Điều 1: Cấm Sử Dụng Hack / Cheat / Client Bất Hợp Pháp</h3>
-                        <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                            Nghiêm cấm mọi hình thức can thiệp client như Killaura, Fly, Speed, Auto-click vượt quy định, X-ray hoặc minimap có radar người chơi. Mọi hành vi vi phạm sẽ bị hệ thống AntiCheat khóa tài khoản vĩnh viễn hoặc xử phạt nặng không cần báo trước.
-                        </p>
-                        <div class="inline-block text-xs font-bold text-red-400 bg-red-500/10 px-3 py-1 rounded-lg border border-red-500/20">
-                            Mức phạt: Khóa tài khoản từ 14 ngày đến Vĩnh Viễn.
+            <!-- TAB 1: LUẬT SERVER MINECRAFT -->
+            <div id="tab-mc" class="space-y-6">
+                
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 border border-red-500/30 flex items-center justify-center text-lg font-bold shrink-0">1</div>
+                        <div class="space-y-1">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Hack / Cheat / Mod / Phần Mềm Ngoài</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                                • Không sử dụng các phần mềm hack / cheat / mod hay các phần mềm tạo thế lợi cho bản thân.
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Điều 2: Bug & Dupe đồ -->
-            <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-yellow-500/30 reveal-on-scroll">
-                <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center text-xl shrink-0 border border-yellow-500/30">
-                        <i class="fa-solid fa-bug"></i>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="text-lg sm:text-xl font-bold text-white">Điều 2: Lợi Dụng Lỗi Game (Bug, Dupe Đồ)</h3>
-                        <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                            Khi phát hiện lỗi game, người chơi có trách nhiệm báo ngay cho BQT qua Discord Ticket để nhận thưởng. Hành vi cố tình giấu giếm, trục lợi hoặc chia sẻ cách dupe đồ/tiền tệ sẽ bị tịch thu toàn bộ tài sản và xử lý nghiêm khắc.
-                        </p>
-                        <div class="inline-block text-xs font-bold text-yellow-400 bg-yellow-500/10 px-3 py-1 rounded-lg border border-yellow-500/20">
-                            Mức phạt: Xóa toàn bộ tài sản (Wipe) + Ban từ 30 ngày đến Vĩnh Viễn.
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 flex items-center justify-center text-lg font-bold shrink-0">2</div>
+                        <div class="space-y-1.5">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Lợi Dụng Bug / Duplication</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không lợi dụng và khai thác các lỗi bug trong game để trục lợi.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không lợi dụng và khai thác các lỗi hệ thống, lỗi plugin, v.v.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không dùng các trick / thủ thuật để nhân bản (dupe) đồ.</p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Điều 3: Văn hóa giao tiếp -->
-            <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
-                <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl shrink-0 border border-emerald-500/30">
-                        <i class="fa-solid fa-comments"></i>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="text-lg sm:text-xl font-bold text-white">Điều 3: Quy Định Về Kênh Chat & Văn Hóa Ứng Xử</h3>
-                        <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                            Không spam, chửi bới xúc phạm tôn giáo, phân biệt vùng miền, bôi nhọ danh dự người khác hay xúc phạm BQT. Cấm tuyệt đối hành vi quảng cáo máy chủ khác dưới mọi hình thức.
-                        </p>
-                        <div class="inline-block text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">
-                            Mức phạt: Cảnh cáo $\rightarrow$ Mute chat từ 1h đến 7 ngày $\rightarrow$ Ban nếu tái phạm.
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-lg font-bold shrink-0">3</div>
+                        <div class="space-y-1.5">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Gây Lag Server</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không xây và sử dụng các loại máy gây lag.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không sử dụng các trick / thủ thuật gây lag cho server.</p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Điều 4: Lừa đảo & Phá hoại Claim -->
-            <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
-                <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl shrink-0 border border-emerald-500/30">
-                        <i class="fa-solid fa-handshake-slash"></i>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="text-lg sm:text-xl font-bold text-white">Điều 4: Phá Hoại (Griefing) & Lừa Đảo (Scam)</h3>
-                        <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                            Khu đất đã claim thuộc quyền sở hữu của người chơi. Nghiêm cấm đặt bẫy giết người vô cớ tại các khu vực dịch chuyển an toàn hoặc lợi dụng lòng tin để phá hoại công trình của đồng đội.
-                        </p>
-                        <div class="inline-block text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">
-                            Mức phạt: Rollback công trình + Ban từ 7 ngày đến Vĩnh Viễn.
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/30 flex items-center justify-center text-lg font-bold shrink-0">4</div>
+                        <div class="space-y-1.5">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Chat & Hành Vi Trong Server</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không spam, flood, quảng cáo server khác.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không nội dung 18+, phản cảm, nhạy cảm.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không giả mạo Staff.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Chửi thề là được phép nhưng hạn chế các từ ngữ quá thô tục.</p>
                         </div>
                     </div>
                 </div>
+
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/30 flex items-center justify-center text-lg font-bold shrink-0">5</div>
+                        <div class="space-y-1.5">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Skin / Tên Phản Cảm</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không dùng các skin / tên phản cảm và ghê rợn quá mức.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Tên xúc phạm đến nhân vật lịch sử.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-400 border border-orange-500/30 flex items-center justify-center text-lg font-bold shrink-0">6</div>
+                        <div class="space-y-1">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Phá Hoại Server</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Cấm xây lavacast, dùng TNT phá hoại quanh server.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LUẬT DÀNH CHO STAFF -->
+                <div class="glass-panel-glow p-6 sm:p-8 rounded-3xl border-2 border-brand-gold/60 mt-8 reveal-on-scroll">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-shield-halved text-brand-gold text-2xl"></i>
+                        <h3 class="text-lg sm:text-xl font-black text-brand-gold uppercase tracking-wider">LUẬT DÀNH CHO STAFF</h3>
+                    </div>
+                    <ul class="space-y-2 text-xs sm:text-sm text-gray-200">
+                        <li class="flex items-start gap-2">• Lạm quyền (give đồ, hồi sinh đồ trái phép, v.v).</li>
+                        <li class="flex items-start gap-2">• Teleport theo dõi người chơi để lấy lợi thế.</li>
+                        <li class="flex items-start gap-2">• Thiên vị bạn bè / bỏ qua luật vì quen biết.</li>
+                        <li class="flex items-start gap-2">• Dùng quyền lực đe doạ người chơi.</li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-brand-gold/20 text-xs font-bold text-brand-gold">
+                        * Các hành vi vi phạm sẽ xử phạt tuỳ mức độ.
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Bảng khung xử phạt tóm tắt -->
-            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
-                <h3 class="text-lg font-bold text-white mb-4">Bảng Tóm Tắt Khung Xử Phạt</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs text-gray-300 border-collapse">
-                        <thead>
-                            <tr class="border-b border-emerald-500/20 text-emerald-400 font-bold uppercase">
-                                <th class="py-3 px-4">Hành Vi Vi Phạm</th>
-                                <th class="py-3 px-4">Lần 1</th>
-                                <th class="py-3 px-4">Lần 2</th>
-                                <th class="py-3 px-4">Lần 3</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-white/5">
-                            <tr>
-                                <td class="py-3 px-4 font-semibold text-white">Spam / Xúc phạm trên Chat</td>
-                                <td class="py-3 px-4">Cảnh cáo / Mute 1h</td>
-                                <td class="py-3 px-4">Mute 24h</td>
-                                <td class="py-3 px-4 text-red-400">Ban 3 ngày</td>
-                            </tr>
-                            <tr>
-                                <td class="py-3 px-4 font-semibold text-white">Quảng cáo server khác</td>
-                                <td class="py-3 px-4 text-red-400">Ban 30 ngày</td>
-                                <td class="py-3 px-4 text-red-400">Ban Vĩnh Viễn</td>
-                                <td class="py-3 px-4 text-red-400">Ban IP</td>
-                            </tr>
-                            <tr>
-                                <td class="py-3 px-4 font-semibold text-white">Sử dụng Hack / Cheat / X-ray</td>
-                                <td class="py-3 px-4 text-red-400">Ban 14 ngày</td>
-                                <td class="py-3 px-4 text-red-400">Ban 60 ngày</td>
-                                <td class="py-3 px-4 text-red-400">Ban Vĩnh Viễn</td>
-                            </tr>
-                            <tr>
-                                <td class="py-3 px-4 font-semibold text-white">Bug / Dupe đồ vật phẩm</td>
-                                <td class="py-3 px-4 text-red-400">Wipe đồ + Ban 30 ngày</td>
-                                <td class="py-3 px-4 text-red-400">Ban Vĩnh Viễn</td>
-                                <td class="py-3 px-4 text-red-400">Ban IP</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <!-- TAB 2: LUẬT SERVER DISCORD -->
+            <div id="tab-discord" class="hidden space-y-6">
+                
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-lg font-bold shrink-0">1</div>
+                        <div class="space-y-1.5">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Tôn Trọng Cộng Đồng</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không toxic, miệt thị, công kích cá nhân.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không phân biệt vùng miền, chủng tộc, giới tính, tôn giáo, v.v.</p>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 border border-red-500/30 flex items-center justify-center text-lg font-bold shrink-0">2</div>
+                        <div class="space-y-1">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Cấm Nội Dung Nhạy Cảm</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• KHÔNG có nội dung 18+ / phản cảm / máu me, bạo lực / v.v.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 flex items-center justify-center text-lg font-bold shrink-0">3</div>
+                        <div class="space-y-1.5">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Gây Rối Trật Tự</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không ping @_everyone / @_here bừa bãi.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không flood ký tự (vd: aaaaaaaa, !!!!!!!!!!!!).</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không gây chiến / drama, gây chia rẽ cộng đồng.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không spam link và reaction.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/30 flex items-center justify-center text-lg font-bold shrink-0">4</div>
+                        <div class="space-y-1.5">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Vấn Đề Quảng Cáo & Chia Sẻ</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Cấm chia sẻ hack, exploit, bug lợi dụng game.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không quảng cáo kênh / server khác.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-400 border border-orange-500/30 flex items-center justify-center text-lg font-bold shrink-0">5</div>
+                        <div class="space-y-1">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Giao Dịch & Mua Bán</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không mua bán acc / vật phẩm / tiền game / v.v bằng tiền thật ngoài hệ thống.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/30 flex items-center justify-center text-lg font-bold shrink-0">6</div>
+                        <div class="space-y-1.5">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Thông Tin Cá Nhân</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không chia sẻ thông tin cá nhân của người khác.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không leak ảnh chụp riêng tư, nhạy cảm của người khác.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-pink-500/10 text-pink-400 border border-pink-500/30 flex items-center justify-center text-lg font-bold shrink-0">7</div>
+                        <div class="space-y-1">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Giả Mạo / Lừa Đảo</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không giả mạo staff để mua bán hoặc có hành vi chuộc lợi cho bản thân.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KHUNG XỬ LÝ VI PHẠM DISCORD -->
+                <div class="glass-panel-glow p-6 sm:p-8 rounded-3xl border-2 border-[#5865F2]/50 mt-8">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-brands fa-discord text-[#5865F2] text-2xl"></i>
+                        <h3 class="text-lg sm:text-xl font-black text-white uppercase tracking-wider">XỬ LÝ VI PHẠM DISCORD</h3>
+                    </div>
+                    <ul class="space-y-2 text-xs sm:text-sm text-gray-300">
+                        <li>• <span class="text-emerald-400 font-bold">Vi phạm nhẹ:</span> nhắc nhở / mute 10–30 phút</li>
+                        <li>• <span class="text-yellow-400 font-bold">Vi phạm vừa:</span> mute 1–7 ngày</li>
+                        <li>• <span class="text-red-400 font-bold">Vi phạm nặng:</span> ban vĩnh viễn</li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-white/10 text-xs font-bold text-gray-400">
+                        * Staff sẽ xử lý tuỳ mức độ vi phạm.
+                    </div>
+                </div>
+
             </div>
 
         </div>
     </section>
 
-    <!-- Footer MineRua Style -->
+    <!-- FOOTER MINE RUA STYLE -->
     <footer class="relative z-10 bg-[#040805] border-t border-emerald-500/20 pt-16 pb-8 text-gray-400">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-4xl mx-auto mb-16 pb-12 border-b border-emerald-500/10">
                 <p class="text-xs sm:text-sm leading-relaxed text-gray-400">
-                    Máy chủ Minecraft Việt Nam ZennezMC (<span class="text-emerald-400 font-semibold">play.zennez.net</span>) – Nơi bắt đầu hành trình sinh tồn văn minh và công bằng.
+                    Máy chủ Minecraft Việt Nam ZennezMC (<span class="text-emerald-400 font-semibold">play.zennez.net</span>) cung cấp trải nghiệm Survival ECO, Dungeon Boss Cổ Đại, Vũ Khí Huyền Thoại 3D và thế giới Động Vật mới lạ.
                 </p>
             </div>
 
@@ -357,6 +449,26 @@
         function copyServerIP() {
             navigator.clipboard.writeText("play.zennez.net");
             alert("Đã sao chép IP: play.zennez.net");
+        }
+
+        // Chuyển Tab Luật Minecraft / Discord
+        function switchRuleTab(tab) {
+            const btnMc = document.getElementById('btn-tab-mc');
+            const btnDc = document.getElementById('btn-tab-discord');
+            const tabMc = document.getElementById('tab-mc');
+            const tabDc = document.getElementById('tab-discord');
+
+            if (tab === 'mc') {
+                btnMc.className = "px-6 py-2.5 rounded-xl bg-emerald-500 text-black font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/30 transition-all";
+                btnDc.className = "px-6 py-2.5 rounded-xl glass-panel text-gray-300 hover:text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 transition-all";
+                tabMc.classList.remove('hidden');
+                tabDc.classList.add('hidden');
+            } else {
+                btnDc.className = "px-6 py-2.5 rounded-xl bg-[#5865F2] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-[#5865F2]/30 transition-all";
+                btnMc.className = "px-6 py-2.5 rounded-xl glass-panel text-gray-300 hover:text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 transition-all";
+                tabDc.classList.remove('hidden');
+                tabMc.classList.add('hidden');
+            }
         }
     </script>
 </body>
