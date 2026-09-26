@@ -133,11 +133,36 @@
                         <i class="fa-regular fa-copy text-emerald-400"></i>
                         <span>play.zennez.net</span>
                     </button>
-                    <a href="https://discord.zennez.net" target="_blank" class="bg-[#5865F2] hover:bg-[#4752C4] text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 shadow-lg shadow-[#5865F2]/30">
-                        <i class="fa-brands fa-discord text-base"></i>
-                        <span>Tham Gia Discord</span>
-                    </a>
+
+                    <!-- Nút Đăng nhập / Profile Discord -->
+                    <div id="auth-section">
+                        <button onclick="loginWithDiscord()" class="bg-[#5865F2] hover:bg-[#4752C4] text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 shadow-lg shadow-[#5865F2]/30">
+                            <i class="fa-brands fa-discord text-base"></i>
+                            <span>Đăng Nhập Discord</span>
+                        </button>
+                    </div>
                 </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-emerald-500/20 px-4 pt-3 pb-6 space-y-3 text-sm font-semibold">
+            <a href="index.html" class="block text-gray-300 hover:text-emerald-400 py-2">Trang Chủ</a>
+            <a href="media.html" class="block text-gray-300 hover:text-emerald-400 py-2">Media</a>
+            <a href="https://discord.zennez.net" target="_blank" class="block text-gray-300 hover:text-emerald-400 py-2">Cộng Đồng Discord</a>
+            <a href="luatchoi.html" class="block text-emerald-400 py-2">Luật Chơi</a>
+            <a href="index.html#store" class="block text-brand-gold py-2">Ủng Hộ</a>
+            
+            <div id="auth-section-mobile" class="pt-2">
+                <button onclick="loginWithDiscord()" class="w-full bg-[#5865F2] hover:bg-[#4752C4] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-discord text-base"></i>
+                    <span>Đăng Nhập Discord</span>
+                </button>
             </div>
         </div>
     </header>
@@ -154,7 +179,6 @@
                 Vui lòng đọc kỹ và nghiêm túc tuân thủ để xây dựng môi trường ZennezMC công bằng, văn minh và vui vẻ.
             </p>
 
-            <!-- Tab chuyển đổi Luật Game & Luật Discord -->
             <div class="flex items-center justify-center gap-3 mt-8">
                 <button onclick="switchRuleTab('mc')" id="btn-tab-mc" class="px-6 py-2.5 rounded-xl bg-emerald-500 text-black font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/30 transition-all">
                     <i class="fa-solid fa-cube"></i>
@@ -174,15 +198,12 @@
             
             <!-- TAB 1: LUẬT SERVER MINECRAFT -->
             <div id="tab-mc" class="space-y-6">
-                
                 <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
                     <div class="flex items-start gap-4">
                         <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 border border-red-500/30 flex items-center justify-center text-lg font-bold shrink-0">1</div>
                         <div class="space-y-1">
                             <h3 class="text-base sm:text-lg font-bold text-white">Hack / Cheat / Mod / Phần Mềm Ngoài</h3>
-                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                                • Không sử dụng các phần mềm hack / cheat / mod hay các phần mềm tạo thế lợi cho bản thân.
-                            </p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không sử dụng các phần mềm hack / cheat / mod hay các phần mềm tạo thế lợi cho bản thân.</p>
                         </div>
                     </div>
                 </div>
@@ -194,7 +215,7 @@
                             <h3 class="text-base sm:text-lg font-bold text-white">Lợi Dụng Bug / Duplication</h3>
                             <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không lợi dụng và khai thác các lỗi bug trong game để trục lợi.</p>
                             <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không lợi dụng và khai thác các lỗi hệ thống, lỗi plugin, v.v.</p>
-                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không dùng các trick / thủ thuật để nhân bản (dupe) đồ.</p>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">• Không dùng các trick / thủ thuật để nhân bản đồ.</p>
                         </div>
                     </div>
                 </div>
@@ -251,21 +272,19 @@
                         <h3 class="text-lg sm:text-xl font-black text-brand-gold uppercase tracking-wider">LUẬT DÀNH CHO STAFF</h3>
                     </div>
                     <ul class="space-y-2 text-xs sm:text-sm text-gray-200">
-                        <li class="flex items-start gap-2">• Lạm quyền (give đồ, hồi sinh đồ trái phép, v.v).</li>
-                        <li class="flex items-start gap-2">• Teleport theo dõi người chơi để lấy lợi thế.</li>
-                        <li class="flex items-start gap-2">• Thiên vị bạn bè / bỏ qua luật vì quen biết.</li>
-                        <li class="flex items-start gap-2">• Dùng quyền lực đe doạ người chơi.</li>
+                        <li>• Lạm quyền (give đồ, hồi sinh đồ trái phép, v.v).</li>
+                        <li>• Teleport theo dõi người chơi để lấy lợi thế.</li>
+                        <li>• Thiên vị bạn bè / bỏ qua luật vì quen biết.</li>
+                        <li>• Dùng quyền lực đe doạ người chơi.</li>
                     </ul>
                     <div class="mt-4 pt-4 border-t border-brand-gold/20 text-xs font-bold text-brand-gold">
                         * Các hành vi vi phạm sẽ xử phạt tuỳ mức độ.
                     </div>
                 </div>
-
             </div>
 
             <!-- TAB 2: LUẬT SERVER DISCORD -->
             <div id="tab-discord" class="hidden space-y-6">
-                
                 <div class="tilt-card glass-panel p-6 sm:p-7 rounded-3xl border border-emerald-500/30">
                     <div class="flex items-start gap-4">
                         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-lg font-bold shrink-0">1</div>
@@ -342,7 +361,6 @@
                     </div>
                 </div>
 
-                <!-- KHUNG XỬ LÝ VI PHẠM DISCORD -->
                 <div class="glass-panel-glow p-6 sm:p-8 rounded-3xl border-2 border-[#5865F2]/50 mt-8">
                     <div class="flex items-center gap-3 mb-4">
                         <i class="fa-brands fa-discord text-[#5865F2] text-2xl"></i>
@@ -357,18 +375,17 @@
                         * Staff sẽ xử lý tuỳ mức độ vi phạm.
                     </div>
                 </div>
-
             </div>
 
         </div>
     </section>
 
-    <!-- FOOTER MINE RUA STYLE -->
+    <!-- Footer MineRua Style -->
     <footer class="relative z-10 bg-[#040805] border-t border-emerald-500/20 pt-16 pb-8 text-gray-400">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-4xl mx-auto mb-16 pb-12 border-b border-emerald-500/10">
                 <p class="text-xs sm:text-sm leading-relaxed text-gray-400">
-                    Máy chủ Minecraft Việt Nam ZennezMC (<span class="text-emerald-400 font-semibold">play.zennez.net</span>) cung cấp trải nghiệm Survival ECO, Dungeon Boss Cổ Đại, Vũ Khí Huyền Thoại 3D và thế giới Động Vật mới lạ.
+                    Máy chủ Minecraft Việt Nam ZennezMC (<span class="text-emerald-400 font-semibold">play.zennez.net</span>) – Nơi bắt đầu hành trình sinh tồn văn minh và công bằng.
                 </p>
             </div>
 
@@ -386,7 +403,7 @@
                     <h4 class="text-xs font-bold text-white uppercase tracking-wider">LIÊN KẾT</h4>
                     <ul class="space-y-2 text-xs">
                         <li><a href="index.html" class="hover:text-emerald-400 transition-colors">Trang Chủ</a></li>
-                        <li><a href="media.html" class="hover:text-emerald-400 transition-colors">Media & Video</a></li>
+                        <li><a href="media.html" class="hover:text-emerald-400 transition-colors">Media</a></li>
                         <li><a href="index.html#store" class="hover:text-emerald-400 transition-colors">Cửa Hàng Rank</a></li>
                         <li><a href="luatchoi.html" class="hover:text-emerald-400 transition-colors">Luật Chơi</a></li>
                     </ul>
@@ -420,7 +437,89 @@
         </div>
     </footer>
 
+    <!-- MODAL TÀI KHOẢN -->
+    <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="glass-panel-glow p-6 sm:p-8 rounded-3xl max-w-md w-full mx-4 border border-emerald-500/40 relative">
+            <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex items-center gap-4 border-b border-emerald-500/20 pb-5 mb-5">
+                <img id="user-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" class="w-14 h-14 rounded-2xl border-2 border-[#5865F2]" alt="Avatar">
+                <div class="flex-1">
+                    <h3 id="user-discord-name" class="text-base font-bold text-white">Discord User</h3>
+                    <p id="user-discord-id" class="text-xs text-gray-400">ID: ...</p>
+                    <span id="link-badge" class="inline-flex items-center gap-1.5 mt-1 text-xs font-bold px-2.5 py-0.5 rounded-full bg-red-500/20 text-red-400 border border-red-500/30">
+                        <i class="fa-solid fa-circle-xmark"></i> Chưa liên kết
+                    </span>
+                </div>
+            </div>
+
+            <!-- View 1: ĐÃ LIÊN KẾT -->
+            <div id="linked-view" class="hidden space-y-4">
+                <div class="glass-panel p-4 rounded-2xl space-y-3 border border-emerald-500/40">
+                    <div class="flex items-center gap-4">
+                        <img id="mc-avatar" src="https://mc-heads.net/avatar/Steve" class="w-12 h-12 rounded-xl border border-emerald-400" alt="Skin">
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-400">Nhân vật:</span>
+                                <span id="mc-name" class="text-base font-extrabold text-emerald-400">Steve</span>
+                            </div>
+                            <div class="flex justify-between items-center mt-1.5">
+                                <span class="text-xs text-gray-400">Hạng:</span>
+                                <span id="mc-rank" class="text-xs font-bold px-2.5 py-0.5 rounded border">Member</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 pt-2 border-t border-white/10 text-xs">
+                        <div class="bg-black/50 p-2.5 rounded-xl flex items-center justify-between border border-white/5">
+                            <span class="text-gray-400"><i class="fa-solid fa-coins text-emerald-400 mr-1"></i> Eco:</span>
+                            <span id="mc-money" class="font-bold text-emerald-400">0 $</span>
+                        </div>
+                        <div class="bg-black/50 p-2.5 rounded-xl flex items-center justify-between border border-white/5">
+                            <span class="text-gray-400"><i class="fa-solid fa-gem text-brand-gold mr-1"></i> Xu:</span>
+                            <span id="mc-points" class="font-bold text-brand-gold">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="unlinkMinecraft()" id="btn-unlink" class="w-full py-2.5 rounded-xl bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-link-slash"></i> Hủy liên kết (Web & Discord)
+                </button>
+            </div>
+
+            <!-- View 2: CHƯA LIÊN KẾT -->
+            <div id="unlinked-view" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 mb-1">Tên nhân vật In-game</label>
+                    <input type="text" id="link-mc-username" placeholder="Ví dụ: KienChua17" class="w-full bg-black/60 border border-emerald-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 mb-1">Mật khẩu In-game (nLogin)</label>
+                    <input type="password" id="link-mc-password" placeholder="Mật khẩu /login trong server..." class="w-full bg-black/60 border border-emerald-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                </div>
+
+                <div id="link-error" class="text-xs text-red-400 hidden bg-red-500/10 p-2.5 rounded-xl border border-red-500/20"></div>
+
+                <button onclick="submitLinkAccount()" id="btn-link-submit" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs transition-all shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-check"></i> Xác Thực & Liên Kết
+                </button>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs">
+                <button onclick="logoutDiscord()" class="text-gray-400 hover:text-red-400 font-semibold transition-colors">Đăng xuất Discord</button>
+                <button onclick="closeProfileModal()" class="text-gray-400 hover:text-white">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT AUTH & HIỆU ỨNG -->
     <script>
+        const API_BASE = "https://api.zennez.net";
+        let currentUser = null;
+
         const cursorSpotlight = document.getElementById('cursor-spotlight');
         window.addEventListener('mousemove', (e) => {
             cursorSpotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
@@ -451,7 +550,6 @@
             alert("Đã sao chép IP: play.zennez.net");
         }
 
-        // Chuyển Tab Luật Minecraft / Discord
         function switchRuleTab(tab) {
             const btnMc = document.getElementById('btn-tab-mc');
             const btnDc = document.getElementById('btn-tab-discord');
@@ -470,6 +568,177 @@
                 tabMc.classList.add('hidden');
             }
         }
+
+        // Logic Đăng Nhập Discord & Check Auth
+        function loginWithDiscord() {
+            window.location.href = `${API_BASE}/auth/discord`;
+        }
+
+        function applyRankColor(rank) {
+            const el = document.getElementById('mc-rank');
+            el.innerText = rank || 'Member';
+            const r = (rank || '').toLowerCase();
+            if (r === 'god') {
+                el.className = "text-xs font-bold text-amber-300 bg-amber-500/20 px-2.5 py-0.5 rounded border border-amber-500/40";
+            } else if (r === 'paladin') {
+                el.className = "text-xs font-bold text-yellow-300 bg-yellow-500/20 px-2.5 py-0.5 rounded border border-yellow-500/40";
+            } else if (r === 'templar') {
+                el.className = "text-xs font-bold text-red-400 bg-red-500/20 px-2.5 py-0.5 rounded border border-red-500/40";
+            } else if (r === 'knight') {
+                el.className = "text-xs font-bold text-emerald-400 bg-emerald-500/20 px-2.5 py-0.5 rounded border border-emerald-500/40";
+            } else {
+                el.className = "text-xs font-bold text-gray-300 bg-white/10 px-2.5 py-0.5 rounded border border-white/20";
+            }
+        }
+
+        async function checkAuth() {
+            const token = localStorage.getItem('zennez_token');
+            const authSection = document.getElementById('auth-section');
+            const authSectionMobile = document.getElementById('auth-section-mobile');
+
+            if (!token) {
+                currentUser = null;
+                const defaultBtn = `
+                    <button onclick="loginWithDiscord()" class="bg-[#5865F2] hover:bg-[#4752C4] text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 shadow-lg shadow-[#5865F2]/30">
+                        <i class="fa-brands fa-discord text-base"></i>
+                        <span>Đăng Nhập Discord</span>
+                    </button>
+                `;
+                authSection.innerHTML = defaultBtn;
+                authSectionMobile.innerHTML = defaultBtn;
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/api/user/me`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) throw new Error(data.error);
+
+                currentUser = data;
+
+                const userHtml = `
+                    <div onclick="openProfileModal()" class="flex items-center gap-2.5 cursor-pointer glass-panel px-3.5 py-1.5 rounded-xl border border-emerald-500/50 hover:border-emerald-400 transition-all">
+                        <img src="${data.discord.avatar}" class="w-7 h-7 rounded-full border border-emerald-400" alt="Avatar">
+                        <span class="text-xs font-bold text-white">${data.discord.username}</span>
+                    </div>
+                `;
+                authSection.innerHTML = userHtml;
+                authSectionMobile.innerHTML = userHtml;
+
+                document.getElementById('user-avatar').src = data.discord.avatar;
+                document.getElementById('user-discord-name').innerText = data.discord.username;
+                document.getElementById('user-discord-id').innerText = `ID: ${data.discord.id}`;
+
+                if (data.minecraft && data.minecraft.linked) {
+                    document.getElementById('link-badge').className = "inline-flex items-center gap-1.5 mt-1 text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+                    document.getElementById('link-badge').innerHTML = '<i class="fa-solid fa-circle-check"></i> Đã liên kết';
+                    
+                    document.getElementById('mc-avatar').src = `https://mc-heads.net/avatar/${data.minecraft.username}`;
+                    document.getElementById('mc-name').innerText = data.minecraft.username;
+                    document.getElementById('mc-money').innerText = data.minecraft.money || "0 $";
+                    document.getElementById('mc-points').innerText = data.minecraft.points || 0;
+                    applyRankColor(data.minecraft.rank);
+
+                    document.getElementById('linked-view').classList.remove('hidden');
+                    document.getElementById('unlinked-view').classList.add('hidden');
+                } else {
+                    document.getElementById('link-badge').className = "inline-flex items-center gap-1.5 mt-1 text-xs font-bold px-2.5 py-0.5 rounded-full bg-red-500/20 text-red-400 border border-red-500/30";
+                    document.getElementById('link-badge').innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Chưa liên kết';
+                    
+                    document.getElementById('linked-view').classList.add('hidden');
+                    document.getElementById('unlinked-view').classList.remove('hidden');
+                }
+            } catch (e) {
+                localStorage.removeItem('zennez_token');
+                checkAuth();
+            }
+        }
+        checkAuth();
+
+        function openProfileModal() {
+            const m = document.getElementById('profile-modal');
+            m.classList.remove('hidden');
+            setTimeout(() => m.classList.remove('opacity-0'), 10);
+        }
+
+        function closeProfileModal() {
+            const m = document.getElementById('profile-modal');
+            m.classList.add('opacity-0');
+            setTimeout(() => m.classList.add('hidden'), 300);
+        }
+
+        async function submitLinkAccount() {
+            const token = localStorage.getItem('zennez_token');
+            const username = document.getElementById('link-mc-username').value.trim();
+            const password = document.getElementById('link-mc-password').value;
+            const errBox = document.getElementById('link-error');
+            const btn = document.getElementById('btn-link-submit');
+
+            errBox.classList.add('hidden');
+            if (!username || !password) {
+                errBox.innerText = "Vui lòng nhập đầy đủ tài khoản và mật khẩu!";
+                errBox.classList.remove('hidden');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Đang xác thực...`;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/user/link-minecraft`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) throw new Error(data.error || "Liên kết thất bại!");
+
+                alert(`Đã liên kết thành công với nhân vật: ${data.player_name}!`);
+                document.getElementById('link-mc-password').value = "";
+                checkAuth();
+            } catch (err) {
+                errBox.innerText = err.message;
+                errBox.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> Xác Thực & Liên Kết`;
+            }
+        }
+
+        async function unlinkMinecraft() {
+            if (!confirm("Bạn có chắc chắn muốn hủy liên kết tài khoản? Trạng thái liên kết trên Bot Discord và Game cũng sẽ được hủy ngay lập tức!")) return;
+            const token = localStorage.getItem('zennez_token');
+            const btn = document.getElementById('btn-unlink');
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/user/unlink-minecraft`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) throw new Error(data.error);
+
+                alert("Đã hủy liên kết thành công trên cả Web và Bot Discord!");
+                checkAuth();
+            } catch (err) {
+                alert("Lỗi: " + err.message);
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        function logoutDiscord() {
+            localStorage.removeItem('zennez_token');
+            closeProfileModal();
+            checkAuth();
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
     </script>
 </body>
 </html>
