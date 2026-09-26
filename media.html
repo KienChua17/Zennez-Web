@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Media & Video - ZennezMC</title>
     
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -12,7 +13,21 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { gold: '#fbbf24' }
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b',
+                            950: '#022c22'
+                        },
+                        brand: {
+                            dark: '#030705',
+                            card: '#07110c',
+                            border: '#0f291c',
+                            gold: '#fbbf24',
+                            cyan: '#38bdf8'
+                        }
                     },
                     fontFamily: {
                         sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
@@ -23,32 +38,35 @@
         }
     </script>
     
+    <!-- Google Fonts: Plus Jakarta Sans & Silkscreen -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Silkscreen:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- KHAI BÁO BIẾN MÀU THEME --- */
-        :root {
-            --bg: #050b07;
-            --bg2: rgba(10, 20, 14, 0.75);
-            --bg3: rgba(10, 20, 14, 0.85);
-            --text: #ecfdf5;
-            --text2: #9ca3af;
-            --accent: #34d399;
-            --border: rgba(16, 185, 129, 0.18);
+        /* --- MÀU GỐC CHUẨN MINERUA (Tối sâu thẳm, xanh lá đậm tinh tế) --- */
+        :root, body.theme-default {
+            --bg: #030705;
+            --bg2: rgba(7, 17, 12, 0.85);
+            --bg3: rgba(10, 24, 17, 0.9);
+            --text: #e2fce8;
+            --text2: #8fa89b;
+            --accent: #22c55e;
+            --accent-hover: #16a34a;
+            --border: rgba(34, 197, 94, 0.15);
+            --border-glow: rgba(34, 197, 94, 0.3);
         }
 
-        /* --- CÁC THEME GIAO DIỆN --- */
-        body.theme-royal { --bg: #FAF7EE; --bg2: rgba(255,255,255,0.7); --bg3: rgba(255,255,255,0.9); --text: #2A2410; --text2: #5E5430; --accent: #B8860B; --border: rgba(184,134,11,0.3); }
-        body.theme-obsidian { --bg: #0A0712; --bg2: rgba(29,19,51,0.75); --bg3: rgba(29,19,51,0.9); --text: #EDE6FA; --text2: #B5A3D9; --accent: #9B5CF0; --border: rgba(155,92,240,0.3); }
-        body.theme-sky { --bg: #EFF8FF; --bg2: rgba(255,255,255,0.75); --bg3: rgba(255,255,255,0.9); --text: #112B40; --text2: #3E6A88; --accent: #1E9FE0; --border: rgba(30,159,224,0.3); }
-        body.theme-ocean { --bg: #06222F; --bg2: rgba(15,63,82,0.75); --bg3: rgba(15,63,82,0.9); --text: #E3F6F7; --text2: #9FCFD8; --accent: #18B7AA; --border: rgba(24,183,170,0.3); }
-        body.theme-hell { --bg: #160605; --bg2: rgba(39,11,8,0.75); --bg3: rgba(39,11,8,0.9); --text: #FFEDE2; --text2: #E8A98C; --accent: #E0402A; --border: rgba(224,64,42,0.3); }
-        body.theme-galaxy { --bg: #0A0A1A; --bg2: rgba(28,24,64,0.75); --bg3: rgba(28,24,64,0.9); --text: #F0EEFF; --text2: #B8AEE0; --accent: #7B5EE8; --border: rgba(123,94,232,0.3); }
-        body.theme-dream { --bg: #FBF3FA; --bg2: rgba(255,255,255,0.75); --bg3: rgba(255,255,255,0.9); --text: #3A2E45; --text2: #7A6584; --accent: #C77DD6; --border: rgba(199,125,214,0.3); }
-        body.theme-hacker { --bg: #050805; --bg2: rgba(10,15,10,0.75); --bg3: rgba(10,15,10,0.9); --text: #C8FFD4; --text2: #7FE89A; --accent: #00FF66; --border: rgba(0,255,102,0.3); }
+        /* --- CÁC THEME GIAO DIỆN KHÁC --- */
+        body.theme-royal { --bg: #FAF7EE; --bg2: rgba(255,255,255,0.7); --bg3: rgba(255,255,255,0.9); --text: #2A2410; --text2: #5E5430; --accent: #B8860B; --accent-hover: #D4AF37; --border: rgba(184,134,11,0.2); --border-glow: rgba(184,134,11,0.4); }
+        body.theme-obsidian { --bg: #0A0712; --bg2: rgba(29,19,51,0.75); --bg3: rgba(29,19,51,0.9); --text: #EDE6FA; --text2: #B5A3D9; --accent: #9B5CF0; --accent-hover: #C792EA; --border: rgba(155,92,240,0.2); --border-glow: rgba(155,92,240,0.4); }
+        body.theme-sky { --bg: #EFF8FF; --bg2: rgba(255,255,255,0.75); --bg3: rgba(255,255,255,0.9); --text: #112B40; --text2: #3E6A88; --accent: #1E9FE0; --accent-hover: #5BC9D8; --border: rgba(30,159,224,0.2); --border-glow: rgba(30,159,224,0.4); }
+        body.theme-ocean { --bg: #06222F; --bg2: rgba(15,63,82,0.75); --bg3: rgba(15,63,82,0.9); --text: #E3F6F7; --text2: #9FCFD8; --accent: #18B7AA; --accent-hover: #4FE8D4; --border: rgba(24,183,170,0.2); --border-glow: rgba(24,183,170,0.4); }
+        body.theme-hell { --bg: #160605; --bg2: rgba(39,11,8,0.75); --bg3: rgba(39,11,8,0.9); --text: #FFEDE2; --text2: #E8A98C; --accent: #E0402A; --accent-hover: #FF8C30; --border: rgba(224,64,42,0.2); --border-glow: rgba(224,64,42,0.4); }
+        body.theme-galaxy { --bg: #0A0A1A; --bg2: rgba(28,24,64,0.75); --bg3: rgba(28,24,64,0.9); --text: #F0EEFF; --text2: #B8AEE0; --accent: #7B5EE8; --accent-hover: #C8C2FF; --border: rgba(123,94,232,0.2); --border-glow: rgba(123,94,232,0.4); }
+        body.theme-dream { --bg: #FBF3FA; --bg2: rgba(255,255,255,0.75); --bg3: rgba(255,255,255,0.9); --text: #3A2E45; --text2: #7A6584; --accent: #C77DD6; --accent-hover: #9B8CF0; --border: rgba(199,125,214,0.2); --border-glow: rgba(199,125,214,0.4); }
+        body.theme-hacker { --bg: #050805; --bg2: rgba(10,15,10,0.75); --bg3: rgba(10,15,10,0.9); --text: #C8FFD4; --text2: #7FE89A; --accent: #00FF66; --accent-hover: #00CC55; --border: rgba(0,255,102,0.2); --border-glow: rgba(0,255,102,0.4); }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -56,17 +74,17 @@
             color: var(--text);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 15%, var(--border) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, var(--border) 0%, transparent 45%);
+                radial-gradient(circle at 15% 15%, rgba(34, 197, 94, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(22, 101, 52, 0.05) 0%, transparent 45%);
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Helpers tự động nhận màu theo theme */
         .text-main { color: var(--text) !important; }
         .text-muted { color: var(--text2) !important; }
         .text-accent { color: var(--accent) !important; }
         .bg-accent { background-color: var(--accent) !important; }
-        .border-accent { border-color: var(--accent) !important; }
+        .bg-accent-hover:hover { background-color: var(--accent-hover) !important; }
+        .border-accent { border-color: var(--border-glow) !important; }
         .hover-text-accent:hover { color: var(--accent) !important; }
         .hover-border-accent:hover { border-color: var(--accent) !important; }
 
@@ -75,26 +93,27 @@
         #cursor-spotlight {
             pointer-events: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999;
             background: radial-gradient(650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--border), transparent 80%);
+            transition: opacity 0.3s ease;
         }
 
         .glass-panel {
-            background: var(--bg2);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
+            background: var(--bg2); backdrop-filter: blur(16px); border: 1px solid var(--border); transition: all 0.3s ease;
         }
         .glass-panel-glow {
-            background: var(--bg3);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--accent);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px var(--border);
-            transition: all 0.3s ease;
+            background: var(--bg3); backdrop-filter: blur(20px); border: 1px solid var(--border-glow);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9), 0 0 20px var(--border); transition: all 0.3s ease;
         }
+
         .tilt-card {
             transform-style: preserve-3d; perspective: 1000px;
             transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .tilt-card:hover { border-color: var(--accent); box-shadow: 0 15px 35px -10px var(--border); }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border-glow); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
         /* --- CSS CHO MENU THEME --- */
         .theme-toggle-btn {
@@ -111,14 +130,13 @@
         .theme-menu {
             position: fixed; left: 18px; bottom: 64px; z-index: 6000; width: 270px; max-height: 70vh; overflow-y: auto;
             background: var(--bg); border: 1px solid var(--border); border-radius: 18px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); padding: 14px; display: none; color: var(--text);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); padding: 14px; display: none; color: var(--text); transition: all 0.3s ease;
         }
         .theme-menu.open { display: block; }
         .theme-menu-title { font-size: 11px; font-weight: bold; color: var(--text2); margin-bottom: 10px; }
         .mode-switch { display: flex; gap: 4px; background: var(--bg2); padding: 4px; border-radius: 12px; margin-bottom: 12px; }
         .mode-option { flex: 1; padding: 6px; font-size: 12px; border-radius: 8px; cursor: pointer; text-align: center; color: var(--text2); border: none; background: transparent;}
-        .mode-option.active { background: var(--accent); color: var(--bg); font-weight: bold; }
+        .mode-option.active { background: var(--accent); color: #030705; font-weight: bold; }
         .theme-menu-sep { height: 1px; background: var(--border); margin: 12px 0; }
         .theme-option { display: flex; align-items: center; gap: 11px; padding: 10px; margin-bottom: 6px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; background: var(--bg2); transition: all 0.2s;}
         .theme-option.active { border-color: var(--accent); background: var(--bg3); }
@@ -133,15 +151,18 @@
     <div id="cursor-spotlight"></div>
 
     <!-- Header Navigation -->
-    <header class="sticky top-0 z-50 glass-panel border-b">
+    <header class="sticky top-0 z-50 glass-panel border-b border-accent">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <!-- ĐÃ THAY LOGO -->
+                
                 <a href="index.html" class="flex items-center space-x-3 cursor-pointer">
-                    <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1550524114446454804/Khong_Co_Tieu_e5_20260918210904.png?ex=6ab888dc&is=6ab7375c&hm=fc44632a58b129e6c8f87674d74d969ff1f1e8900e7f0d3b3369985fbda248cf&" alt="ZennezMC Logo" class="h-12 w-auto rounded-lg">
+                    <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1550524114446454804/Khong_Co_Tieu_e5_20260918210904.png?ex=6ab888dc&is=6ab7375c&hm=fc44632a58b129e6c8f87674d74d969ff1f1e8900e7f0d3b3369985fbda248cf&" alt="ZennezMC Logo" class="h-12 w-auto rounded-lg border border-accent">
+                    <div>
+                        <span class="text-xl font-black font-pixel tracking-wider text-main">ZENNEZ<span class="text-accent">MC</span></span>
+                        <span class="block text-[10px] tracking-widest text-accent font-bold uppercase">SURVIVAL ECO 1.21.X</span>
+                    </div>
                 </a>
 
-                <!-- ĐÃ SỬA MENU -->
                 <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold tracking-wide">
                     <a href="index.html" class="text-muted hover-text-accent transition-colors flex items-center space-x-1.5">
                         <i class="fa-solid fa-house text-xs text-accent"></i>
@@ -152,12 +173,16 @@
                         <span>Media</span>
                     </a>
                     <a href="https://discord.zennez.net" target="_blank" class="text-muted hover-text-accent transition-colors flex items-center space-x-1.5">
-                        <i class="fa-solid fa-users text-xs text-accent"></i>
+                        <i class="fa-brands fa-discord text-xs text-[#5865F2]"></i>
                         <span>Cộng Đồng</span>
                     </a>
                     <a href="luatchoi.html" class="text-muted hover-text-accent transition-colors flex items-center space-x-1.5">
                         <i class="fa-solid fa-scale-balanced text-xs text-accent"></i>
                         <span>Luật Chơi</span>
+                    </a>
+                    <a href="index.html#store" class="text-muted hover:text-brand-gold transition-colors flex items-center space-x-1.5">
+                        <i class="fa-solid fa-crown text-xs text-brand-gold"></i>
+                        <span>Ủng Hộ</span>
                     </a>
                 </nav>
 
@@ -176,18 +201,19 @@
                 </div>
 
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-muted hover-text-accent p-2">
+                    <button id="mobile-menu-btn" class="text-muted hover-text-main p-2">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t px-4 pt-3 pb-6 space-y-3 text-sm font-semibold">
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-accent px-4 pt-3 pb-6 space-y-3 text-sm font-semibold">
             <a href="index.html" class="block text-muted hover-text-accent py-2">Trang Chủ</a>
             <a href="media.html" class="block text-accent py-2">Media</a>
             <a href="https://discord.zennez.net" target="_blank" class="block text-muted hover-text-accent py-2">Cộng Đồng</a>
             <a href="luatchoi.html" class="block text-muted hover-text-accent py-2">Luật Chơi</a>
+            <a href="index.html#store" class="block text-brand-gold py-2">Ủng Hộ / Cửa Hàng</a>
             
             <div id="auth-section-mobile" class="pt-2">
                 <button onclick="loginWithDiscord()" class="w-full bg-[#5865F2] hover:bg-[#4752C4] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
@@ -195,6 +221,11 @@
                     <span>Đăng Nhập Discord</span>
                 </button>
             </div>
+            
+            <button onclick="copyServerIP()" class="w-full bg-white/5 border border-accent text-accent py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 mt-2">
+                <i class="fa-regular fa-copy"></i>
+                <span>Copy IP: play.zennez.net</span>
+            </button>
         </div>
     </header>
 
@@ -255,7 +286,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-16">
                 <div class="lg:col-span-4 space-y-4">
                     <div class="flex items-center space-x-2">
-                        <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1550524114446454804/Khong_Co_Tieu_e5_20260918210904.png?ex=6ab888dc&is=6ab7375c&hm=fc44632a58b129e6c8f87674d74d969ff1f1e8900e7f0d3b3369985fbda248cf&" alt="Logo" class="h-10 w-auto rounded">
+                        <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1550524114446454804/Khong_Co_Tieu_e5_20260918210904.png?ex=6ab888dc&is=6ab7375c&hm=fc44632a58b129e6c8f87674d74d969ff1f1e8900e7f0d3b3369985fbda248cf&" alt="Logo" class="h-10 w-auto rounded border border-accent">
                     </div>
                     <p class="text-xs leading-relaxed text-muted pr-4">
                         Máy chủ Minecraft Việt Nam hàng đầu – Survival ECO 1.21.x. Hỗ trợ đầy đủ PC Java & Mobile Bedrock.
@@ -267,6 +298,7 @@
                     <ul class="space-y-2 text-xs">
                         <li><a href="index.html" class="hover-text-accent transition-colors">Trang Chủ</a></li>
                         <li><a href="media.html" class="hover-text-accent transition-colors">Media</a></li>
+                        <li><a href="index.html#store" class="hover-text-accent transition-colors">Cửa Hàng Rank</a></li>
                         <li><a href="luatchoi.html" class="hover-text-accent transition-colors">Luật Chơi</a></li>
                     </ul>
                 </div>
@@ -299,6 +331,17 @@
         </div>
     </footer>
 
+    <!-- COPY IP TOAST -->
+    <div id="copy-toast" class="fixed bottom-8 right-8 z-50 transform translate-y-32 opacity-0 transition-all duration-300 ease-out pointer-events-none">
+        <div class="glass-panel-glow px-6 py-4 rounded-2xl flex items-center gap-3 border-2 border-accent text-main shadow-2xl">
+            <i class="fa-solid fa-circle-check text-accent text-xl"></i>
+            <div>
+                <p class="font-extrabold text-xs text-accent">ĐÃ SAO CHÉP IP!</p>
+                <p class="text-xs text-muted">Đã lưu <span class="text-main font-bold">play.zennez.net</span> vào bộ nhớ tạm.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- THEME CHANGER UI -->
     <button class="theme-toggle-btn" onclick="toggleThemeMenu()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path><path d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2v10h10z"></path></svg>
@@ -318,10 +361,10 @@
         <div class="theme-menu-title">CHỌN THEME</div>
         <div id="themeList">
             <div class="theme-option active" data-theme="" onclick="setTheme('', this)">
-                <div class="theme-option-swatch" style="background: linear-gradient(135deg,#3D5FE0,#0098C9);"></div>
+                <div class="theme-option-swatch" style="background: #22c55e;"></div>
                 <div class="theme-option-text">
                     <div class="theme-option-name">Mặc định</div>
-                    <div class="theme-option-desc">Theme gốc</div>
+                    <div class="theme-option-desc">Theme gốc ZennezMC</div>
                 </div>
             </div>
             <div class="theme-option" data-theme="theme-royal" onclick="setTheme('theme-royal', this)">
@@ -375,7 +418,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT AUTH & THEME & HIỆU ỨNG -->
+    <!-- JAVASCRIPT -->
     <script>
         const API_BASE = "https://api.zennez.net";
         let currentUser = null;
@@ -400,7 +443,21 @@
 
         function copyServerIP() {
             navigator.clipboard.writeText("play.zennez.net");
-            alert("Đã sao chép IP: play.zennez.net");
+            const toast = document.getElementById('copy-toast');
+            if(toast) {
+                toast.classList.remove('translate-y-32', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('translate-y-32', 'opacity-0');
+                }, 3000);
+            } else {
+                alert("Đã sao chép IP: play.zennez.net");
+            }
+        }
+
+        function loginWithDiscord() {
+            window.location.href = `${API_BASE}/auth/discord`;
         }
 
         document.getElementById('mobile-menu-btn').addEventListener('click', () => {
@@ -442,13 +499,26 @@
             var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
             if (mode === 'dark' || (mode === 'system' && sysDark)) {
                 document.documentElement.classList.add('dark');
-                // Ép thêm fallback cho biến css nếu cần
-                document.documentElement.style.setProperty('--bg', '#050b07');
-                document.documentElement.style.setProperty('--text', '#ecfdf5');
+                document.documentElement.style.setProperty('--bg', '#030705');
+                document.documentElement.style.setProperty('--bg2', 'rgba(7, 17, 12, 0.85)');
+                document.documentElement.style.setProperty('--bg3', 'rgba(10, 24, 17, 0.9)');
+                document.documentElement.style.setProperty('--text', '#e2fce8');
+                document.documentElement.style.setProperty('--text2', '#8fa89b');
+                document.documentElement.style.setProperty('--accent', '#22c55e');
+                document.documentElement.style.setProperty('--accent-hover', '#16a34a');
+                document.documentElement.style.setProperty('--border', 'rgba(34, 197, 94, 0.15)');
+                document.documentElement.style.setProperty('--border-glow', 'rgba(34, 197, 94, 0.3)');
             } else {
                 document.documentElement.classList.remove('dark');
                 document.documentElement.style.setProperty('--bg', '#f4f4f5');
+                document.documentElement.style.setProperty('--bg2', 'rgba(255, 255, 255, 0.75)');
+                document.documentElement.style.setProperty('--bg3', 'rgba(255, 255, 255, 0.9)');
                 document.documentElement.style.setProperty('--text', '#18181b');
+                document.documentElement.style.setProperty('--text2', '#52525b');
+                document.documentElement.style.setProperty('--accent', '#16a34a');
+                document.documentElement.style.setProperty('--accent-hover', '#15803d');
+                document.documentElement.style.setProperty('--border', 'rgba(22, 163, 74, 0.2)');
+                document.documentElement.style.setProperty('--border-glow', 'rgba(22, 163, 74, 0.4)');
             }
         }
 
