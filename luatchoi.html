@@ -1,1 +1,363 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luật Chơi & Quy Định Xử Phạt - ZennezMC</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+                        pixel: ['"Silkscreen"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Silkscreen:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #050b07;
+            color: #ecfdf5;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(5, 150, 105, 0.08) 0%, transparent 45%);
+        }
+        .font-pixel { font-family: 'Silkscreen', monospace; }
+
+        #cursor-spotlight {
+            pointer-events: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 9999;
+            background: radial-gradient(650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(16, 185, 129, 0.12), transparent 80%);
+        }
+
+        .glass-panel {
+            background: rgba(10, 20, 14, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(16, 185, 129, 0.18);
+        }
+        .glass-panel-glow {
+            background: rgba(10, 20, 14, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(16, 185, 129, 0.15);
+        }
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .tilt-card:hover {
+            border-color: rgba(52, 211, 153, 0.7);
+            box-shadow: 0 15px 35px -10px rgba(16, 185, 129, 0.3);
+        }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="relative selection:bg-emerald-500 selection:text-black">
+
+    <div id="cursor-spotlight"></div>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-emerald-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3 cursor-pointer">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center font-black text-2xl text-black shadow-lg shadow-emerald-500/30 font-pixel border border-emerald-300">Z</div>
+                    <div>
+                        <span class="text-xl font-black font-pixel tracking-wider text-white">ZENNEZ<span class="text-emerald-400">MC</span></span>
+                        <span class="block text-[10px] tracking-widest text-emerald-400 font-bold uppercase">SURVIVAL ECO 1.21.X</span>
+                    </div>
+                </a>
+
+                <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold tracking-wide">
+                    <a href="index.html" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-1.5">
+                        <i class="fa-solid fa-house text-xs text-emerald-500"></i>
+                        <span>Trang Chủ</span>
+                    </a>
+                    <a href="media.html" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-1.5">
+                        <i class="fa-solid fa-photo-film text-xs text-emerald-500"></i>
+                        <span>Media</span>
+                    </a>
+                    <a href="https://discord.zennez.net" target="_blank" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-1.5">
+                        <i class="fa-brands fa-discord text-xs text-[#5865F2]"></i>
+                        <span>Cộng Đồng</span>
+                    </a>
+                    <a href="luatchoi.html" class="text-emerald-400 font-bold flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
+                        <i class="fa-solid fa-scale-balanced text-xs"></i>
+                        <span>Luật Chơi</span>
+                    </a>
+                    <a href="index.html#store" class="text-gray-300 hover:text-brand-gold transition-colors flex items-center space-x-1.5">
+                        <i class="fa-solid fa-crown text-xs text-brand-gold"></i>
+                        <span>Ủng Hộ</span>
+                    </a>
+                </nav>
+
+                <div class="hidden lg:flex items-center space-x-4">
+                    <button onclick="copyServerIP()" class="glass-panel hover:bg-emerald-500/10 text-emerald-300 px-4 py-2.5 rounded-xl text-xs font-bold border border-emerald-500/40 hover:border-emerald-400 transition-all flex items-center space-x-2">
+                        <i class="fa-regular fa-copy text-emerald-400"></i>
+                        <span>play.zennez.net</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Section -->
+    <section class="pt-16 pb-12 text-center relative z-10">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-semibold text-emerald-400 mb-4">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>QUY ĐỊNH & ĐIỀU KHOẢN</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-black text-white mb-3">Luật Chơi & Xử Phạt</h1>
+            <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">
+                Vui lòng đọc kỹ và nghiêm túc tuân thủ để xây dựng môi trường ZennezMC công bằng và văn minh.
+            </p>
+        </div>
+    </section>
+
+    <!-- Danh sách điều luật -->
+    <section class="pb-24 relative z-10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            
+            <!-- Điều 1: Hack / Cheat -->
+            <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-red-500/30 reveal-on-scroll">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center text-xl shrink-0 border border-red-500/30">
+                        <i class="fa-solid fa-ban"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-lg sm:text-xl font-bold text-white">Điều 1: Cấm Sử Dụng Hack / Cheat / Client Bất Hợp Pháp</h3>
+                        <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                            Nghiêm cấm mọi hình thức can thiệp client như Killaura, Fly, Speed, Auto-click vượt quy định, X-ray hoặc minimap có radar người chơi. Mọi hành vi vi phạm sẽ bị hệ thống AntiCheat khóa tài khoản vĩnh viễn hoặc xử phạt nặng không cần báo trước.
+                        </p>
+                        <div class="inline-block text-xs font-bold text-red-400 bg-red-500/10 px-3 py-1 rounded-lg border border-red-500/20">
+                            Mức phạt: Khóa tài khoản từ 14 ngày đến Vĩnh Viễn.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Điều 2: Bug & Dupe đồ -->
+            <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-yellow-500/30 reveal-on-scroll">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center text-xl shrink-0 border border-yellow-500/30">
+                        <i class="fa-solid fa-bug"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-lg sm:text-xl font-bold text-white">Điều 2: Lợi Dụng Lỗi Game (Bug, Dupe Đồ)</h3>
+                        <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                            Khi phát hiện lỗi game, người chơi có trách nhiệm báo ngay cho BQT qua Discord Ticket để nhận thưởng. Hành vi cố tình giấu giếm, trục lợi hoặc chia sẻ cách dupe đồ/tiền tệ sẽ bị tịch thu toàn bộ tài sản và xử lý nghiêm khắc.
+                        </p>
+                        <div class="inline-block text-xs font-bold text-yellow-400 bg-yellow-500/10 px-3 py-1 rounded-lg border border-yellow-500/20">
+                            Mức phạt: Xóa toàn bộ tài sản (Wipe) + Ban từ 30 ngày đến Vĩnh Viễn.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Điều 3: Văn hóa giao tiếp -->
+            <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl shrink-0 border border-emerald-500/30">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-lg sm:text-xl font-bold text-white">Điều 3: Quy Định Về Kênh Chat & Văn Hóa Ứng Xử</h3>
+                        <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                            Không spam, chửi bới xúc phạm tôn giáo, phân biệt vùng miền, bôi nhọ danh dự người khác hay xúc phạm BQT. Cấm tuyệt đối hành vi quảng cáo máy chủ khác dưới mọi hình thức.
+                        </p>
+                        <div class="inline-block text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">
+                            Mức phạt: Cảnh cáo $\rightarrow$ Mute chat từ 1h đến 7 ngày $\rightarrow$ Ban nếu tái phạm.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Điều 4: Lừa đảo & Phá hoại Claim -->
+            <div class="tilt-card glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl shrink-0 border border-emerald-500/30">
+                        <i class="fa-solid fa-handshake-slash"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-lg sm:text-xl font-bold text-white">Điều 4: Phá Hoại (Griefing) & Lừa Đảo (Scam)</h3>
+                        <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                            Khu đất đã claim thuộc quyền sở hữu của người chơi. Nghiêm cấm đặt bẫy giết người vô cớ tại các khu vực dịch chuyển an toàn hoặc lợi dụng lòng tin để phá hoại công trình của đồng đội.
+                        </p>
+                        <div class="inline-block text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">
+                            Mức phạt: Rollback công trình + Ban từ 7 ngày đến Vĩnh Viễn.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bảng khung xử phạt tóm tắt -->
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/30 reveal-on-scroll">
+                <h3 class="text-lg font-bold text-white mb-4">Bảng Tóm Tắt Khung Xử Phạt</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-gray-300 border-collapse">
+                        <thead>
+                            <tr class="border-b border-emerald-500/20 text-emerald-400 font-bold uppercase">
+                                <th class="py-3 px-4">Hành Vi Vi Phạm</th>
+                                <th class="py-3 px-4">Lần 1</th>
+                                <th class="py-3 px-4">Lần 2</th>
+                                <th class="py-3 px-4">Lần 3</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            <tr>
+                                <td class="py-3 px-4 font-semibold text-white">Spam / Xúc phạm trên Chat</td>
+                                <td class="py-3 px-4">Cảnh cáo / Mute 1h</td>
+                                <td class="py-3 px-4">Mute 24h</td>
+                                <td class="py-3 px-4 text-red-400">Ban 3 ngày</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-semibold text-white">Quảng cáo server khác</td>
+                                <td class="py-3 px-4 text-red-400">Ban 30 ngày</td>
+                                <td class="py-3 px-4 text-red-400">Ban Vĩnh Viễn</td>
+                                <td class="py-3 px-4 text-red-400">Ban IP</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-semibold text-white">Sử dụng Hack / Cheat / X-ray</td>
+                                <td class="py-3 px-4 text-red-400">Ban 14 ngày</td>
+                                <td class="py-3 px-4 text-red-400">Ban 60 ngày</td>
+                                <td class="py-3 px-4 text-red-400">Ban Vĩnh Viễn</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-semibold text-white">Bug / Dupe đồ vật phẩm</td>
+                                <td class="py-3 px-4 text-red-400">Wipe đồ + Ban 30 ngày</td>
+                                <td class="py-3 px-4 text-red-400">Ban Vĩnh Viễn</td>
+                                <td class="py-3 px-4 text-red-400">Ban IP</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer MineRua Style -->
+    <footer class="relative z-10 bg-[#040805] border-t border-emerald-500/20 pt-16 pb-8 text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto mb-16 pb-12 border-b border-emerald-500/10">
+                <p class="text-xs sm:text-sm leading-relaxed text-gray-400">
+                    Máy chủ Minecraft Việt Nam ZennezMC (<span class="text-emerald-400 font-semibold">play.zennez.net</span>) – Nơi bắt đầu hành trình sinh tồn văn minh và công bằng.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-16">
+                <div class="lg:col-span-4 space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-2xl font-black font-pixel text-white">ZENNEZ<span class="text-emerald-400">MC</span></span>
+                    </div>
+                    <p class="text-xs leading-relaxed text-gray-400 pr-4">
+                        Máy chủ Minecraft Việt Nam hàng đầu – Survival ECO 1.21.x. Hỗ trợ đầy đủ PC Java & Mobile Bedrock.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-3 space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">LIÊN KẾT</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="index.html" class="hover:text-emerald-400 transition-colors">Trang Chủ</a></li>
+                        <li><a href="media.html" class="hover:text-emerald-400 transition-colors">Media & Video</a></li>
+                        <li><a href="index.html#store" class="hover:text-emerald-400 transition-colors">Cửa Hàng Rank</a></li>
+                        <li><a href="luatchoi.html" class="hover:text-emerald-400 transition-colors">Luật Chơi</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-2 space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">HỖ TRỢ</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="luatchoi.html" class="hover:text-emerald-400 transition-colors">Quy Định Xử Phạt</a></li>
+                        <li><a href="https://discord.zennez.net" target="_blank" class="hover:text-emerald-400 transition-colors">Discord Ticket</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3 space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">CỘNG ĐỒNG</h4>
+                    <p class="text-xs leading-relaxed text-gray-400">Tham gia Discord ZennezMC để nhận hỗ trợ 24/7 từ BQT.</p>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-emerald-500/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4">
+                <p>&copy; 2026 ZennezMC Network. Không liên kết với Mojang AB.</p>
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center gap-1.5 text-emerald-400 font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Hệ Thống Hoạt Động
+                    </span>
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-emerald-400 font-bold flex items-center gap-1 transition-colors">
+                        <span>↑ Đầu trang</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const cursorSpotlight = document.getElementById('cursor-spotlight');
+        window.addEventListener('mousemove', (e) => {
+            cursorSpotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
+            cursorSpotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
+        });
+
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                card.style.transform = `perspective(1000px) rotateX(${-y * 0.05}deg) rotateY(${x * 0.05}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('is-revealed');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+        function copyServerIP() {
+            navigator.clipboard.writeText("play.zennez.net");
+            alert("Đã sao chép IP: play.zennez.net");
+        }
+    </script>
+</body>
+</html>
