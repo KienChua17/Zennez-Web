@@ -277,6 +277,7 @@
                 <div class="w-24 h-1 bg-gradient-to-r from-brand-cyan to-brand-purple mx-auto mt-4 rounded-full"></div>
             </div>
 
+            <!-- Tab Buttons -->
             <div class="flex flex-wrap justify-center gap-3 mb-12">
                 <button onclick="switchWikiTab('dungeon')" id="tab-btn-dungeon" class="wiki-tab-btn px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-brand-purple text-white shadow-lg shadow-brand-purple/30 transition-all flex items-center gap-2">
                     <i class="fa-solid fa-dungeon"></i>
@@ -727,7 +728,7 @@
         </div>
     </div>
 
-    <!-- Modal Hồ Sơ & Đồng Bộ nLogin / Discord / Rank -->
+    <!-- Modal Hồ Sơ & Đồng Bộ nLogin / Discord / Rank / Tiền / Xu -->
     <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
         <div class="glass-panel-glow p-6 sm:p-8 rounded-3xl max-w-md w-full mx-4 border border-brand-purple/40 relative">
             <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
@@ -758,22 +759,36 @@
                     <span>Tài khoản Discord này đã liên kết với nhân vật:</span>
                 </div>
 
-                <div class="glass-panel p-4 rounded-2xl flex items-center gap-4 border border-brand-cyan/40">
-                    <img id="mc-avatar" src="https://mc-heads.net/avatar/Steve" class="w-14 h-14 rounded-xl border border-brand-cyan shadow-md" alt="Skin">
-                    <div class="flex-1">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-400">Nhân vật ingame:</span>
-                            <span id="mc-name" class="text-base font-black text-brand-cyan">Steve</span>
+                <div class="glass-panel p-4 rounded-2xl space-y-3 border border-brand-cyan/40">
+                    <div class="flex items-center gap-4">
+                        <img id="mc-avatar" src="https://mc-heads.net/avatar/Steve" class="w-12 h-12 rounded-xl border border-brand-cyan shadow-md" alt="Skin">
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-400">Nhân vật ingame:</span>
+                                <span id="mc-name" class="text-base font-black text-brand-cyan">Steve</span>
+                            </div>
+                            <div class="flex justify-between items-center mt-1.5">
+                                <span class="text-xs text-gray-400">Hạng / Rank:</span>
+                                <span id="mc-rank" class="text-xs font-black px-2.5 py-0.5 rounded border">Member</span>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center mt-2">
-                            <span class="text-xs text-gray-400">Hạng / Rank:</span>
-                            <span id="mc-rank" class="text-xs font-black px-2.5 py-0.5 rounded border">Member</span>
+                    </div>
+
+                    <!-- Hiển thị Số Dư Tiền và Xu -->
+                    <div class="grid grid-cols-2 gap-2 pt-2 border-t border-white/10 text-xs">
+                        <div class="bg-black/40 p-2.5 rounded-xl flex items-center justify-between border border-white/5">
+                            <span class="text-gray-400"><i class="fa-solid fa-coins text-emerald-400 mr-1"></i> Tiền Eco:</span>
+                            <span id="mc-money" class="font-bold text-emerald-400">0 $</span>
+                        </div>
+                        <div class="bg-black/40 p-2.5 rounded-xl flex items-center justify-between border border-white/5">
+                            <span class="text-gray-400"><i class="fa-solid fa-gem text-brand-gold mr-1"></i> Số Xu:</span>
+                            <span id="mc-points" class="font-bold text-brand-gold">0</span>
                         </div>
                     </div>
                 </div>
 
                 <button onclick="unlinkMinecraft()" id="btn-unlink" class="w-full py-2.5 rounded-xl bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-link-slash"></i> Hủy liên kết (Cả trong Discord & Game)
+                    <i class="fa-solid fa-link-slash"></i> Hủy liên kết (Web & Discord Bot)
                 </button>
             </div>
 
@@ -1034,6 +1049,8 @@
                     
                     document.getElementById('mc-avatar').src = `https://mc-heads.net/avatar/${data.minecraft.username}`;
                     document.getElementById('mc-name').innerText = data.minecraft.username;
+                    document.getElementById('mc-money').innerText = data.minecraft.money || "0 $";
+                    document.getElementById('mc-points').innerText = data.minecraft.points || 0;
                     applyRankColor(data.minecraft.rank);
 
                     document.getElementById('linked-view').classList.remove('hidden');
@@ -1094,7 +1111,7 @@
                 const data = await res.json();
                 if (!res.ok || data.error) throw new Error(data.error || "Liên kết thất bại!");
 
-                alert(`Đã liên kết thành công với nhân vật ${data.player_name}!`);
+                alert(`Đã liên kết thành công với nhân vật: ${data.player_name}!`);
                 document.getElementById('link-mc-password').value = "";
                 checkAuth();
             } catch (err) {
