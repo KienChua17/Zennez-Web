@@ -22,9 +22,9 @@
                             950: '#022c22'
                         },
                         brand: {
-                            dark: '#050b07',
-                            card: '#0a140e',
-                            border: '#163321',
+                            dark: '#030705',
+                            card: '#07110c',
+                            border: '#0f291c',
                             gold: '#fbbf24',
                             cyan: '#38bdf8'
                         }
@@ -45,17 +45,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- THEME GỐC ZENNEXMC (Emerald chuẩn ban đầu của bạn) --- */
+        /* --- MÀU GỐC CHUẨN MINERUA (Tối sâu thẳm, xanh lá đậm tinh tế) --- */
         :root, body.theme-default {
-            --bg: #050b07;
-            --bg2: rgba(10, 20, 14, 0.75);
-            --bg3: rgba(10, 20, 14, 0.85);
-            --text: #ecfdf5;
-            --text2: #9ca3af;
-            --accent: #34d399;
-            --accent-hover: #10b981;
-            --border: rgba(16, 185, 129, 0.18);
-            --border-glow: rgba(52, 211, 153, 0.35);
+            --bg: #030705;
+            --bg2: rgba(7, 17, 12, 0.85);
+            --bg3: rgba(10, 24, 17, 0.9);
+            --text: #e2fce8;
+            --text2: #8fa89b;
+            --accent: #22c55e;
+            --accent-hover: #16a34a;
+            --border: rgba(34, 197, 94, 0.15);
+            --border-glow: rgba(34, 197, 94, 0.3);
         }
 
         /* --- CÁC THEME GIAO DIỆN KHÁC --- */
@@ -74,8 +74,8 @@
             color: var(--text);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 15%, var(--border) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, var(--border) 0%, transparent 45%);
+                radial-gradient(circle at 15% 15%, rgba(34, 197, 94, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(22, 101, 52, 0.05) 0%, transparent 45%);
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
@@ -104,7 +104,7 @@
             transition: opacity 0.3s ease;
         }
 
-        /* Glassmorphism */
+        /* Glassmorphism chuẩn mẫu MineRua */
         .glass-panel {
             background: var(--bg2);
             backdrop-filter: blur(16px);
@@ -116,7 +116,7 @@
             background: var(--bg3);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border-glow);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px var(--border);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9), 0 0 20px var(--border);
             transition: all 0.3s ease;
         }
 
@@ -133,7 +133,7 @@
 
         /* Chữ đổi màu kim cương lướt sang phải */
         .animate-gradient-text {
-            background: linear-gradient(90deg, var(--accent), var(--accent-hover), #6ee7b7, #fbbf24, var(--accent));
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover), #4ade80, #fbbf24, var(--accent));
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
@@ -193,7 +193,7 @@
         .theme-menu-title { font-size: 11px; font-weight: bold; color: var(--text2); margin-bottom: 10px; }
         .mode-switch { display: flex; gap: 4px; background: var(--bg2); padding: 4px; border-radius: 12px; margin-bottom: 12px; }
         .mode-option { flex: 1; padding: 6px; font-size: 12px; border-radius: 8px; cursor: pointer; text-align: center; color: var(--text2); border: none; background: transparent;}
-        .mode-option.active { background: var(--accent); color: var(--bg); font-weight: bold; }
+        .mode-option.active { background: var(--accent); color: #030705; font-weight: bold; }
         .theme-menu-sep { height: 1px; background: var(--border); margin: 12px 0; }
         .theme-option { display: flex; align-items: center; gap: 11px; padding: 10px; margin-bottom: 6px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; background: var(--bg2); transition: all 0.2s;}
         .theme-option.active { border-color: var(--accent); background: var(--bg3); }
@@ -397,7 +397,7 @@
                 
                 <!-- Card 1: SURVIVAL ECO -->
                 <div class="tilt-card glass-panel-glow p-8 rounded-3xl border-2 border-accent relative flex flex-col justify-between text-left reveal-on-scroll">
-                    <div class="absolute top-4 right-4 bg-accent text-bg text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                    <div class="absolute top-4 right-4 bg-accent text-[#030705] text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
                         HOT
                     </div>
                     <div>
@@ -417,7 +417,7 @@
                                 <span class="w-2 h-2 rounded-full bg-accent"></span> ONLINE
                             </span>
                         </div>
-                        <a href="#wiki" class="w-full py-3 rounded-xl bg-accent bg-accent-hover text-bg font-extrabold text-xs flex items-center justify-center gap-2 transition-all">
+                        <a href="#wiki" class="w-full py-3 rounded-xl bg-accent bg-accent-hover text-[#030705] font-extrabold text-xs flex items-center justify-center gap-2 transition-all">
                             <i class="fa-solid fa-circle-info"></i>
                             <span>XEM CHI TIẾT TÍNH NĂNG</span>
                         </a>
@@ -632,7 +632,7 @@
                             <li class="pt-2 border-t border-white/10 text-accent font-bold">+ 50.000$ & 1.000 Claim</li>
                         </ul>
                     </div>
-                    <button onclick="handleBuyRank('KNIGHT', '50 Xu', 'knight')" class="w-full py-3 rounded-xl bg-accent bg-accent-hover text-black font-extrabold text-xs transition-all shadow-lg">
+                    <button onclick="handleBuyRank('KNIGHT', '50 Xu', 'knight')" class="w-full py-3 rounded-xl bg-accent bg-accent-hover text-[#030705] font-extrabold text-xs transition-all shadow-lg">
                         MUA RANK KNIGHT
                     </button>
                 </div>
@@ -655,7 +655,7 @@
                             <li class="pt-2 border-t border-white/10 text-accent font-bold">+ 100.000$ & 3.000 Claim</li>
                         </ul>
                     </div>
-                    <button onclick="handleBuyRank('TEMPLAR', '50 Xu (Bù từ Knight)', 'templar')" class="w-full py-3 rounded-xl bg-accent bg-accent-hover text-black font-extrabold text-xs transition-all shadow-lg">
+                    <button onclick="handleBuyRank('TEMPLAR', '50 Xu (Bù từ Knight)', 'templar')" class="w-full py-3 rounded-xl bg-accent bg-accent-hover text-[#030705] font-extrabold text-xs transition-all shadow-lg">
                         NÂNG CẤP TEMPLAR
                     </button>
                 </div>
@@ -871,7 +871,7 @@
 
                 <div id="link-error" class="text-xs text-red-400 hidden bg-red-500/10 p-2.5 rounded-xl border border-red-500/20"></div>
 
-                <button onclick="submitLinkAccount()" id="btn-link-submit" class="w-full py-3 rounded-xl bg-accent bg-accent-hover text-black font-extrabold text-xs transition-all shadow-lg flex items-center justify-center gap-2">
+                <button onclick="submitLinkAccount()" id="btn-link-submit" class="w-full py-3 rounded-xl bg-accent bg-accent-hover text-[#030705] font-extrabold text-xs transition-all shadow-lg flex items-center justify-center gap-2">
                     <i class="fa-solid fa-check"></i> Xác Thực & Liên Kết
                 </button>
             </div>
@@ -931,9 +931,9 @@
         <div class="theme-menu-title">CHỌN THEME</div>
         <div id="themeList">
             <div class="theme-option active" data-theme="" onclick="setTheme('', this)">
-                <div class="theme-option-swatch" style="background: #10b981;"></div>
+                <div class="theme-option-swatch" style="background: #22c55e;"></div>
                 <div class="theme-option-text">
-                    <div class="theme-option-name">Emerald Mặc định</div>
+                    <div class="theme-option-name">Mặc định</div>
                     <div class="theme-option-desc">Theme gốc ZennezMC</div>
                 </div>
             </div>
@@ -1331,15 +1331,15 @@
             var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
             if (mode === 'dark' || (mode === 'system' && sysDark)) {
                 document.documentElement.classList.add('dark');
-                document.documentElement.style.setProperty('--bg', '#050b07');
-                document.documentElement.style.setProperty('--bg2', 'rgba(10, 20, 14, 0.75)');
-                document.documentElement.style.setProperty('--bg3', 'rgba(10, 20, 14, 0.85)');
-                document.documentElement.style.setProperty('--text', '#ecfdf5');
-                document.documentElement.style.setProperty('--text2', '#9ca3af');
-                document.documentElement.style.setProperty('--accent', '#34d399');
-                document.documentElement.style.setProperty('--accent-hover', '#10b981');
-                document.documentElement.style.setProperty('--border', 'rgba(16, 185, 129, 0.2)');
-                document.documentElement.style.setProperty('--border-glow', 'rgba(52, 211, 153, 0.35)');
+                document.documentElement.style.setProperty('--bg', '#030705');
+                document.documentElement.style.setProperty('--bg2', 'rgba(7, 17, 12, 0.85)');
+                document.documentElement.style.setProperty('--bg3', 'rgba(10, 24, 17, 0.9)');
+                document.documentElement.style.setProperty('--text', '#e2fce8');
+                document.documentElement.style.setProperty('--text2', '#8fa89b');
+                document.documentElement.style.setProperty('--accent', '#22c55e');
+                document.documentElement.style.setProperty('--accent-hover', '#16a34a');
+                document.documentElement.style.setProperty('--border', 'rgba(34, 197, 94, 0.15)');
+                document.documentElement.style.setProperty('--border-glow', 'rgba(34, 197, 94, 0.3)');
             } else {
                 document.documentElement.classList.remove('dark');
                 document.documentElement.style.setProperty('--bg', '#f4f4f5');
@@ -1347,10 +1347,10 @@
                 document.documentElement.style.setProperty('--bg3', 'rgba(255, 255, 255, 0.9)');
                 document.documentElement.style.setProperty('--text', '#18181b');
                 document.documentElement.style.setProperty('--text2', '#52525b');
-                document.documentElement.style.setProperty('--accent', '#059669');
-                document.documentElement.style.setProperty('--accent-hover', '#047857');
-                document.documentElement.style.setProperty('--border', 'rgba(5, 150, 105, 0.2)');
-                document.documentElement.style.setProperty('--border-glow', 'rgba(5, 150, 105, 0.4)');
+                document.documentElement.style.setProperty('--accent', '#16a34a');
+                document.documentElement.style.setProperty('--accent-hover', '#15803d');
+                document.documentElement.style.setProperty('--border', 'rgba(22, 163, 74, 0.2)');
+                document.documentElement.style.setProperty('--border-glow', 'rgba(22, 163, 74, 0.4)');
             }
         }
 
