@@ -1,1 +1,368 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media & Video - ZennezMC</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+                        pixel: ['"Silkscreen"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Silkscreen:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #050b07;
+            color: #ecfdf5;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(5, 150, 105, 0.08) 0%, transparent 45%);
+        }
+        .font-pixel { font-family: 'Silkscreen', monospace; }
+
+        #cursor-spotlight {
+            pointer-events: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 9999;
+            background: radial-gradient(650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(16, 185, 129, 0.12), transparent 80%);
+        }
+
+        .glass-panel {
+            background: rgba(10, 20, 14, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(16, 185, 129, 0.18);
+        }
+        .glass-panel-glow {
+            background: rgba(10, 20, 14, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(16, 185, 129, 0.15);
+        }
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .tilt-card:hover {
+            border-color: rgba(52, 211, 153, 0.7);
+            box-shadow: 0 15px 35px -10px rgba(16, 185, 129, 0.3);
+        }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="relative selection:bg-emerald-500 selection:text-black">
+
+    <div id="cursor-spotlight"></div>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-emerald-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3 cursor-pointer">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center font-black text-2xl text-black shadow-lg shadow-emerald-500/30 font-pixel border border-emerald-300">Z</div>
+                    <div>
+                        <span class="text-xl font-black font-pixel tracking-wider text-white">ZENNEZ<span class="text-emerald-400">MC</span></span>
+                        <span class="block text-[10px] tracking-widest text-emerald-400 font-bold uppercase">SURVIVAL ECO 1.21.X</span>
+                    </div>
+                </a>
+
+                <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold tracking-wide">
+                    <a href="index.html" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-1.5">
+                        <i class="fa-solid fa-house text-xs text-emerald-500"></i>
+                        <span>Trang Chủ</span>
+                    </a>
+                    <a href="media.html" class="text-emerald-400 font-bold flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
+                        <i class="fa-solid fa-photo-film text-xs"></i>
+                        <span>Media</span>
+                    </a>
+                    <a href="https://discord.zennez.net" target="_blank" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-1.5">
+                        <i class="fa-brands fa-discord text-xs text-[#5865F2]"></i>
+                        <span>Cộng Đồng</span>
+                    </a>
+                    <a href="luatchoi.html" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-1.5">
+                        <i class="fa-solid fa-scale-balanced text-xs text-emerald-500"></i>
+                        <span>Luật Chơi</span>
+                    </a>
+                    <a href="index.html#store" class="text-gray-300 hover:text-brand-gold transition-colors flex items-center space-x-1.5">
+                        <i class="fa-solid fa-crown text-xs text-brand-gold"></i>
+                        <span>Ủng Hộ</span>
+                    </a>
+                </nav>
+
+                <div class="hidden lg:flex items-center space-x-4">
+                    <button onclick="copyServerIP()" class="glass-panel hover:bg-emerald-500/10 text-emerald-300 px-4 py-2.5 rounded-xl text-xs font-bold border border-emerald-500/40 hover:border-emerald-400 transition-all flex items-center space-x-2">
+                        <i class="fa-regular fa-copy text-emerald-400"></i>
+                        <span>play.zennez.net</span>
+                    </button>
+                    <a href="https://discord.zennez.net" target="_blank" class="bg-[#5865F2] hover:bg-[#4752C4] text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 shadow-lg shadow-[#5865F2]/30">
+                        <i class="fa-brands fa-discord text-base"></i>
+                        <span>Tham Gia Discord</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Content: Media & Sự Kiện (Chuẩn MineRua) -->
+    <section class="pt-16 pb-12 text-center relative z-10">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-semibold text-emerald-400 mb-4">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>MEDIA & SỰ KIỆN</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-black text-white mb-3">Media</h1>
+            <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">
+                Video và hình ảnh về các sự kiện, phó bản Dungeon và các cập nhật nổi bật của ZennezMC.
+            </p>
+
+            <!-- Bộ lọc Filter Tag -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mt-8 text-xs font-semibold">
+                <button onclick="filterMedia('all')" class="media-filter-btn px-4 py-2 rounded-full bg-emerald-500 text-black font-bold transition-all">Tất cả</button>
+                <button onclick="filterMedia('guide')" class="media-filter-btn px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white transition-all">Hướng Dẫn</button>
+                <button onclick="filterMedia('dungeon')" class="media-filter-btn px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white transition-all">Dungeon & Boss</button>
+                <button onclick="filterMedia('weapons')" class="media-filter-btn px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white transition-all">Vũ Khí 3D</button>
+                <button onclick="filterMedia('mobs')" class="media-filter-btn px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white transition-all">Động Vật Mới</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grid danh sách Video & Hình ảnh Media -->
+    <section class="pb-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Item 1: Sảnh Spawn -->
+                <div class="media-card tilt-card glass-panel rounded-3xl overflow-hidden border border-emerald-500/30 reveal-on-scroll" data-category="guide">
+                    <div class="relative group overflow-hidden">
+                        <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1553415968242401461/image.png?ex=6ab92adb&is=6ab7d95b&hm=d5bd53f9b91ea453fb18844fa6c511a3f7e6f945a1f1294d11d214a4f78446b6&" class="w-full h-52 object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Spawn">
+                        <span class="absolute top-3 left-3 bg-emerald-500 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full">Hướng Dẫn</span>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="text-base font-bold text-white hover:text-emerald-400 transition-colors">Khám phá Sảnh Spawn & Trung Tâm Tân Thủ</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Toàn cảnh khu vực xuất hiện, nhận quà tân thủ, khu vực đặt lệnh /rank và hướng dẫn cơ bản.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2: Thần Khí 1 -->
+                <div class="media-card tilt-card glass-panel rounded-3xl overflow-hidden border border-emerald-500/30 reveal-on-scroll" data-category="weapons">
+                    <div class="relative group overflow-hidden">
+                        <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1553415967407607919/image.png?ex=6ab92adb&is=6ab7d95b&hm=0ea782ab3a8a3bd52c148340143fcde21cd7f289ae3809e430caf20c688be544&" class="w-full h-52 object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Weapons 1">
+                        <span class="absolute top-3 left-3 bg-yellow-500 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full">Vũ Khí 3D</span>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="text-base font-bold text-white hover:text-emerald-400 transition-colors">Tế Đàn Chế Tạo: Hỏa Thần Kiếm & Môn Xa Tiễn</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Công thức nguyên liệu bí mật và cách rèn đúc bộ vũ khí nguyên tố lửa huyền thoại.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3: Thần Khí 2 -->
+                <div class="media-card tilt-card glass-panel rounded-3xl overflow-hidden border border-emerald-500/30 reveal-on-scroll" data-category="weapons">
+                    <div class="relative group overflow-hidden">
+                        <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1553415967810392199/image.png?ex=6ab92adb&is=6ab7d95b&hm=8cd598e74cdbd770a7f1da299112498d77079f371cb587201a634a55f8c68bd0&" class="w-full h-52 object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Weapons 2">
+                        <span class="absolute top-3 left-3 bg-yellow-500 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full">Vũ Khí 3D</span>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="text-base font-bold text-white hover:text-emerald-400 transition-colors">Hàn Thương & Đại Kiếm Thủy Uyên</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Hiệu ứng khống chế băng giá và kỹ năng diện rộng của bộ vũ khí bậc thần thoại.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4: Boss Dungeon -->
+                <div class="media-card tilt-card glass-panel rounded-3xl overflow-hidden border border-emerald-500/30 reveal-on-scroll" data-category="dungeon">
+                    <div class="relative group overflow-hidden">
+                        <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1553415966983987291/image.png?ex=6ab92adb&is=6ab7d95b&hm=bd816dec1a7c44e93174af862863cbbb140a902cecd5b66d51ea6837e975e1d4&" class="w-full h-52 object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Dungeon">
+                        <span class="absolute top-3 left-3 bg-red-500 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full">Dungeon & Boss</span>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="text-base font-bold text-white hover:text-emerald-400 transition-colors">Đột Kích Hầm Ngục: Boss Hoàng Kim Cổ Đại</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Tổ đội 4 người săn Boss phó bản dưới lòng đất rinh rương ngọc Shards và phôi trang bị.</p>
+                    </div>
+                </div>
+
+                <!-- Item 5: Capybara -->
+                <div class="media-card tilt-card glass-panel rounded-3xl overflow-hidden border border-emerald-500/30 reveal-on-scroll" data-category="mobs">
+                    <div class="relative group overflow-hidden">
+                        <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1553415969144049824/image.png?ex=6ab92adc&is=6ab7d95c&hm=fca78110abecb40f744cec0b76af0ef65af82c6f5b37bd6e31866eb26d2ede69&" class="w-full h-52 object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Capybara">
+                        <span class="absolute top-3 left-3 bg-emerald-500 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full">Động Vật Mới</span>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="text-base font-bold text-white hover:text-emerald-400 transition-colors">Khu Sinh Thái Capybara Thân Thiện</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Tìm kiếm, thuần dưỡng và nhân giống những chú chuột lang nước siêu đáng yêu.</p>
+                    </div>
+                </div>
+
+                <!-- Item 6: Linh Thú Tuyết -->
+                <div class="media-card tilt-card glass-panel rounded-3xl overflow-hidden border border-emerald-500/30 reveal-on-scroll" data-category="mobs">
+                    <div class="relative group overflow-hidden">
+                        <img src="https://cdn.discordapp.com/attachments/1516763323486699570/1553415969601359892/image.png?ex=6ab92adc&is=6ab7d95c&hm=22bfed7915f53c1fb34bca05a7178c1c0a8fa5116fa979ea741b2f70d40520fc&" class="w-full h-52 object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Linh Thú Băng Giá">
+                        <span class="absolute top-3 left-3 bg-emerald-500 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full">Động Vật Mới</span>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="text-base font-bold text-white hover:text-emerald-400 transition-colors">Quần Xã Băng Giá & Linh Thú Tuyết</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Hành trình khám phá các biome tuyết phủ lạnh giá và cưỡi các sinh vật huyền bí.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER MINE RUA STYLE -->
+    <footer class="relative z-10 bg-[#040805] border-t border-emerald-500/20 pt-16 pb-8 text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto mb-16 pb-12 border-b border-emerald-500/10">
+                <p class="text-xs sm:text-sm leading-relaxed text-gray-400">
+                    Máy chủ Minecraft Việt Nam ZennezMC (<span class="text-emerald-400 font-semibold">play.zennez.net</span>) cung cấp trải nghiệm Survival ECO, Dungeon Boss Cổ Đại, Vũ Khí Huyền Thoại 3D và thế giới Động Vật mới lạ.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-16">
+                <div class="lg:col-span-4 space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-2xl font-black font-pixel text-white">ZENNEZ<span class="text-emerald-400">MC</span></span>
+                    </div>
+                    <p class="text-xs leading-relaxed text-gray-400 pr-4">
+                        Máy chủ Minecraft Việt Nam hàng đầu – Survival ECO 1.21.x, Dungeon Boss, Vũ Khí 3D & Thú Mới. Hỗ trợ đầy đủ PC Java & Mobile Bedrock.
+                    </p>
+                    <div class="pt-2">
+                        <div onclick="copyServerIP()" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/60 border border-emerald-500/30 text-xs font-semibold text-emerald-400 cursor-pointer hover:border-emerald-400 transition-colors">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            <span>IP: play.zennez.net</span>
+                            <i class="fa-regular fa-copy ml-1 text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3 space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">LIÊN KẾT</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="index.html" class="hover:text-emerald-400 transition-colors">Trang Chủ</a></li>
+                        <li><a href="media.html" class="hover:text-emerald-400 transition-colors">Media & Video</a></li>
+                        <li><a href="index.html#store" class="hover:text-emerald-400 transition-colors">Cửa Hàng Rank</a></li>
+                        <li><a href="luatchoi.html" class="hover:text-emerald-400 transition-colors">Luật Chơi</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-2 space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">HỖ TRỢ</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="luatchoi.html" class="hover:text-emerald-400 transition-colors">Quy Định Xử Phạt</a></li>
+                        <li><a href="https://discord.zennez.net" target="_blank" class="hover:text-emerald-400 transition-colors">Discord Ticket</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3 space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">CỘNG ĐỒNG</h4>
+                    <p class="text-xs leading-relaxed text-gray-400">Tham gia Discord ZennezMC để kết nối với hàng ngàn người chơi khác.</p>
+                    <div class="pt-2">
+                        <a href="https://discord.zennez.net" target="_blank" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:border-[#5865F2] hover:text-[#5865F2] flex items-center justify-center text-base transition-all">
+                            <i class="fa-brands fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-emerald-500/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4">
+                <p>&copy; 2026 ZennezMC Network. Không liên kết với Mojang AB.</p>
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center gap-1.5 text-emerald-400 font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Hệ Thống Hoạt Động
+                    </span>
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-emerald-400 font-bold flex items-center gap-1 transition-colors">
+                        <span>↑ Đầu trang</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Đèn pin soi chuột
+        const cursorSpotlight = document.getElementById('cursor-spotlight');
+        window.addEventListener('mousemove', (e) => {
+            cursorSpotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
+            cursorSpotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
+        });
+
+        // 3D Tilt Card
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                card.style.transform = `perspective(1000px) rotateX(${-y * 0.05}deg) rotateY(${x * 0.05}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('is-revealed');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+        function copyServerIP() {
+            navigator.clipboard.writeText("play.zennez.net");
+            alert("Đã sao chép IP: play.zennez.net");
+        }
+
+        // Lọc bài viết Media
+        function filterMedia(category) {
+            document.querySelectorAll('.media-filter-btn').forEach(btn => {
+                btn.className = "media-filter-btn px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white transition-all";
+            });
+            event.target.className = "media-filter-btn px-4 py-2 rounded-full bg-emerald-500 text-black font-bold transition-all";
+
+            const cards = document.querySelectorAll('.media-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
